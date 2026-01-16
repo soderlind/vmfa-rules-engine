@@ -33,11 +33,10 @@ Turn "Default folder for uploads" into a powerful rule system. Automatically ass
 
 ## Installation
 
-1. Install and activate the [Virtual Media Folders](https://github.com/soderlind/virtual-media-folders) plugin
-2. Download and extract this plugin to `wp-content/plugins/vmfa-rules-engine/`
-3. Run `composer install` to install PHP dependencies
-4. Run `npm install && npm run build` to compile assets
-5. Activate the plugin through the WordPress admin
+
+1. Download [`vmfa-rules-engine.zip`](https://github.com/soderlind/vmfa-rules-engine/releases/latest/download/vmfa-rules-engine.zip)
+2. Upload via  `Plugins → Add New → Upload Plugin`
+3. Activate via `WordPress Admin → Plugins`
 
 ## Usage
 
