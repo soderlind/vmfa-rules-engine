@@ -4,7 +4,7 @@
  * @package VmfaRulesEngine
  */
 
-import { useState, useCallback, useMemo } from '@wordpress/element';
+import { useState, useCallback, useMemo, useRef, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
 	Button,
@@ -18,17 +18,20 @@ import {
 /**
  * Preview Modal component.
  *
- * @param {Object}   props              Component props.
- * @param {Object}   props.results      Preview results.
- * @param {Function} props.onApply      Apply handler.
- * @param {Function} props.onClose      Close handler.
- * @param {boolean}  props.isProcessing Whether processing is in progress.
+ * @param {Object}   props                Component props.
+ * @param {Object}   props.results        Preview results.
+ * @param {Function} props.onApply        Apply handler.
+ * @param {Function} props.onClose        Close handler.
+ * @param {Function} props.onLoadMore     Load more handler.
+ * @param {boolean}  props.isProcessing   Whether processing is in progress.
+ * @param {boolean}  props.isLoadingMore  Whether loading more items.
  * @return {JSX.Element} Preview modal.
  */
-export function PreviewModal( { results, onApply, onClose, isProcessing } ) {
+export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcessing, isLoadingMore } ) {
 	const [ selectedIds, setSelectedIds ] = useState( new Set() );
 	const [ selectAll, setSelectAll ] = useState( false );
 	const [ applied, setApplied ] = useState( false );
+	const tableContainerRef = useRef( null );
 
 	const { strings = {} } = window.vmfaRulesEngine || {};
 
@@ -47,6 +50,25 @@ export function PreviewModal( { results, onApply, onClose, isProcessing } ) {
 		}
 		return results.items.filter( ( item ) => item.status === 'no_match' );
 	}, [ results ] );
+
+	// Infinite scroll: detect when user scrolls near bottom.
+	useEffect( () => {
+		const container = tableContainerRef.current;
+		if ( ! container || ! results?.has_more || isLoadingMore ) {
+			return;
+		}
+
+		const handleScroll = () => {
+			const { scrollTop, scrollHeight, clientHeight } = container;
+			// Load more when within 100px of bottom.
+			if ( scrollHeight - scrollTop - clientHeight < 100 ) {
+				onLoadMore?.();
+			}
+		};
+
+		container.addEventListener( 'scroll', handleScroll );
+		return () => container.removeEventListener( 'scroll', handleScroll );
+	}, [ results?.has_more, isLoadingMore, onLoadMore ] );
 
 	/**
 	 * Toggle selection of an item.
@@ -158,10 +180,18 @@ export function PreviewModal( { results, onApply, onClose, isProcessing } ) {
 				<div className="vmfa-preview-summary">
 					<p>
 						{ __( 'Scanned', 'vmfa-rules-engine' ) }{ ' ' }
-						<strong>{ results.total }</strong>{ ' ' }
-						{ __( 'media items.', 'vmfa-rules-engine' ) }{ ' ' }
+						<strong>{ results.total }</strong>
+						{ results.total_count > results.total && (
+							<>{ ' ' }{ __( 'of', 'vmfa-rules-engine' ) } <strong>{ results.total_count }</strong></>
+						) }
+						{ ' ' }{ __( 'media items.', 'vmfa-rules-engine' ) }{ ' ' }
 						<strong>{ results.matched }</strong>{ ' ' }
 						{ __( 'will be assigned to folders.', 'vmfa-rules-engine' ) }
+						{ results.has_more && (
+							<span className="vmfa-preview-loading-hint">
+								{ ' ' }{ __( 'Scroll down to load more.', 'vmfa-rules-engine' ) }
+							</span>
+						) }
 					</p>
 				</div>
 
@@ -170,13 +200,13 @@ export function PreviewModal( { results, onApply, onClose, isProcessing } ) {
 						<div className="vmfa-preview-section-header">
 							<h3>{ __( 'Will be assigned', 'vmfa-rules-engine' ) }</h3>
 							<CheckboxControl
-								label={ __( 'Select all', 'vmfa-rules-engine' ) }
+								label={ __( 'Select all loaded', 'vmfa-rules-engine' ) }
 								checked={ selectAll }
 								onChange={ handleSelectAll }
 								__nextHasNoMarginBottom
 							/>
 						</div>
-						<div className="vmfa-preview-table">
+						<div className="vmfa-preview-table" ref={ tableContainerRef }>
 							<table>
 								<thead>
 									<tr>
@@ -227,6 +257,19 @@ export function PreviewModal( { results, onApply, onClose, isProcessing } ) {
 									) ) }
 								</tbody>
 							</table>
+							{ isLoadingMore && (
+								<div className="vmfa-preview-loading-more">
+									<Spinner />
+									<span>{ __( 'Loading more...', 'vmfa-rules-engine' ) }</span>
+								</div>
+							) }
+							{ results.has_more && ! isLoadingMore && (
+								<div className="vmfa-preview-load-more">
+									<Button variant="secondary" onClick={ onLoadMore }>
+										{ __( 'Load more', 'vmfa-rules-engine' ) }
+									</Button>
+								</div>
+							) }
 						</div>
 					</div>
 				) }

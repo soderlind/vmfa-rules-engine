@@ -140,6 +140,8 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 					placeholder={ __( 'e.g., Mobile Photos', 'vmfa-rules-engine' ) }
 					help={ errors.name }
 					className={ errors.name ? 'has-error' : '' }
+					__nextHasNoMarginBottom
+					__next40pxDefaultSize
 				/>
 
 				<SelectControl
@@ -150,6 +152,7 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 					help={ errors.folder }
 					className={ errors.folder ? 'has-error' : '' }
 					__nextHasNoMarginBottom
+					__next40pxDefaultSize
 				/>
 
 				<div className="vmfa-rule-editor__conditions">
@@ -172,6 +175,7 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 						help={ __( 'When enabled, no further rules will be evaluated after this rule matches.', 'vmfa-rules-engine' ) }
 						checked={ stopProcessing }
 						onChange={ setStopProcessing }
+						__nextHasNoMarginBottom
 					/>
 
 					<ToggleControl
@@ -179,6 +183,7 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 						help={ __( 'Disabled rules will not be evaluated during uploads.', 'vmfa-rules-engine' ) }
 						checked={ enabled }
 						onChange={ setEnabled }
+						__nextHasNoMarginBottom
 					/>
 				</div>
 

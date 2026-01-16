@@ -11,8 +11,10 @@ import {
 	Card,
 	CardBody,
 	CardHeader,
+	CheckboxControl,
 	Flex,
 	FlexItem,
+	Modal,
 	Notice,
 	Spinner,
 	ToggleControl,
@@ -191,7 +193,7 @@ export function RulesPanel() {
 	} = useRules();
 
 	const { stats, refresh: refreshStats } = useStats();
-	const { preview, apply, isProcessing, results, clearResults } = useBatchOperations();
+	const { preview, loadMore, apply, isProcessing, isLoadingMore, results, clearResults } = useBatchOperations();
 
 	const [ editingRule, setEditingRule ] = useState( null );
 	const [ isEditorOpen, setIsEditorOpen ] = useState( false );
@@ -288,13 +290,31 @@ export function RulesPanel() {
 		[ editingRule, createRule, updateRule, strings.saveSuccess ]
 	);
 
+	const [ isPreviewOptionsOpen, setIsPreviewOptionsOpen ] = useState( false );
+	const [ previewUnassignedOnly, setPreviewUnassignedOnly ] = useState( true );
+
 	/**
-	 * Handle preview button click.
+	 * Handle preview button click - show options first.
 	 */
-	const handlePreview = useCallback( async () => {
-		await preview( { unassignedOnly: true, limit: 100 } );
+	const handlePreviewClick = useCallback( () => {
+		setIsPreviewOptionsOpen( true );
+	}, [] );
+
+	/**
+	 * Run the preview with selected options.
+	 */
+	const handleRunPreview = useCallback( async () => {
+		setIsPreviewOptionsOpen( false );
+		await preview( { unassignedOnly: previewUnassignedOnly } );
 		setIsPreviewOpen( true );
-	}, [ preview ] );
+	}, [ preview, previewUnassignedOnly ] );
+
+	/**
+	 * Handle loading more preview items.
+	 */
+	const handleLoadMore = useCallback( async () => {
+		await loadMore( { unassignedOnly: previewUnassignedOnly } );
+	}, [ loadMore, previewUnassignedOnly ] );
 
 	/**
 	 * Handle apply from preview modal.
@@ -344,26 +364,30 @@ export function RulesPanel() {
 
 			<Card className="vmfa-rules-card">
 				<CardHeader>
-					<Flex>
+					<Flex align="center" justify="space-between">
 						<FlexItem>
 							<h2>{ __( 'Rules', 'vmfa-rules-engine' ) }</h2>
 						</FlexItem>
-						<FlexItem>
-							<Button
-								variant="secondary"
-								onClick={ handlePreview }
-								disabled={ rules.length === 0 || isProcessing }
-							>
-								{ isProcessing ? (
-									<Spinner />
-								) : (
-									strings.dryRun || __( 'Dry Run (Preview)', 'vmfa-rules-engine' )
-								) }
-							</Button>
-							<Button variant="primary" icon={ plus } onClick={ handleAddRule }>
-								{ strings.addRule || __( 'Add Rule', 'vmfa-rules-engine' ) }
-							</Button>
-						</FlexItem>
+						<Flex gap={ 2 }>
+							<FlexItem>
+								<Button
+									variant="secondary"
+									onClick={ handlePreviewClick }
+									disabled={ rules.length === 0 || isProcessing }
+								>
+									{ isProcessing ? (
+										<Spinner />
+									) : (
+										strings.dryRun || __( 'Scan Existing Media', 'vmfa-rules-engine' )
+									) }
+								</Button>
+							</FlexItem>
+							<FlexItem>
+								<Button variant="primary" icon={ plus } onClick={ handleAddRule }>
+									{ strings.addRule || __( 'Add Rule', 'vmfa-rules-engine' ) }
+								</Button>
+							</FlexItem>
+						</Flex>
 					</Flex>
 				</CardHeader>
 				<CardBody>
@@ -415,12 +439,49 @@ export function RulesPanel() {
 				/>
 			) }
 
+			{ isPreviewOptionsOpen && (
+				<Modal
+					title={ __( 'Scan Options', 'vmfa-rules-engine' ) }
+					onRequestClose={ () => setIsPreviewOptionsOpen( false ) }
+					size="small"
+				>
+					<p>{ __( 'Choose which media files to scan.', 'vmfa-rules-engine' ) }</p>
+					<CheckboxControl
+						label={ __( 'Unassigned media only', 'vmfa-rules-engine' ) }
+						help={ __( 'When checked, only media not yet in any folder will be scanned. Uncheck to include all media (may reassign existing).', 'vmfa-rules-engine' ) }
+						checked={ previewUnassignedOnly }
+						onChange={ setPreviewUnassignedOnly }
+						__nextHasNoMarginBottom
+					/>
+					<Flex justify="flex-end" style={ { marginTop: '16px' } }>
+						<FlexItem>
+							<Button
+								variant="secondary"
+								onClick={ () => setIsPreviewOptionsOpen( false ) }
+							>
+								{ __( 'Cancel', 'vmfa-rules-engine' ) }
+							</Button>
+						</FlexItem>
+						<FlexItem>
+							<Button
+								variant="primary"
+								onClick={ handleRunPreview }
+							>
+								{ __( 'Run Preview', 'vmfa-rules-engine' ) }
+							</Button>
+						</FlexItem>
+					</Flex>
+				</Modal>
+			) }
+
 			{ isPreviewOpen && (
 				<PreviewModal
 					results={ results }
 					onApply={ handleApply }
 					onClose={ handleClosePreview }
+					onLoadMore={ handleLoadMore }
 					isProcessing={ isProcessing }
+					isLoadingMore={ isLoadingMore }
 				/>
 			) }
 		</div>

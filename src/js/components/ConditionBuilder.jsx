@@ -109,6 +109,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 						onChange={ ( val ) => handleValueChange( 'value', val ) }
 						placeholder={ conditionType.placeholder || '' }
 						__nextHasNoMarginBottom
+									__next40pxDefaultSize
 					/>
 				);
 
@@ -119,6 +120,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 						options={ conditionType.options || [] }
 						onChange={ ( val ) => handleValueChange( 'value', val ) }
 						__nextHasNoMarginBottom
+									__next40pxDefaultSize
 					/>
 				);
 
@@ -135,6 +137,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								] }
 								onChange={ ( val ) => handleValueChange( 'dimension', val ) }
 								__nextHasNoMarginBottom
+									__next40pxDefaultSize
 							/>
 						</FlexItem>
 						<FlexItem>
@@ -150,6 +153,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								] }
 								onChange={ ( val ) => handleValueChange( 'operator', val ) }
 								__nextHasNoMarginBottom
+									__next40pxDefaultSize
 							/>
 						</FlexItem>
 						<FlexItem>
@@ -159,6 +163,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								onChange={ ( val ) => handleValueChange( 'value', parseInt( val, 10 ) || 0 ) }
 								placeholder="1920"
 								__nextHasNoMarginBottom
+									__next40pxDefaultSize
 							/>
 						</FlexItem>
 						{ condition.operator === 'between' && (
@@ -169,6 +174,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 									onChange={ ( val ) => handleValueChange( 'value_end', parseInt( val, 10 ) || 0 ) }
 									placeholder="3840"
 									__nextHasNoMarginBottom
+									__next40pxDefaultSize
 								/>
 							</FlexItem>
 						) }
@@ -193,6 +199,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								] }
 								onChange={ ( val ) => handleValueChange( 'operator', val ) }
 								__nextHasNoMarginBottom
+									__next40pxDefaultSize
 							/>
 						</FlexItem>
 						<FlexItem>
@@ -202,6 +209,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								onChange={ ( val ) => handleValueChange( 'value', parseInt( val, 10 ) || 0 ) }
 								placeholder="1024"
 								__nextHasNoMarginBottom
+									__next40pxDefaultSize
 							/>
 						</FlexItem>
 						{ condition.operator === 'between' && (
@@ -212,6 +220,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 									onChange={ ( val ) => handleValueChange( 'value_end', parseInt( val, 10 ) || 0 ) }
 									placeholder="5120"
 									__nextHasNoMarginBottom
+									__next40pxDefaultSize
 								/>
 							</FlexItem>
 						) }
@@ -237,6 +246,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								] }
 								onChange={ ( val ) => handleValueChange( 'operator', val ) }
 								__nextHasNoMarginBottom
+									__next40pxDefaultSize
 							/>
 						</FlexItem>
 						<FlexItem>
@@ -245,6 +255,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								value={ condition.value || '' }
 								onChange={ ( val ) => handleValueChange( 'value', val ) }
 								__nextHasNoMarginBottom
+									__next40pxDefaultSize
 							/>
 						</FlexItem>
 						{ condition.operator === 'between' && (
@@ -254,6 +265,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 									value={ condition.value_end || '' }
 									onChange={ ( val ) => handleValueChange( 'value_end', val ) }
 									__nextHasNoMarginBottom
+									__next40pxDefaultSize
 								/>
 							</FlexItem>
 						) }
@@ -273,6 +285,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 						] }
 						onChange={ ( val ) => handleValueChange( 'value', parseInt( val, 10 ) || 0 ) }
 						__nextHasNoMarginBottom
+									__next40pxDefaultSize
 					/>
 				);
 
@@ -282,6 +295,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 						value={ condition.value || '' }
 						onChange={ ( val ) => handleValueChange( 'value', val ) }
 						__nextHasNoMarginBottom
+									__next40pxDefaultSize
 					/>
 				);
 		}
@@ -302,6 +316,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 						] }
 						onChange={ handleTypeChange }
 						__nextHasNoMarginBottom
+									__next40pxDefaultSize
 					/>
 				</FlexItem>
 				<FlexBlock>{ renderValueInput() }</FlexBlock>

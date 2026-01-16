@@ -86,7 +86,7 @@ class Plugin {
 	public function register_admin_menu() {
 		add_submenu_page(
 			'upload.php',
-			__( 'Rules Engine', 'vmfa-rules-engine' ),
+			__( 'Virtual Media Folders Rules Engine', 'vmfa-rules-engine' ),
 			__( 'Rules Engine', 'vmfa-rules-engine' ),
 			'manage_options',
 			'vmfa-rules-engine',
@@ -102,7 +102,7 @@ class Plugin {
 	public function render_admin_page() {
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'VMFA Rules Engine', 'vmfa-rules-engine' ); ?></h1>
+			<h1><?php esc_html_e( 'Virtual Media Folders Rules Engine', 'vmfa-rules-engine' ); ?></h1>
 			<div id="vmfa-rules-engine-app"></div>
 		</div>
 		<?php
@@ -166,7 +166,7 @@ class Plugin {
 					'stopProcessing' => __( 'Stop processing after match', 'vmfa-rules-engine' ),
 					'enabled'        => __( 'Enabled', 'vmfa-rules-engine' ),
 					'applyToLibrary' => __( 'Apply to Library', 'vmfa-rules-engine' ),
-					'dryRun'         => __( 'Dry Run (Preview)', 'vmfa-rules-engine' ),
+					'dryRun'         => __( 'Scan Existing Media', 'vmfa-rules-engine' ),
 					'preview'        => __( 'Preview', 'vmfa-rules-engine' ),
 					'apply'          => __( 'Apply Changes', 'vmfa-rules-engine' ),
 				),

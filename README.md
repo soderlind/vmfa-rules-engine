@@ -20,7 +20,9 @@ Turn "Default folder for uploads" into a powerful rule system. Automatically ass
 - **Multiple rules with priority** — Create as many rules as needed, drag to reorder
 - **Stop after first match** — Control whether to continue evaluating rules
 - **AND logic** — All conditions in a rule must match
-- **Apply to existing library** — Run rules against your existing media with dry-run preview
+- **Automatic on upload** — New uploads are processed instantly
+- **Scan existing media** — Apply rules to your existing library with preview
+- **WP-CLI compatible** — Rules apply to imports via `wp media import`
 - **Modern React UI** — Consistent with WordPress admin design
 
 ## Requirements
@@ -45,9 +47,9 @@ Turn "Default folder for uploads" into a powerful rule system. Automatically ass
 4. Enable the rule and save
 5. New uploads will automatically be assigned to folders based on your rules
 
-### Applying Rules to Existing Media
+### Scanning Existing Media
 
-1. Click **Dry Run (Preview)** to see what changes would be made
+1. Click **Scan Existing Media** to preview what changes would be made
 2. Review the preview and select items to process
 3. Click **Apply Changes** to assign folders
 
@@ -132,18 +134,9 @@ All endpoints require `manage_options` capability.
 | PUT | `/vmfa-rules/v1/rules/{id}` | Update a rule |
 | DELETE | `/vmfa-rules/v1/rules/{id}` | Delete a rule |
 | POST | `/vmfa-rules/v1/rules/reorder` | Reorder rules |
-| POST | `/vmfa-rules/v1/preview` | Preview rule application (dry run) |
+| POST | `/vmfa-rules/v1/preview` | Scan existing media (preview) |
 | POST | `/vmfa-rules/v1/apply-rules` | Apply rules to media |
 | GET | `/vmfa-rules/v1/stats` | Get media library statistics |
-
-## Changelog
-
-### 0.1.0
-- Initial release
-- 8 condition types: filename regex, MIME type, dimensions, file size, EXIF camera, EXIF date, author, IPTC keywords
-- Drag-and-drop rule reordering
-- Dry-run preview for batch operations
-- React-based admin UI
 
 ## License
 

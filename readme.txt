@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.3
-Stable tag: 0.1.0
+Stable tag: 0.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,10 +35,15 @@ VMFA Rules Engine automatically assigns uploaded media files to virtual folders 
   * Stop processing option (first matching rule wins)
   * Enable/disable individual rules without deleting
 
+* **Two Ways to Organize**
+  * Automatic on upload – new files are processed instantly
+  * Scan existing media – apply rules to your current library
+
 * **Batch Processing**
-  * Preview mode (dry-run) to see affected files before applying
+  * Preview mode to see affected files before applying
   * Apply rules to existing unassigned media
   * Filter by MIME type for targeted processing
+  * WP-CLI compatible – works with `wp media import`
 
 * **Modern Admin Interface**
   * Clean, intuitive React-based interface
@@ -86,6 +91,14 @@ Yes, developers can add custom matchers using the `vmfa_rules_engine_matchers` f
 
 Yes, use the `vmfa_rules_engine_skip_if_assigned` filter to skip files that already have a folder assigned, or create rules with specific conditions to exclude certain file types.
 
+= Does this work with WP-CLI media imports? =
+
+Yes! Rules are automatically applied when you use `wp media import`. For example:
+
+`wp media import ~/photos/* --url=http://example.com/mysite/`
+
+Each imported file will be evaluated against your rules and assigned to the matching folder.
+
 == Screenshots ==
 
 1. Rules management panel with drag-and-drop ordering
@@ -95,16 +108,53 @@ Yes, use the `vmfa_rules_engine_skip_if_assigned` filter to skip files that alre
 
 == Changelog ==
 
+= 0.3.2 =
+* Fixed WordPress 6.8+ deprecation warnings for form controls
+
+= 0.3.1 =
+* Fixed namespace reference for GitHubPluginUpdater
+
+= 0.3.0 =
+* Added GitHub auto-updater for plugin updates via GitHub releases
+
+= 0.2.1 =
+* Fixed lazy loading pagination stopping at 300 items (offset calculation bug)
+* Fixed CheckboxControl deprecation warning for WordPress 6.7+
+* Increased preview table height for better scrolling experience
+
+= 0.2.0 =
+* Added lazy loading (infinite scroll) for preview results
+* Added scan options modal to choose unassigned-only or all media
+* Renamed button to "Scan Existing Media" for clarity
+* Updated page title to "Virtual Media Folders Rules Engine"
+* Fixed button alignment in Rules card header
+
 = 0.1.0 =
 * Initial release
 * 8 condition matchers: Filename Regex, MIME Type, Dimensions, File Size, EXIF Camera, EXIF Date, Author, IPTC Keywords
 * AND logic for combining conditions
 * Priority-based rule ordering with drag-and-drop
-* Batch processing with preview mode
+* Automatic folder assignment on new uploads
+* Scan existing media with preview before applying
 * REST API for rule management
 * React-based admin interface
 
 == Upgrade Notice ==
+
+= 0.3.2 =
+Fixes deprecation warnings in WordPress 6.8+.
+
+= 0.3.1 =
+Bug fix for auto-updater initialization.
+
+= 0.3.0 =
+New: Plugin now supports automatic updates from GitHub releases.
+
+= 0.2.1 =
+Bug fix: Lazy loading now correctly loads all preview results beyond 300 items.
+
+= 0.2.0 =
+Improved preview with lazy loading - scans your entire library seamlessly.
 
 = 0.1.0 =
 Initial release of VMFA Rules Engine.

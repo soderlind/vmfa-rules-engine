@@ -3,7 +3,7 @@
  * Plugin Name: Virtual Media Folders Rules Engine
  * Plugin URI: https://github.com/soderlind/vmfa-rules-engine
  * Description: Rule-based automatic folder assignment for media uploads. Add-on for Virtual Media Folders.
- * Version: 0.1.0
+ * Version: 0.3.2
  * Author: Per Soderlind
  * Author URI: https://soderlind.no
  * License: GPL-2.0-or-later
@@ -19,7 +19,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Plugin constants.
-define( 'VMFA_RULES_ENGINE_VERSION', '0.1.0' );
+define( 'VMFA_RULES_ENGINE_VERSION', '0.3.2' );
 define( 'VMFA_RULES_ENGINE_FILE', __FILE__ );
 define( 'VMFA_RULES_ENGINE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VMFA_RULES_ENGINE_URL', plugin_dir_url( __FILE__ ) );
@@ -71,6 +71,15 @@ function vmfa_rules_engine_init() {
 		add_action( 'admin_notices', 'vmfa_rules_engine_missing_parent_notice' );
 		return;
 	}
+
+	// Update checker via GitHub releases.
+	VmfaRulesEngine\Update\GitHubPluginUpdater::create_with_assets(
+		'https://github.com/soderlind/vmfa-rules-engine',
+		__FILE__,
+		'vmfa-rules-engine',
+		'/vmfa-rules-engine\.zip/',
+		'main'
+	);
 
 	// Load text domain.
 	load_plugin_textdomain( 'vmfa-rules-engine', false, dirname( VMFA_RULES_ENGINE_BASENAME ) . '/languages' );

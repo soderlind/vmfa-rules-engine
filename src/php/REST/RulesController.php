@@ -148,9 +148,14 @@ class RulesController extends WP_REST_Controller {
 					),
 					'limit'           => array(
 						'type'    => 'integer',
-						'default' => 100,
+						'default' => 50,
 						'minimum' => 1,
-						'maximum' => 1000,
+						'maximum' => 200,
+					),
+					'offset'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+						'minimum' => 0,
 					),
 				),
 			)
@@ -336,6 +341,7 @@ class RulesController extends WP_REST_Controller {
 		$args = array(
 			'unassigned_only' => $request->get_param( 'unassigned_only' ),
 			'posts_per_page'  => $request->get_param( 'limit' ),
+			'offset'          => $request->get_param( 'offset' ),
 		);
 
 		if ( $request->get_param( 'mime_type' ) ) {
@@ -384,10 +390,10 @@ class RulesController extends WP_REST_Controller {
 		$stats = $this->batch_processor->get_stats();
 
 		// Add rules count.
-		$rules          = $this->repository->get_all();
+		$rules            = $this->repository->get_all();
 		$stats[ 'rules' ] = count( $rules );
 
-		$enabled_rules          = $this->repository->get_enabled();
+		$enabled_rules            = $this->repository->get_enabled();
 		$stats[ 'rules_enabled' ] = count( $enabled_rules );
 
 		return rest_ensure_response( $stats );

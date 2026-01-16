@@ -237,13 +237,14 @@ export function useStats() {
  */
 export function useBatchOperations() {
 	const [ isProcessing, setIsProcessing ] = useState( false );
+	const [ isLoadingMore, setIsLoadingMore ] = useState( false );
 	const [ results, setResults ] = useState( null );
 	const [ error, setError ] = useState( null );
 
 	const { nonce } = window.vmfaRulesEngine || {};
 
 	/**
-	 * Preview rule application.
+	 * Preview rule application (initial load).
 	 *
 	 * @param {Object} options Preview options.
 	 * @return {Promise<Object>} Preview results.
@@ -260,7 +261,8 @@ export function useBatchOperations() {
 					method: 'POST',
 					data: {
 						unassigned_only: options.unassignedOnly ?? true,
-						limit: options.limit ?? 100,
+						limit: options.limit ?? 50,
+						offset: 0,
 						mime_type: options.mimeType,
 					},
 					headers: { 'X-WP-Nonce': nonce },
@@ -275,6 +277,60 @@ export function useBatchOperations() {
 			}
 		},
 		[ nonce ]
+	);
+
+	/**
+	 * Load more preview items.
+	 *
+	 * @param {Object} options Load more options.
+	 * @return {Promise<Object>} Additional results.
+	 */
+	const loadMore = useCallback(
+		async ( options = {} ) => {
+			if ( ! results || ! results.has_more || isLoadingMore ) {
+				return null;
+			}
+
+			setIsLoadingMore( true );
+			setError( null );
+
+			try {
+				// Calculate offset based on currently loaded items count.
+				const newOffset = results.items.length;
+				const response = await apiFetch( {
+					path: 'vmfa-rules/v1/preview',
+					method: 'POST',
+					data: {
+						unassigned_only: options.unassignedOnly ?? true,
+						limit: results.limit,
+						offset: newOffset,
+						mime_type: options.mimeType,
+					},
+					headers: { 'X-WP-Nonce': nonce },
+				} );
+
+				// Merge new items with existing results.
+				setResults( ( prev ) => {
+					const mergedItems = [ ...prev.items, ...response.items ];
+					return {
+						...prev,
+						items: mergedItems,
+						total: mergedItems.length,
+						matched: prev.matched + response.matched,
+						unmatched: prev.unmatched + response.unmatched,
+						has_more: response.has_more,
+					};
+				} );
+
+				return response;
+			} catch ( err ) {
+				setError( err.message || 'Failed to load more' );
+				throw err;
+			} finally {
+				setIsLoadingMore( false );
+			}
+		},
+		[ nonce, results, isLoadingMore ]
 	);
 
 	/**
@@ -322,9 +378,11 @@ export function useBatchOperations() {
 
 	return {
 		isProcessing,
+		isLoadingMore,
 		results,
 		error,
 		preview,
+		loadMore,
 		apply,
 		clearResults,
 	};

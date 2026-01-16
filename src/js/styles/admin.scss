@@ -402,7 +402,7 @@ $transition-duration: 0.2s;
 }
 
 .vmfa-preview-table {
-	max-height: 300px;
+	max-height: 400px;
 	overflow-y: auto;
 	border: 1px solid $color-gray-200;
 	border-radius: $border-radius;
@@ -556,4 +556,27 @@ $transition-duration: 0.2s;
 	.vmfa-preview-stat-value {
 		color: $color-error;
 	}
+}
+
+/* Infinite scroll loading */
+.vmfa-preview-loading-hint {
+	font-style: italic;
+	color: $color-gray-600;
+	font-size: 13px;
+}
+
+.vmfa-preview-loading-more {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: $spacing-sm;
+	padding: $spacing-md;
+	color: $color-gray-600;
+	font-size: 13px;
+}
+
+.vmfa-preview-load-more {
+	display: flex;
+	justify-content: center;
+	padding: $spacing-md;
 }

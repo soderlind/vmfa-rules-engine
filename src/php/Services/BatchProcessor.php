@@ -74,18 +74,63 @@ class BatchProcessor {
 	}
 
 	/**
+	 * Count total attachments matching criteria.
+	 *
+	 * @param array $args Query arguments.
+	 * @return int Total count.
+	 */
+	public function count_attachments( $args = array() ) {
+		$count_args = array(
+			'post_type'      => 'attachment',
+			'post_status'    => 'inherit',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+		);
+
+		// Filter to only unassigned if requested.
+		if ( ! empty( $args[ 'unassigned_only' ] ) ) {
+			$count_args[ 'tax_query' ] = array(
+				array(
+					'taxonomy' => self::TAXONOMY,
+					'operator' => 'NOT EXISTS',
+				),
+			);
+		}
+
+		// Filter by mime type if specified.
+		if ( ! empty( $args[ 'mime_type' ] ) ) {
+			$count_args[ 'post_mime_type' ] = $args[ 'mime_type' ];
+		}
+
+		$query = new \WP_Query( $count_args );
+
+		return $query->found_posts;
+	}
+
+	/**
 	 * Preview rule application (dry run).
 	 *
 	 * @param array $args Processing arguments.
-	 * @return array Preview results.
+	 * @return array Preview results with pagination info.
 	 */
 	public function preview( $args = array() ) {
+		// Get total count first (without pagination).
+		$total_count = $this->count_attachments( $args );
+
+		// Get paginated attachments.
 		$attachment_ids = $this->get_attachments( $args );
-		$results        = array(
-			'total'     => count( $attachment_ids ),
-			'matched'   => 0,
-			'unmatched' => 0,
-			'items'     => array(),
+		$offset         = isset( $args[ 'offset' ] ) ? (int) $args[ 'offset' ] : 0;
+		$limit          = isset( $args[ 'posts_per_page' ] ) ? (int) $args[ 'posts_per_page' ] : 50;
+
+		$results = array(
+			'total'       => count( $attachment_ids ),
+			'total_count' => $total_count,
+			'offset'      => $offset,
+			'limit'       => $limit,
+			'has_more'    => ( $offset + count( $attachment_ids ) ) < $total_count,
+			'matched'     => 0,
+			'unmatched'   => 0,
+			'items'       => array(),
 		);
 
 		foreach ( $attachment_ids as $attachment_id ) {
@@ -173,7 +218,7 @@ class BatchProcessor {
 			);
 
 			if ( $assigned ) {
-				$folder             = get_term( $match[ 'folder_id' ], self::TAXONOMY );
+				$folder               = get_term( $match[ 'folder_id' ], self::TAXONOMY );
 				$results[ 'items' ][] = array(
 					'attachment_id' => $attachment_id,
 					'status'        => 'assigned',
