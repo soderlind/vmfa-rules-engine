@@ -56,14 +56,6 @@ Turn "Default folder for uploads" into a powerful rule system. Automatically ass
 
 See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
-## Hooks & Filters
-
-See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md#hooks--filters).
-
-## REST API Endpoints
-
-See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md#rest-api-endpoints).
-
 ## License
 
 GPL-2.0-or-later. See [LICENSE](LICENSE).
