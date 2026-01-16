@@ -1,0 +1,31 @@
+{
+	"name": "vmfa-rules-engine",
+	"version": "0.1.0",
+	"description": "Rule-based automatic folder assignment for media uploads",
+	"author": "Per Soderlind",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build src/js/index.js --output-path=build",
+		"start": "wp-scripts start src/js/index.js --output-path=build",
+		"lint:js": "wp-scripts lint-js src/js",
+		"lint:css": "wp-scripts lint-style src/js/styles",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^31.2.0",
+		"vitest": "^4.0.16",
+		"jsdom": "^26.1.0"
+	},
+	"dependencies": {
+		"@dnd-kit/core": "^6.3.1",
+		"@dnd-kit/sortable": "^10.0.0",
+		"@dnd-kit/utilities": "^3.2.2",
+		"@wordpress/api-fetch": "^7.37.0",
+		"@wordpress/components": "^31.0.0",
+		"@wordpress/element": "^6.37.0",
+		"@wordpress/i18n": "^6.10.0",
+		"@wordpress/icons": "^11.0.0"
+	}
+}

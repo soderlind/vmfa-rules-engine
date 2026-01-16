@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<ruleset name="VMFA Rules Engine">
+	<description>WordPress Coding Standards for VMFA Rules Engine</description>
+
+	<file>./</file>
+
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>node_modules/*</exclude-pattern>
+	<exclude-pattern>build/*</exclude-pattern>
+	<exclude-pattern>tests/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="ps"/>
+
+	<rule ref="WordPress"/>
+	<rule ref="WordPress-Docs"/>
+	<rule ref="WordPress-Extra"/>
+
+	<rule ref="PHPCompatibility"/>
+	<config name="testVersion" value="8.3-"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="vmfa-rules-engine"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="vmfa_rules_engine"/>
+				<element value="VmfaRulesEngine"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

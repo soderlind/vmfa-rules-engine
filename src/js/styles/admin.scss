@@ -1,0 +1,558 @@
+/**
+ * Admin styles for VMFA Rules Engine.
+ *
+ * @package VmfaRulesEngine
+ */
+
+/* Variables */
+$color-primary: #007cba;
+$color-primary-hover: #006ba1;
+$color-success: #00a32a;
+$color-error: #d63638;
+$color-warning: #dba617;
+$color-gray-100: #f0f0f1;
+$color-gray-200: #e0e0e0;
+$color-gray-300: #c3c4c7;
+$color-gray-600: #50575e;
+$color-gray-900: #1d2327;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+$border-radius: 4px;
+$transition-duration: 0.2s;
+
+/* Loading State */
+.vmfa-rules-loading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: $spacing-xl;
+	
+	p {
+		margin-top: $spacing-md;
+		color: $color-gray-600;
+	}
+}
+
+/* Rules Panel */
+.vmfa-rules-panel {
+	max-width: 1200px;
+	
+	.components-notice {
+		margin-bottom: $spacing-md;
+	}
+}
+
+/* Stats Card */
+.vmfa-stats-card {
+	margin-bottom: $spacing-lg;
+	
+	.components-card__body {
+		padding: $spacing-lg;
+	}
+}
+
+.vmfa-stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: $spacing-lg;
+}
+
+.vmfa-stats-item {
+	text-align: center;
+}
+
+.vmfa-stats-value {
+	display: block;
+	font-size: 32px;
+	font-weight: 600;
+	line-height: 1.2;
+	color: $color-gray-900;
+	
+	&--highlight {
+		color: $color-primary;
+	}
+}
+
+.vmfa-stats-label {
+	display: block;
+	margin-top: $spacing-xs;
+	font-size: 13px;
+	color: $color-gray-600;
+}
+
+/* Rules Card */
+.vmfa-rules-card {
+	.components-card__header {
+		h2 {
+			margin: 0;
+			font-size: 16px;
+		}
+		
+		.components-flex {
+			width: 100%;
+		}
+		
+		.components-button {
+			margin-left: $spacing-sm;
+		}
+	}
+}
+
+/* Rules Empty State */
+.vmfa-rules-empty {
+	text-align: center;
+	padding: $spacing-xl;
+	
+	p {
+		margin-bottom: $spacing-md;
+		color: $color-gray-600;
+	}
+}
+
+/* Rules List */
+.vmfa-rules-list {
+	display: flex;
+	flex-direction: column;
+	gap: $spacing-sm;
+}
+
+/* Rule Item */
+.vmfa-rule-item {
+	display: flex;
+	align-items: center;
+	gap: $spacing-md;
+	padding: $spacing-md;
+	background: $color-gray-100;
+	border-radius: $border-radius;
+	transition: background-color $transition-duration;
+	
+	&:hover {
+		background: darken($color-gray-100, 3%);
+	}
+	
+	&--disabled {
+		opacity: 0.6;
+		
+		.vmfa-rule-item__name {
+			text-decoration: line-through;
+		}
+	}
+}
+
+.vmfa-rule-item__drag {
+	cursor: grab;
+	color: $color-gray-300;
+	
+	&:active {
+		cursor: grabbing;
+	}
+	
+	.dashicons {
+		font-size: 20px;
+	}
+}
+
+.vmfa-rule-item__content {
+	flex: 1;
+	min-width: 0;
+}
+
+.vmfa-rule-item__header {
+	display: flex;
+	align-items: center;
+	gap: $spacing-sm;
+	margin-bottom: $spacing-xs;
+}
+
+.vmfa-rule-item__name {
+	font-weight: 600;
+	color: $color-gray-900;
+}
+
+.vmfa-rule-item__folder {
+	color: $color-gray-600;
+	font-size: 13px;
+}
+
+.vmfa-rule-item__conditions {
+	display: flex;
+	align-items: center;
+	gap: $spacing-sm;
+	font-size: 12px;
+	color: $color-gray-600;
+}
+
+.vmfa-rule-item__no-conditions {
+	color: $color-warning;
+}
+
+.vmfa-rule-item__stop-badge {
+	display: inline-block;
+	padding: 2px 6px;
+	background: $color-gray-200;
+	border-radius: 3px;
+	font-size: 11px;
+	text-transform: uppercase;
+	color: $color-gray-600;
+}
+
+.vmfa-rule-item__actions {
+	display: flex;
+	align-items: center;
+	gap: $spacing-xs;
+	
+	.components-toggle-control {
+		margin-bottom: 0;
+		
+		.components-base-control__field {
+			margin-bottom: 0;
+		}
+	}
+	
+	.components-button {
+		min-width: auto;
+	}
+}
+
+/* Rule Editor Modal */
+.vmfa-rule-editor-modal {
+	.components-modal__content {
+		min-width: 600px;
+		max-width: 800px;
+	}
+}
+
+.vmfa-rule-editor {
+	.components-text-control__input,
+	.components-select-control__input {
+		&.has-error {
+			border-color: $color-error;
+		}
+	}
+	
+	h3 {
+		margin: $spacing-lg 0 $spacing-xs;
+		font-size: 14px;
+	}
+	
+	.description {
+		margin: 0 0 $spacing-md;
+		color: $color-gray-600;
+		font-size: 12px;
+	}
+}
+
+.vmfa-rule-editor__conditions {
+	margin: $spacing-lg 0;
+	padding: $spacing-md;
+	background: $color-gray-100;
+	border-radius: $border-radius;
+}
+
+.vmfa-rule-editor__options {
+	margin: $spacing-lg 0;
+	
+	.components-toggle-control {
+		margin-bottom: $spacing-md;
+		
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.vmfa-rule-editor__actions {
+	margin-top: $spacing-lg;
+	padding-top: $spacing-lg;
+	border-top: 1px solid $color-gray-200;
+}
+
+.vmfa-error-message {
+	color: $color-error;
+	font-size: 12px;
+	margin: $spacing-xs 0;
+}
+
+/* Condition Builder */
+.vmfa-condition-builder {
+	margin-top: $spacing-md;
+}
+
+.vmfa-condition-list {
+	display: flex;
+	flex-direction: column;
+	gap: $spacing-md;
+}
+
+.vmfa-condition-row {
+	padding: $spacing-md;
+	background: white;
+	border: 1px solid $color-gray-200;
+	border-radius: $border-radius;
+	
+	.components-flex {
+		flex-wrap: wrap;
+	}
+	
+	.components-base-control {
+		margin-bottom: 0;
+	}
+}
+
+.vmfa-condition-description {
+	margin: $spacing-sm 0 0;
+	font-size: 12px;
+	color: $color-gray-600;
+	font-style: italic;
+}
+
+.vmfa-condition-unit {
+	display: inline-flex;
+	align-items: center;
+	height: 36px;
+	color: $color-gray-600;
+	font-size: 13px;
+}
+
+.vmfa-condition-empty {
+	color: $color-gray-600;
+	font-style: italic;
+}
+
+.vmfa-condition-add {
+	margin-top: $spacing-md;
+}
+
+/* Preview Modal */
+.vmfa-preview-modal {
+	.components-modal__content {
+		min-width: 700px;
+		max-width: 900px;
+	}
+}
+
+.vmfa-preview-loading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: $spacing-xl;
+	
+	p {
+		margin-top: $spacing-md;
+		color: $color-gray-600;
+	}
+}
+
+.vmfa-preview-content {
+	max-height: 70vh;
+	overflow-y: auto;
+}
+
+.vmfa-preview-summary {
+	margin-bottom: $spacing-lg;
+	padding: $spacing-md;
+	background: $color-gray-100;
+	border-radius: $border-radius;
+	
+	p {
+		margin: 0;
+	}
+}
+
+.vmfa-preview-section {
+	margin-bottom: $spacing-lg;
+	
+	&--collapsed {
+		summary {
+			cursor: pointer;
+			padding: $spacing-sm;
+			background: $color-gray-100;
+			border-radius: $border-radius;
+			font-weight: 500;
+			
+			&:hover {
+				background: $color-gray-200;
+			}
+		}
+	}
+}
+
+.vmfa-preview-section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: $spacing-md;
+	
+	h3 {
+		margin: 0;
+		font-size: 14px;
+	}
+	
+	.components-checkbox-control {
+		margin-bottom: 0;
+	}
+}
+
+.vmfa-preview-table {
+	max-height: 300px;
+	overflow-y: auto;
+	border: 1px solid $color-gray-200;
+	border-radius: $border-radius;
+	
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		
+		th,
+		td {
+			padding: $spacing-sm $spacing-md;
+			text-align: left;
+			border-bottom: 1px solid $color-gray-200;
+		}
+		
+		th {
+			position: sticky;
+			top: 0;
+			background: $color-gray-100;
+			font-weight: 600;
+			font-size: 12px;
+			text-transform: uppercase;
+			color: $color-gray-600;
+		}
+		
+		tr:last-child td {
+			border-bottom: none;
+		}
+		
+		tr:hover td {
+			background: rgba(0, 0, 0, 0.02);
+		}
+	}
+}
+
+.vmfa-preview-col-check {
+	width: 40px;
+	
+	.components-checkbox-control {
+		margin-bottom: 0;
+	}
+}
+
+.vmfa-preview-col-thumb {
+	width: 50px;
+	
+	img {
+		display: block;
+		border-radius: 2px;
+		object-fit: cover;
+	}
+}
+
+.vmfa-preview-file {
+	display: flex;
+	flex-direction: column;
+}
+
+.vmfa-preview-filename {
+	font-weight: 500;
+	font-size: 13px;
+}
+
+.vmfa-preview-title {
+	font-size: 12px;
+	color: $color-gray-600;
+}
+
+.vmfa-preview-folder {
+	display: inline-block;
+	padding: 2px 8px;
+	background: lighten($color-primary, 45%);
+	color: $color-primary;
+	border-radius: 3px;
+	font-size: 12px;
+}
+
+.vmfa-preview-unmatched {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $spacing-sm;
+	padding: $spacing-md;
+}
+
+.vmfa-preview-unmatched-item {
+	display: flex;
+	align-items: center;
+	gap: $spacing-xs;
+	padding: $spacing-xs $spacing-sm;
+	background: $color-gray-100;
+	border-radius: $border-radius;
+	font-size: 12px;
+	
+	img {
+		border-radius: 2px;
+		object-fit: cover;
+	}
+}
+
+.vmfa-preview-more {
+	width: 100%;
+	margin: $spacing-sm 0 0;
+	color: $color-gray-600;
+	font-style: italic;
+}
+
+.vmfa-preview-actions {
+	margin-top: $spacing-lg;
+	padding-top: $spacing-lg;
+	border-top: 1px solid $color-gray-200;
+}
+
+/* Applied Results */
+.vmfa-preview-applied {
+	text-align: center;
+	padding: $spacing-lg;
+}
+
+.vmfa-preview-stats {
+	display: flex;
+	justify-content: center;
+	gap: $spacing-xl;
+	margin-bottom: $spacing-lg;
+}
+
+.vmfa-preview-stat {
+	text-align: center;
+}
+
+.vmfa-preview-stat-value {
+	display: block;
+	font-size: 36px;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.vmfa-preview-stat-label {
+	display: block;
+	margin-top: $spacing-xs;
+	font-size: 13px;
+	color: $color-gray-600;
+}
+
+.vmfa-preview-stat--success {
+	.vmfa-preview-stat-value {
+		color: $color-success;
+	}
+}
+
+.vmfa-preview-stat--error {
+	.vmfa-preview-stat-value {
+		color: $color-error;
+	}
+}

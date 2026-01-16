@@ -1,0 +1,36 @@
+{
+	"$schema": "https://getcomposer.org/schema.json",
+	"name": "soderlind/vmfa-rules-engine",
+	"description": "Rule-based automatic folder assignment for media uploads",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Per Soderlind",
+			"homepage": "https://soderlind.no"
+		}
+	],
+	"require": {
+		"php": ">=8.3"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"wp-coding-standards/wpcs": "^3.0",
+		"phpcompatibility/php-compatibility": "^9.0",
+		"yoast/phpunit-polyfills": "^2.0"
+	},
+	"scripts": {
+		"lint:php": "phpcs -p",
+		"fix:php": "phpcbf -p"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"VmfaRulesEngine\\": "src/php/"
+		}
+	}
+}
