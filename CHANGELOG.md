@@ -7,21 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.3] - 2026-01-16
+## [0.4.0] - 2026-01-16
 
-### Improved
+### Added
+- **Parent Plugin Tab Integration**: Settings now appear as a tab within Virtual Media Folders "Folder Settings" page
+  - Registers via `vmfo_settings_tabs` filter when parent plugin supports tabs
+  - URL pattern: `?page=vmfo-settings&tab=rules-engine`
 
-- Clarified condition descriptions for better usability
-  - File size: now indicates support for comparison operators (>, <, =, >=, <=)
-  - EXIF camera model: clarified as partial match
-  - EXIF date taken: clarified as date range matching
-  - IPTC keywords: clarified as partial match with comma-separated values
-- Added Norwegian (nb_NO) translations
-- Added npm scripts for i18n workflow (i18n:pot, i18n:po, i18n:mo, i18n:json, i18n:php, i18n:build)
-
-### Fixed
-
-- Added `wp_set_script_translations()` to enable JavaScript translations
+### Changed
+- Settings menu no longer appears as separate item under Media when parent supports tabs
+- Backwards compatible: falls back to standalone menu if parent plugin is outdated
 
 ## [0.3.2] - 2026-01-16
 
