@@ -11,12 +11,14 @@
 		"lint:js": "wp-scripts lint-js src/js",
 		"lint:css": "wp-scripts lint-style src/js/styles",
 		"test": "vitest run",
-		"test:watch": "vitest"
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage"
 	},
 	"devDependencies": {
+		"@vitest/coverage-v8": "^4.0.16",
 		"@wordpress/scripts": "^31.2.0",
-		"vitest": "^4.0.16",
-		"jsdom": "^26.1.0"
+		"jsdom": "^26.1.0",
+		"vitest": "^4.0.16"
 	},
 	"dependencies": {
 		"@dnd-kit/core": "^6.3.1",
