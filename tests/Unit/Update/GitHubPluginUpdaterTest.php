@@ -22,7 +22,7 @@ class GitHubPluginUpdaterTest extends TestCase {
 	 * Test that constructor throws exception for missing github_url.
 	 */
 	public function test_constructor_throws_for_missing_github_url(): void {
-		$this->expectException( \InvalidArgumentException::class );
+		$this->expectException( \InvalidArgumentException::class);
 		$this->expectExceptionMessage( "Required parameter 'github_url' is missing or empty." );
 
 		new GitHubPluginUpdater( [
@@ -35,7 +35,7 @@ class GitHubPluginUpdaterTest extends TestCase {
 	 * Test that constructor throws exception for missing plugin_file.
 	 */
 	public function test_constructor_throws_for_missing_plugin_file(): void {
-		$this->expectException( \InvalidArgumentException::class );
+		$this->expectException( \InvalidArgumentException::class);
 		$this->expectExceptionMessage( "Required parameter 'plugin_file' is missing or empty." );
 
 		new GitHubPluginUpdater( [
@@ -48,7 +48,7 @@ class GitHubPluginUpdaterTest extends TestCase {
 	 * Test that constructor throws exception for missing plugin_slug.
 	 */
 	public function test_constructor_throws_for_missing_plugin_slug(): void {
-		$this->expectException( \InvalidArgumentException::class );
+		$this->expectException( \InvalidArgumentException::class);
 		$this->expectExceptionMessage( "Required parameter 'plugin_slug' is missing or empty." );
 
 		new GitHubPluginUpdater( [
@@ -61,7 +61,7 @@ class GitHubPluginUpdaterTest extends TestCase {
 	 * Test that constructor throws exception for empty github_url.
 	 */
 	public function test_constructor_throws_for_empty_github_url(): void {
-		$this->expectException( \InvalidArgumentException::class );
+		$this->expectException( \InvalidArgumentException::class);
 		$this->expectExceptionMessage( "Required parameter 'github_url' is missing or empty." );
 
 		new GitHubPluginUpdater( [
