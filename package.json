@@ -1,6 +1,6 @@
 {
 	"name": "vmfa-rules-engine",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"description": "Rule-based automatic folder assignment for media uploads",
 	"author": "Per Soderlind",
 	"license": "GPL-2.0-or-later",
@@ -12,7 +12,13 @@
 		"lint:css": "wp-scripts lint-style src/js/styles",
 		"test": "vitest run",
 		"test:watch": "vitest",
-		"test:coverage": "vitest run --coverage"
+		"test:coverage": "vitest run --coverage",
+		"i18n:pot": "wp i18n make-pot . languages/vmfa-rules-engine.pot --domain=vmfa-rules-engine --exclude=node_modules,vendor,tests",
+		"i18n:po": "wp i18n update-po languages/vmfa-rules-engine.pot languages/",
+		"i18n:mo": "wp i18n make-mo languages/",
+		"i18n:json": "wp i18n make-json languages/ --no-purge",
+		"i18n:php": "wp i18n make-php languages/",
+		"i18n:build": "npm run i18n:pot && npm run i18n:po && npm run i18n:mo && npm run i18n:json && npm run i18n:php"
 	},
 	"devDependencies": {
 		"@vitest/coverage-v8": "^4.0.16",

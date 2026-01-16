@@ -208,6 +208,12 @@ class Plugin {
 			true
 		);
 
+		wp_set_script_translations(
+			'vmfa-rules-engine-admin',
+			'vmfa-rules-engine',
+			VMFA_RULES_ENGINE_PATH . 'languages'
+		);
+
 		wp_enqueue_style(
 			'vmfa-rules-engine-admin',
 			VMFA_RULES_ENGINE_URL . 'build/index.css',
@@ -350,20 +356,20 @@ class Plugin {
 			array(
 				'value'       => 'file_size',
 				'label'       => __( 'File size', 'vmfa-rules-engine' ),
-				'description' => __( 'Match by file size in KB', 'vmfa-rules-engine' ),
+				'description' => __( 'Match files by size (supports >, <, =, >=, <= operators)', 'vmfa-rules-engine' ),
 				'inputType'   => 'filesize',
 			),
 			array(
 				'value'       => 'exif_camera',
 				'label'       => __( 'EXIF camera model', 'vmfa-rules-engine' ),
-				'description' => __( 'Match by camera model from EXIF data', 'vmfa-rules-engine' ),
+				'description' => __( 'Partial match by camera model from EXIF data', 'vmfa-rules-engine' ),
 				'inputType'   => 'text',
 				'placeholder' => 'iPhone 15 Pro',
 			),
 			array(
 				'value'       => 'exif_date',
 				'label'       => __( 'EXIF date taken', 'vmfa-rules-engine' ),
-				'description' => __( 'Match by photo capture date', 'vmfa-rules-engine' ),
+				'description' => __( 'Match photos taken within a date range', 'vmfa-rules-engine' ),
 				'inputType'   => 'daterange',
 			),
 			array(
@@ -375,7 +381,7 @@ class Plugin {
 			array(
 				'value'       => 'iptc_keywords',
 				'label'       => __( 'IPTC keywords', 'vmfa-rules-engine' ),
-				'description' => __( 'Match by embedded IPTC keywords', 'vmfa-rules-engine' ),
+				'description' => __( 'Partial match by embedded IPTC keywords (comma-separated)', 'vmfa-rules-engine' ),
 				'inputType'   => 'text',
 				'placeholder' => 'product, marketing',
 			),

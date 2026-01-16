@@ -108,6 +108,11 @@ Each imported file will be evaluated against your rules and assigned to the matc
 
 == Changelog ==
 
+= 0.3.3 =
+* Improved condition descriptions for better usability
+* Added Norwegian (nb_NO) translations
+* Added npm scripts for i18n workflow
+
 = 0.3.2 =
 * Fixed WordPress 6.8+ deprecation warnings for form controls
 
