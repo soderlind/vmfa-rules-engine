@@ -17,6 +17,11 @@ use VmfaRulesEngine\Services\RuleEvaluator;
 class Plugin {
 
 	/**
+	 * Tab slug for registration with parent plugin.
+	 */
+	private const TAB_SLUG = 'rules-engine';
+
+	/**
 	 * Singleton instance.
 	 *
 	 * @var Plugin|null
@@ -67,8 +72,15 @@ class Plugin {
 	private function init_hooks() {
 		// Admin hooks.
 		if ( is_admin() ) {
-			add_action( 'admin_menu', array( $this, 'register_admin_menu' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+			if ( $this->supports_parent_tabs() ) {
+				// Register as a tab in the parent plugin.
+				add_filter( 'vmfo_settings_tabs', array( $this, 'register_tab' ) );
+				add_action( 'vmfo_settings_enqueue_scripts', array( $this, 'enqueue_tab_scripts' ), 10, 2 );
+			} else {
+				// Fall back to standalone menu.
+				add_action( 'admin_menu', array( $this, 'register_admin_menu' ) );
+				add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+			}
 		}
 
 		// REST API.
@@ -79,7 +91,59 @@ class Plugin {
 	}
 
 	/**
-	 * Register admin menu.
+	 * Check if the parent plugin supports add-on tabs.
+	 *
+	 * @return bool True if parent supports tabs, false otherwise.
+	 */
+	private function supports_parent_tabs(): bool {
+		return defined( 'VirtualMediaFolders\Settings::SUPPORTS_ADDON_TABS' )
+			&& \VirtualMediaFolders\Settings::SUPPORTS_ADDON_TABS;
+	}
+
+	/**
+	 * Register tab with parent plugin.
+	 *
+	 * @param array $tabs Existing tabs array.
+	 * @return array Modified tabs array.
+	 */
+	public function register_tab( array $tabs ): array {
+		$tabs[ self::TAB_SLUG ] = array(
+			'title'    => __( 'Rules Engine', 'vmfa-rules-engine' ),
+			'callback' => array( $this, 'render_tab_content' ),
+		);
+		return $tabs;
+	}
+
+	/**
+	 * Render tab content within parent plugin's settings page.
+	 *
+	 * @param string $active_tab    The currently active tab slug.
+	 * @param string $active_subtab The currently active subtab slug.
+	 * @return void
+	 */
+	public function render_tab_content( string $active_tab, string $active_subtab ): void {
+		?>
+		<div id="vmfa-rules-engine-app"></div>
+		<?php
+	}
+
+	/**
+	 * Enqueue scripts when Rules Engine tab is active.
+	 *
+	 * @param string $active_tab    The currently active tab slug.
+	 * @param string $active_subtab The currently active subtab slug.
+	 * @return void
+	 */
+	public function enqueue_tab_scripts( string $active_tab, string $active_subtab ): void {
+		if ( self::TAB_SLUG !== $active_tab ) {
+			return;
+		}
+
+		$this->do_enqueue_assets();
+	}
+
+	/**
+	 * Register admin menu (fallback when parent doesn't support tabs).
 	 *
 	 * @return void
 	 */
@@ -95,7 +159,7 @@ class Plugin {
 	}
 
 	/**
-	 * Render admin page.
+	 * Render admin page (fallback for standalone page).
 	 *
 	 * @return void
 	 */
@@ -109,7 +173,7 @@ class Plugin {
 	}
 
 	/**
-	 * Enqueue admin assets.
+	 * Enqueue admin assets (fallback for standalone page).
 	 *
 	 * @param string $hook_suffix The current admin page hook suffix.
 	 * @return void
@@ -119,6 +183,15 @@ class Plugin {
 			return;
 		}
 
+		$this->do_enqueue_assets();
+	}
+
+	/**
+	 * Actually enqueue the scripts and styles.
+	 *
+	 * @return void
+	 */
+	private function do_enqueue_assets(): void {
 		$asset_file = VMFA_RULES_ENGINE_PATH . 'build/index.asset.php';
 
 		if ( ! file_exists( $asset_file ) ) {

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-01-16
+
+### Added
+- **Parent Plugin Tab Integration**: Settings now appear as a tab within Virtual Media Folders "Folder Settings" page
+  - Registers via `vmfo_settings_tabs` filter when parent plugin supports tabs
+  - URL pattern: `?page=vmfo-settings&tab=rules-engine`
+
+### Changed
+- Settings menu no longer appears as separate item under Media when parent supports tabs
+- Backwards compatible: falls back to standalone menu if parent plugin is outdated
+
 ## [0.3.2] - 2026-01-16
 
 ### Fixed
