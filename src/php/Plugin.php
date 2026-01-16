@@ -130,8 +130,8 @@ class Plugin {
 		wp_enqueue_script(
 			'vmfa-rules-engine-admin',
 			VMFA_RULES_ENGINE_URL . 'build/index.js',
-			$asset['dependencies'],
-			$asset['version'],
+			$asset[ 'dependencies' ],
+			$asset[ 'version' ],
 			true
 		);
 
@@ -139,7 +139,7 @@ class Plugin {
 			'vmfa-rules-engine-admin',
 			VMFA_RULES_ENGINE_URL . 'build/index.css',
 			array( 'wp-components' ),
-			$asset['version']
+			$asset[ 'version' ]
 		);
 
 		// Get folders from parent plugin.
@@ -149,11 +149,11 @@ class Plugin {
 			'vmfa-rules-engine-admin',
 			'vmfaRulesEngine',
 			array(
-				'restUrl'          => rest_url( 'vmfa-rules/v1/' ),
-				'nonce'            => wp_create_nonce( 'wp_rest' ),
-				'folders'          => $folders,
-				'conditionTypes'   => $this->get_condition_types(),
-				'strings'          => array(
+				'restUrl'        => rest_url( 'vmfa-rules/v1/' ),
+				'nonce'          => wp_create_nonce( 'wp_rest' ),
+				'folders'        => $folders,
+				'conditionTypes' => $this->get_condition_types(),
+				'strings'        => array(
 					'saveSuccess'    => __( 'Rules saved successfully.', 'vmfa-rules-engine' ),
 					'saveError'      => __( 'Failed to save rules.', 'vmfa-rules-engine' ),
 					'deleteConfirm'  => __( 'Are you sure you want to delete this rule?', 'vmfa-rules-engine' ),

@@ -21,18 +21,18 @@ class FileSizeMatcher implements MatcherInterface {
 	 * @return bool True if file size matches.
 	 */
 	public function matches( $attachment_id, $metadata, $params ) {
-		if ( ! isset( $params['value'] ) ) {
+		if ( ! isset( $params[ 'value' ] ) ) {
 			return false;
 		}
 
-		$operator  = $params['operator'] ?? 'gt';
-		$value     = absint( $params['value'] ) * 1024; // Convert KB to bytes.
-		$value_end = isset( $params['value_end'] ) ? absint( $params['value_end'] ) * 1024 : 0;
+		$operator  = $params[ 'operator' ] ?? 'gt';
+		$value     = absint( $params[ 'value' ] ) * 1024; // Convert KB to bytes.
+		$value_end = isset( $params[ 'value_end' ] ) ? absint( $params[ 'value_end' ] ) * 1024 : 0;
 
 		// Get file size from metadata or filesystem.
 		$actual = 0;
-		if ( isset( $metadata['filesize'] ) ) {
-			$actual = absint( $metadata['filesize'] );
+		if ( isset( $metadata[ 'filesize' ] ) ) {
+			$actual = absint( $metadata[ 'filesize' ] );
 		} else {
 			$file_path = get_attached_file( $attachment_id );
 			if ( $file_path && file_exists( $file_path ) ) {

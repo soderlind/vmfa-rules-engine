@@ -21,18 +21,18 @@ class ExifCameraMatcher implements MatcherInterface {
 	 * @return bool True if camera model matches.
 	 */
 	public function matches( $attachment_id, $metadata, $params ) {
-		if ( empty( $params['value'] ) ) {
+		if ( empty( $params[ 'value' ] ) ) {
 			return false;
 		}
 
-		$camera = $metadata['image_meta']['camera'] ?? '';
+		$camera = $metadata[ 'image_meta' ][ 'camera' ] ?? '';
 
 		if ( empty( $camera ) ) {
 			return false;
 		}
 
 		// Case-insensitive partial match.
-		return stripos( $camera, $params['value'] ) !== false;
+		return stripos( $camera, $params[ 'value' ] ) !== false;
 	}
 
 	/**

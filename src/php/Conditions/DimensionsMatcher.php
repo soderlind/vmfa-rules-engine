@@ -21,25 +21,25 @@ class DimensionsMatcher implements MatcherInterface {
 	 * @return bool True if dimensions match.
 	 */
 	public function matches( $attachment_id, $metadata, $params ) {
-		if ( ! isset( $params['value'] ) || ! isset( $params['dimension'] ) ) {
+		if ( ! isset( $params[ 'value' ] ) || ! isset( $params[ 'dimension' ] ) ) {
 			return false;
 		}
 
-		$dimension = $params['dimension'] ?? 'width';
-		$operator  = $params['operator'] ?? 'gt';
-		$value     = absint( $params['value'] );
-		$value_end = isset( $params['value_end'] ) ? absint( $params['value_end'] ) : 0;
+		$dimension = $params[ 'dimension' ] ?? 'width';
+		$operator  = $params[ 'operator' ] ?? 'gt';
+		$value     = absint( $params[ 'value' ] );
+		$value_end = isset( $params[ 'value_end' ] ) ? absint( $params[ 'value_end' ] ) : 0;
 
 		// Get the actual dimension value.
 		$actual = 0;
-		if ( 'width' === $dimension && isset( $metadata['width'] ) ) {
-			$actual = absint( $metadata['width'] );
-		} elseif ( 'height' === $dimension && isset( $metadata['height'] ) ) {
-			$actual = absint( $metadata['height'] );
+		if ( 'width' === $dimension && isset( $metadata[ 'width' ] ) ) {
+			$actual = absint( $metadata[ 'width' ] );
+		} elseif ( 'height' === $dimension && isset( $metadata[ 'height' ] ) ) {
+			$actual = absint( $metadata[ 'height' ] );
 		} elseif ( 'both' === $dimension ) {
 			// For 'both', check if either dimension meets the criteria.
-			$width  = isset( $metadata['width'] ) ? absint( $metadata['width'] ) : 0;
-			$height = isset( $metadata['height'] ) ? absint( $metadata['height'] ) : 0;
+			$width  = isset( $metadata[ 'width' ] ) ? absint( $metadata[ 'width' ] ) : 0;
+			$height = isset( $metadata[ 'height' ] ) ? absint( $metadata[ 'height' ] ) : 0;
 			$actual = min( $width, $height ); // Use the smaller dimension.
 		}
 

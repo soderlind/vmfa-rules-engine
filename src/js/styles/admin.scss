@@ -32,7 +32,7 @@ $transition-duration: 0.2s;
 	align-items: center;
 	justify-content: center;
 	padding: $spacing-xl;
-	
+
 	p {
 		margin-top: $spacing-md;
 		color: $color-gray-600;
@@ -42,7 +42,7 @@ $transition-duration: 0.2s;
 /* Rules Panel */
 .vmfa-rules-panel {
 	max-width: 1200px;
-	
+
 	.components-notice {
 		margin-bottom: $spacing-md;
 	}
@@ -51,7 +51,7 @@ $transition-duration: 0.2s;
 /* Stats Card */
 .vmfa-stats-card {
 	margin-bottom: $spacing-lg;
-	
+
 	.components-card__body {
 		padding: $spacing-lg;
 	}
@@ -73,7 +73,7 @@ $transition-duration: 0.2s;
 	font-weight: 600;
 	line-height: 1.2;
 	color: $color-gray-900;
-	
+
 	&--highlight {
 		color: $color-primary;
 	}
@@ -93,11 +93,11 @@ $transition-duration: 0.2s;
 			margin: 0;
 			font-size: 16px;
 		}
-		
+
 		.components-flex {
 			width: 100%;
 		}
-		
+
 		.components-button {
 			margin-left: $spacing-sm;
 		}
@@ -108,7 +108,7 @@ $transition-duration: 0.2s;
 .vmfa-rules-empty {
 	text-align: center;
 	padding: $spacing-xl;
-	
+
 	p {
 		margin-bottom: $spacing-md;
 		color: $color-gray-600;
@@ -131,14 +131,14 @@ $transition-duration: 0.2s;
 	background: $color-gray-100;
 	border-radius: $border-radius;
 	transition: background-color $transition-duration;
-	
+
 	&:hover {
 		background: darken($color-gray-100, 3%);
 	}
-	
+
 	&--disabled {
 		opacity: 0.6;
-		
+
 		.vmfa-rule-item__name {
 			text-decoration: line-through;
 		}
@@ -148,11 +148,11 @@ $transition-duration: 0.2s;
 .vmfa-rule-item__drag {
 	cursor: grab;
 	color: $color-gray-300;
-	
+
 	&:active {
 		cursor: grabbing;
 	}
-	
+
 	.dashicons {
 		font-size: 20px;
 	}
@@ -206,15 +206,15 @@ $transition-duration: 0.2s;
 	display: flex;
 	align-items: center;
 	gap: $spacing-xs;
-	
+
 	.components-toggle-control {
 		margin-bottom: 0;
-		
+
 		.components-base-control__field {
 			margin-bottom: 0;
 		}
 	}
-	
+
 	.components-button {
 		min-width: auto;
 	}
@@ -229,18 +229,19 @@ $transition-duration: 0.2s;
 }
 
 .vmfa-rule-editor {
+
 	.components-text-control__input,
 	.components-select-control__input {
 		&.has-error {
 			border-color: $color-error;
 		}
 	}
-	
+
 	h3 {
 		margin: $spacing-lg 0 $spacing-xs;
 		font-size: 14px;
 	}
-	
+
 	.description {
 		margin: 0 0 $spacing-md;
 		color: $color-gray-600;
@@ -257,10 +258,10 @@ $transition-duration: 0.2s;
 
 .vmfa-rule-editor__options {
 	margin: $spacing-lg 0;
-	
+
 	.components-toggle-control {
 		margin-bottom: $spacing-md;
-		
+
 		&:last-child {
 			margin-bottom: 0;
 		}
@@ -295,11 +296,11 @@ $transition-duration: 0.2s;
 	background: white;
 	border: 1px solid $color-gray-200;
 	border-radius: $border-radius;
-	
+
 	.components-flex {
 		flex-wrap: wrap;
 	}
-	
+
 	.components-base-control {
 		margin-bottom: 0;
 	}
@@ -343,7 +344,7 @@ $transition-duration: 0.2s;
 	align-items: center;
 	justify-content: center;
 	padding: $spacing-xl;
-	
+
 	p {
 		margin-top: $spacing-md;
 		color: $color-gray-600;
@@ -360,7 +361,7 @@ $transition-duration: 0.2s;
 	padding: $spacing-md;
 	background: $color-gray-100;
 	border-radius: $border-radius;
-	
+
 	p {
 		margin: 0;
 	}
@@ -368,7 +369,7 @@ $transition-duration: 0.2s;
 
 .vmfa-preview-section {
 	margin-bottom: $spacing-lg;
-	
+
 	&--collapsed {
 		summary {
 			cursor: pointer;
@@ -376,7 +377,7 @@ $transition-duration: 0.2s;
 			background: $color-gray-100;
 			border-radius: $border-radius;
 			font-weight: 500;
-			
+
 			&:hover {
 				background: $color-gray-200;
 			}
@@ -389,12 +390,12 @@ $transition-duration: 0.2s;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: $spacing-md;
-	
+
 	h3 {
 		margin: 0;
 		font-size: 14px;
 	}
-	
+
 	.components-checkbox-control {
 		margin-bottom: 0;
 	}
@@ -405,18 +406,18 @@ $transition-duration: 0.2s;
 	overflow-y: auto;
 	border: 1px solid $color-gray-200;
 	border-radius: $border-radius;
-	
+
 	table {
 		width: 100%;
 		border-collapse: collapse;
-		
+
 		th,
 		td {
 			padding: $spacing-sm $spacing-md;
 			text-align: left;
 			border-bottom: 1px solid $color-gray-200;
 		}
-		
+
 		th {
 			position: sticky;
 			top: 0;
@@ -426,11 +427,11 @@ $transition-duration: 0.2s;
 			text-transform: uppercase;
 			color: $color-gray-600;
 		}
-		
+
 		tr:last-child td {
 			border-bottom: none;
 		}
-		
+
 		tr:hover td {
 			background: rgba(0, 0, 0, 0.02);
 		}
@@ -439,7 +440,7 @@ $transition-duration: 0.2s;
 
 .vmfa-preview-col-check {
 	width: 40px;
-	
+
 	.components-checkbox-control {
 		margin-bottom: 0;
 	}
@@ -447,7 +448,7 @@ $transition-duration: 0.2s;
 
 .vmfa-preview-col-thumb {
 	width: 50px;
-	
+
 	img {
 		display: block;
 		border-radius: 2px;
@@ -494,7 +495,7 @@ $transition-duration: 0.2s;
 	background: $color-gray-100;
 	border-radius: $border-radius;
 	font-size: 12px;
-	
+
 	img {
 		border-radius: 2px;
 		object-fit: cover;

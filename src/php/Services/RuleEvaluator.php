@@ -72,8 +72,8 @@ class RuleEvaluator {
 		);
 
 		foreach ( $matcher_classes as $class ) {
-			$matcher                              = new $class();
-			$this->matchers[ $matcher->get_type() ] = $matcher;
+			$matcher                                = new $class();
+			$this->matchers[ $matcher->get_type()] = $matcher;
 		}
 
 		/**
@@ -119,8 +119,8 @@ class RuleEvaluator {
 		// Evaluate rules.
 		$result = $this->evaluate( $attachment_id, $metadata );
 
-		if ( $result && ! empty( $result['folder_id'] ) ) {
-			$this->assign_folder( $attachment_id, $result['folder_id'], $result['rule'] );
+		if ( $result && ! empty( $result[ 'folder_id' ] ) ) {
+			$this->assign_folder( $attachment_id, $result[ 'folder_id' ], $result[ 'rule' ] );
 		}
 
 		return $metadata;
@@ -146,7 +146,7 @@ class RuleEvaluator {
 		foreach ( $rules as $rule ) {
 			if ( $this->rule_matches( $rule, $attachment_id, $metadata ) ) {
 				return array(
-					'folder_id' => $rule['folder_id'],
+					'folder_id' => $rule[ 'folder_id' ],
 					'rule'      => $rule,
 				);
 			}
@@ -166,7 +166,7 @@ class RuleEvaluator {
 	 * @return bool True if all conditions match (AND logic).
 	 */
 	public function rule_matches( $rule, $attachment_id, $metadata ) {
-		$conditions = $rule['conditions'] ?? array();
+		$conditions = $rule[ 'conditions' ] ?? array();
 
 		if ( empty( $conditions ) ) {
 			return false;
@@ -174,7 +174,7 @@ class RuleEvaluator {
 
 		// AND logic: all conditions must match.
 		foreach ( $conditions as $condition ) {
-			$type = $condition['type'] ?? '';
+			$type = $condition[ 'type' ] ?? '';
 
 			if ( ! isset( $this->matchers[ $type ] ) ) {
 				// Unknown condition type, skip (or fail depending on strictness).

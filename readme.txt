@@ -1,4 +1,4 @@
-=== VMFA Rules Engine ===
+=== Virtual Media Folders Rules Engine ===
 Contributors: flavflavor
 Donate link: https://developer.developer.developer.developer.developer.developer.developer/
 Tags: media library, virtual folders, automation, rules engine, media organization

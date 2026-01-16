@@ -21,7 +21,7 @@ class FilenameRegexMatcher implements MatcherInterface {
 	 * @return bool True if filename matches the pattern.
 	 */
 	public function matches( $attachment_id, $metadata, $params ) {
-		if ( empty( $params['value'] ) ) {
+		if ( empty( $params[ 'value' ] ) ) {
 			return false;
 		}
 
@@ -31,7 +31,7 @@ class FilenameRegexMatcher implements MatcherInterface {
 		}
 
 		$filename = basename( $file_path );
-		$pattern  = '/' . str_replace( '/', '\/', $params['value'] ) . '/i';
+		$pattern  = '/' . str_replace( '/', '\/', $params[ 'value' ] ) . '/i';
 
 		// Suppress errors for invalid regex patterns.
 		$result = @preg_match( $pattern, $filename );

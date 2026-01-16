@@ -54,8 +54,8 @@ class BatchProcessor {
 		$query_args = wp_parse_args( $args, $defaults );
 
 		// Filter to only unassigned if requested.
-		if ( ! empty( $args['unassigned_only'] ) ) {
-			$query_args['tax_query'] = array(
+		if ( ! empty( $args[ 'unassigned_only' ] ) ) {
+			$query_args[ 'tax_query' ] = array(
 				array(
 					'taxonomy' => self::TAXONOMY,
 					'operator' => 'NOT EXISTS',
@@ -64,8 +64,8 @@ class BatchProcessor {
 		}
 
 		// Filter by mime type if specified.
-		if ( ! empty( $args['mime_type'] ) ) {
-			$query_args['post_mime_type'] = $args['mime_type'];
+		if ( ! empty( $args[ 'mime_type' ] ) ) {
+			$query_args[ 'post_mime_type' ] = $args[ 'mime_type' ];
 		}
 
 		$query = new \WP_Query( $query_args );
@@ -97,26 +97,26 @@ class BatchProcessor {
 			$match = $this->evaluator->evaluate( $attachment_id, $metadata );
 
 			if ( $match ) {
-				$folder = get_term( $match['folder_id'], self::TAXONOMY );
+				$folder = get_term( $match[ 'folder_id' ], self::TAXONOMY );
 
-				$results['items'][] = array(
+				$results[ 'items' ][] = array(
 					'attachment_id' => $attachment_id,
 					'title'         => get_the_title( $attachment_id ),
 					'filename'      => basename( get_attached_file( $attachment_id ) ),
 					'thumbnail'     => wp_get_attachment_image_url( $attachment_id, 'thumbnail' ),
 					'matched_rule'  => array(
-						'id'   => $match['rule']['id'],
-						'name' => $match['rule']['name'],
+						'id'   => $match[ 'rule' ][ 'id' ],
+						'name' => $match[ 'rule' ][ 'name' ],
 					),
 					'target_folder' => array(
-						'id'   => $match['folder_id'],
+						'id'   => $match[ 'folder_id' ],
 						'name' => $folder ? $folder->name : __( 'Unknown', 'vmfa-rules-engine' ),
 					),
 					'status'        => 'will_assign',
 				);
-				++$results['matched'];
+				++$results[ 'matched' ];
 			} else {
-				$results['items'][] = array(
+				$results[ 'items' ][] = array(
 					'attachment_id' => $attachment_id,
 					'title'         => get_the_title( $attachment_id ),
 					'filename'      => basename( get_attached_file( $attachment_id ) ),
@@ -125,7 +125,7 @@ class BatchProcessor {
 					'target_folder' => null,
 					'status'        => 'no_match',
 				);
-				++$results['unmatched'];
+				++$results[ 'unmatched' ];
 			}
 		}
 
@@ -141,11 +141,11 @@ class BatchProcessor {
 	public function apply( $args = array() ) {
 		$attachment_ids = $this->get_attachments( $args );
 		$results        = array(
-			'total'     => count( $attachment_ids ),
-			'assigned'  => 0,
-			'skipped'   => 0,
-			'errors'    => 0,
-			'items'     => array(),
+			'total'    => count( $attachment_ids ),
+			'assigned' => 0,
+			'skipped'  => 0,
+			'errors'   => 0,
+			'items'    => array(),
 		);
 
 		foreach ( $attachment_ids as $attachment_id ) {
@@ -157,39 +157,39 @@ class BatchProcessor {
 			$match = $this->evaluator->evaluate( $attachment_id, $metadata );
 
 			if ( ! $match ) {
-				$results['items'][] = array(
+				$results[ 'items' ][] = array(
 					'attachment_id' => $attachment_id,
 					'status'        => 'skipped',
 					'message'       => __( 'No matching rule', 'vmfa-rules-engine' ),
 				);
-				++$results['skipped'];
+				++$results[ 'skipped' ];
 				continue;
 			}
 
 			$assigned = $this->evaluator->assign_folder(
 				$attachment_id,
-				$match['folder_id'],
-				$match['rule']
+				$match[ 'folder_id' ],
+				$match[ 'rule' ]
 			);
 
 			if ( $assigned ) {
-				$folder             = get_term( $match['folder_id'], self::TAXONOMY );
-				$results['items'][] = array(
+				$folder             = get_term( $match[ 'folder_id' ], self::TAXONOMY );
+				$results[ 'items' ][] = array(
 					'attachment_id' => $attachment_id,
 					'status'        => 'assigned',
-					'folder_id'     => $match['folder_id'],
+					'folder_id'     => $match[ 'folder_id' ],
 					'folder_name'   => $folder ? $folder->name : '',
-					'rule_id'       => $match['rule']['id'],
-					'rule_name'     => $match['rule']['name'],
+					'rule_id'       => $match[ 'rule' ][ 'id' ],
+					'rule_name'     => $match[ 'rule' ][ 'name' ],
 				);
-				++$results['assigned'];
+				++$results[ 'assigned' ];
 			} else {
-				$results['items'][] = array(
+				$results[ 'items' ][] = array(
 					'attachment_id' => $attachment_id,
 					'status'        => 'error',
 					'message'       => __( 'Failed to assign folder', 'vmfa-rules-engine' ),
 				);
-				++$results['errors'];
+				++$results[ 'errors' ];
 			}
 		}
 

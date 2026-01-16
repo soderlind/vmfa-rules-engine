@@ -21,7 +21,7 @@ class AuthorMatcher implements MatcherInterface {
 	 * @return bool True if author matches.
 	 */
 	public function matches( $attachment_id, $metadata, $params ) {
-		if ( empty( $params['value'] ) ) {
+		if ( empty( $params[ 'value' ] ) ) {
 			return false;
 		}
 
@@ -31,7 +31,7 @@ class AuthorMatcher implements MatcherInterface {
 		}
 
 		$author_id = absint( $attachment->post_author );
-		$target_id = absint( $params['value'] );
+		$target_id = absint( $params[ 'value' ] );
 
 		return $author_id === $target_id;
 	}

@@ -21,7 +21,7 @@ class MimeTypeMatcher implements MatcherInterface {
 	 * @return bool True if MIME type matches.
 	 */
 	public function matches( $attachment_id, $metadata, $params ) {
-		if ( empty( $params['value'] ) ) {
+		if ( empty( $params[ 'value' ] ) ) {
 			return false;
 		}
 
@@ -30,7 +30,7 @@ class MimeTypeMatcher implements MatcherInterface {
 			return false;
 		}
 
-		$pattern = $params['value'];
+		$pattern = $params[ 'value' ];
 
 		// Handle wildcard patterns like 'image/*'.
 		if ( strpos( $pattern, '/*' ) !== false ) {

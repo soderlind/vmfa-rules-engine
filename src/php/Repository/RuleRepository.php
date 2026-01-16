@@ -35,7 +35,7 @@ class RuleRepository {
 		usort(
 			$rules,
 			function ( $a, $b ) {
-				return ( $a['priority'] ?? 10 ) - ( $b['priority'] ?? 10 );
+				return ( $a[ 'priority' ] ?? 10 ) - ( $b[ 'priority' ] ?? 10 );
 			}
 		);
 
@@ -53,7 +53,7 @@ class RuleRepository {
 		return array_filter(
 			$rules,
 			function ( $rule ) {
-				return ! empty( $rule['enabled'] );
+				return ! empty( $rule[ 'enabled' ] );
 			}
 		);
 	}
@@ -68,7 +68,7 @@ class RuleRepository {
 		$rules = $this->get_all();
 
 		foreach ( $rules as $rule ) {
-			if ( $rule['id'] === $id ) {
+			if ( $rule[ 'id' ] === $id ) {
 				return $rule;
 			}
 		}
@@ -91,8 +91,8 @@ class RuleRepository {
 		$rule = $this->prepare_rule_data( $data, $id );
 
 		// Set default priority if not provided.
-		if ( ! isset( $rule['priority'] ) ) {
-			$rule['priority'] = count( $rules ) + 1;
+		if ( ! isset( $rule[ 'priority' ] ) ) {
+			$rule[ 'priority' ] = count( $rules ) + 1;
 		}
 
 		$rules[] = $rule;
@@ -114,7 +114,7 @@ class RuleRepository {
 		$found = false;
 
 		foreach ( $rules as $index => $rule ) {
-			if ( $rule['id'] === $id ) {
+			if ( $rule[ 'id' ] === $id ) {
 				$rules[ $index ] = $this->prepare_rule_data( $data, $id );
 				$found           = true;
 				break;
@@ -143,7 +143,7 @@ class RuleRepository {
 		$rules = array_filter(
 			$rules,
 			function ( $rule ) use ( $id, &$found ) {
-				if ( $rule['id'] === $id ) {
+				if ( $rule[ 'id' ] === $id ) {
 					$found = true;
 					return false;
 				}
@@ -175,7 +175,7 @@ class RuleRepository {
 
 		// Index rules by ID.
 		foreach ( $rules as $rule ) {
-			$rules_by_id[ $rule['id'] ] = $rule;
+			$rules_by_id[ $rule[ 'id' ] ] = $rule;
 		}
 
 		// Rebuild array in new order with updated priorities.
@@ -185,7 +185,7 @@ class RuleRepository {
 		foreach ( $order as $id ) {
 			if ( isset( $rules_by_id[ $id ] ) ) {
 				$rule             = $rules_by_id[ $id ];
-				$rule['priority'] = $priority;
+				$rule[ 'priority' ] = $priority;
 				$reordered[]      = $rule;
 				++$priority;
 				unset( $rules_by_id[ $id ] );
@@ -194,7 +194,7 @@ class RuleRepository {
 
 		// Append any rules not in the order array.
 		foreach ( $rules_by_id as $rule ) {
-			$rule['priority'] = $priority;
+			$rule[ 'priority' ] = $priority;
 			$reordered[]      = $rule;
 			++$priority;
 		}
@@ -214,12 +214,12 @@ class RuleRepository {
 	private function prepare_rule_data( $data, $id ) {
 		return array(
 			'id'              => $id,
-			'name'            => sanitize_text_field( $data['name'] ?? '' ),
-			'conditions'      => $this->sanitize_conditions( $data['conditions'] ?? array() ),
-			'folder_id'       => absint( $data['folder_id'] ?? 0 ),
-			'priority'        => absint( $data['priority'] ?? 10 ),
-			'stop_processing' => ! empty( $data['stop_processing'] ),
-			'enabled'         => ! empty( $data['enabled'] ),
+			'name'            => sanitize_text_field( $data[ 'name' ] ?? '' ),
+			'conditions'      => $this->sanitize_conditions( $data[ 'conditions' ] ?? array() ),
+			'folder_id'       => absint( $data[ 'folder_id' ] ?? 0 ),
+			'priority'        => absint( $data[ 'priority' ] ?? 10 ),
+			'stop_processing' => ! empty( $data[ 'stop_processing' ] ),
+			'enabled'         => ! empty( $data[ 'enabled' ] ),
 		);
 	}
 
@@ -237,51 +237,51 @@ class RuleRepository {
 		$sanitized = array();
 
 		foreach ( $conditions as $condition ) {
-			if ( ! isset( $condition['type'] ) ) {
+			if ( ! isset( $condition[ 'type' ] ) ) {
 				continue;
 			}
 
 			$sanitized_condition = array(
-				'type' => sanitize_key( $condition['type'] ),
+				'type' => sanitize_key( $condition[ 'type' ] ),
 			);
 
 			// Sanitize based on condition type.
-			switch ( $condition['type'] ) {
+			switch ( $condition[ 'type' ] ) {
 				case 'filename_regex':
 				case 'exif_camera':
 				case 'iptc_keywords':
-					$sanitized_condition['value'] = sanitize_text_field( $condition['value'] ?? '' );
+					$sanitized_condition[ 'value' ] = sanitize_text_field( $condition[ 'value' ] ?? '' );
 					break;
 
 				case 'mime_type':
-					$sanitized_condition['value'] = sanitize_mime_type( $condition['value'] ?? '' );
+					$sanitized_condition[ 'value' ] = sanitize_mime_type( $condition[ 'value' ] ?? '' );
 					break;
 
 				case 'dimensions':
-					$sanitized_condition['operator']    = sanitize_key( $condition['operator'] ?? 'gt' );
-					$sanitized_condition['dimension']   = sanitize_key( $condition['dimension'] ?? 'width' );
-					$sanitized_condition['value']       = absint( $condition['value'] ?? 0 );
-					$sanitized_condition['value_end']   = absint( $condition['value_end'] ?? 0 );
+					$sanitized_condition[ 'operator' ] = sanitize_key( $condition[ 'operator' ] ?? 'gt' );
+					$sanitized_condition[ 'dimension' ] = sanitize_key( $condition[ 'dimension' ] ?? 'width' );
+					$sanitized_condition[ 'value' ] = absint( $condition[ 'value' ] ?? 0 );
+					$sanitized_condition[ 'value_end' ] = absint( $condition[ 'value_end' ] ?? 0 );
 					break;
 
 				case 'file_size':
-					$sanitized_condition['operator']    = sanitize_key( $condition['operator'] ?? 'gt' );
-					$sanitized_condition['value']       = absint( $condition['value'] ?? 0 );
-					$sanitized_condition['value_end']   = absint( $condition['value_end'] ?? 0 );
+					$sanitized_condition[ 'operator' ] = sanitize_key( $condition[ 'operator' ] ?? 'gt' );
+					$sanitized_condition[ 'value' ] = absint( $condition[ 'value' ] ?? 0 );
+					$sanitized_condition[ 'value_end' ] = absint( $condition[ 'value_end' ] ?? 0 );
 					break;
 
 				case 'exif_date':
-					$sanitized_condition['operator']    = sanitize_key( $condition['operator'] ?? 'after' );
-					$sanitized_condition['value']       = sanitize_text_field( $condition['value'] ?? '' );
-					$sanitized_condition['value_end']   = sanitize_text_field( $condition['value_end'] ?? '' );
+					$sanitized_condition[ 'operator' ] = sanitize_key( $condition[ 'operator' ] ?? 'after' );
+					$sanitized_condition[ 'value' ] = sanitize_text_field( $condition[ 'value' ] ?? '' );
+					$sanitized_condition[ 'value_end' ] = sanitize_text_field( $condition[ 'value_end' ] ?? '' );
 					break;
 
 				case 'author':
-					$sanitized_condition['value'] = absint( $condition['value'] ?? 0 );
+					$sanitized_condition[ 'value' ] = absint( $condition[ 'value' ] ?? 0 );
 					break;
 
 				default:
-					$sanitized_condition['value'] = sanitize_text_field( $condition['value'] ?? '' );
+					$sanitized_condition[ 'value' ] = sanitize_text_field( $condition[ 'value' ] ?? '' );
 					break;
 			}
 

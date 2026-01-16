@@ -339,7 +339,7 @@ class RulesController extends WP_REST_Controller {
 		);
 
 		if ( $request->get_param( 'mime_type' ) ) {
-			$args['mime_type'] = $request->get_param( 'mime_type' );
+			$args[ 'mime_type' ] = $request->get_param( 'mime_type' );
 		}
 
 		$results = $this->batch_processor->preview( $args );
@@ -359,14 +359,14 @@ class RulesController extends WP_REST_Controller {
 		);
 
 		if ( $request->get_param( 'mime_type' ) ) {
-			$args['mime_type'] = $request->get_param( 'mime_type' );
+			$args[ 'mime_type' ] = $request->get_param( 'mime_type' );
 		}
 
 		// If specific attachment IDs provided, use them.
 		$attachment_ids = $request->get_param( 'attachment_ids' );
 		if ( ! empty( $attachment_ids ) ) {
-			$args['post__in'] = array_map( 'absint', $attachment_ids );
-			unset( $args['unassigned_only'] );
+			$args[ 'post__in' ] = array_map( 'absint', $attachment_ids );
+			unset( $args[ 'unassigned_only' ] );
 		}
 
 		$results = $this->batch_processor->apply( $args );
@@ -385,10 +385,10 @@ class RulesController extends WP_REST_Controller {
 
 		// Add rules count.
 		$rules          = $this->repository->get_all();
-		$stats['rules'] = count( $rules );
+		$stats[ 'rules' ] = count( $rules );
 
-		$enabled_rules         = $this->repository->get_enabled();
-		$stats['rules_enabled'] = count( $enabled_rules );
+		$enabled_rules          = $this->repository->get_enabled();
+		$stats[ 'rules_enabled' ] = count( $enabled_rules );
 
 		return rest_ensure_response( $stats );
 	}

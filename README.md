@@ -1,4 +1,4 @@
-# VMFA Rules Engine
+# Virtual Media Folders Rules Engine
 
 Rule-based automatic folder assignment for media uploads. Add-on plugin for [Virtual Media Folders](https://github.com/soderlind/virtual-media-folders).
 

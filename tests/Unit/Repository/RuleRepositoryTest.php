@@ -76,9 +76,9 @@ class RuleRepositoryTest extends TestCase {
 		$result = $this->repository->get_all();
 
 		$this->assertCount( 3, $result );
-		$this->assertEquals( 'rule_xyz', $result[0]['id'] ); // Priority 5.
-		$this->assertEquals( 'rule_def', $result[1]['id'] ); // Priority 10.
-		$this->assertEquals( 'rule_abc', $result[2]['id'] ); // Priority 20.
+		$this->assertEquals( 'rule_xyz', $result[ 0 ][ 'id' ] ); // Priority 5.
+		$this->assertEquals( 'rule_def', $result[ 1 ][ 'id' ] ); // Priority 10.
+		$this->assertEquals( 'rule_abc', $result[ 2 ][ 'id' ] ); // Priority 20.
 	}
 
 	/**
@@ -143,8 +143,8 @@ class RuleRepositoryTest extends TestCase {
 		$result = $this->repository->get( 'rule_2' );
 
 		$this->assertNotNull( $result );
-		$this->assertEquals( 'rule_2', $result['id'] );
-		$this->assertEquals( 'Second Rule', $result['name'] );
+		$this->assertEquals( 'rule_2', $result[ 'id' ] );
+		$this->assertEquals( 'Second Rule', $result[ 'name' ] );
 	}
 
 	/**
@@ -181,8 +181,8 @@ class RuleRepositoryTest extends TestCase {
 				function ( $option, $value ) {
 					$this->assertEquals( 'vmfa_rules_engine_rules', $option );
 					$this->assertCount( 1, $value );
-					$this->assertEquals( 'rule_abcd1234', $value[0]['id'] );
-					$this->assertEquals( 'Test Rule', $value[0]['name'] );
+					$this->assertEquals( 'rule_abcd1234', $value[ 0 ][ 'id' ] );
+					$this->assertEquals( 'Test Rule', $value[ 0 ][ 'name' ] );
 					return true;
 				}
 			);
@@ -197,9 +197,9 @@ class RuleRepositoryTest extends TestCase {
 
 		$result = $this->repository->create( $data );
 
-		$this->assertEquals( 'rule_abcd1234', $result['id'] );
-		$this->assertEquals( 'Test Rule', $result['name'] );
-		$this->assertEquals( 5, $result['folder_id'] );
+		$this->assertEquals( 'rule_abcd1234', $result[ 'id' ] );
+		$this->assertEquals( 'Test Rule', $result[ 'name' ] );
+		$this->assertEquals( 5, $result[ 'folder_id' ] );
 	}
 
 	/**
@@ -253,8 +253,8 @@ class RuleRepositoryTest extends TestCase {
 		);
 
 		$this->assertNotNull( $result );
-		$this->assertEquals( 'Updated Name', $result['name'] );
-		$this->assertEquals( 10, $result['folder_id'] );
+		$this->assertEquals( 'Updated Name', $result[ 'name' ] );
+		$this->assertEquals( 10, $result[ 'folder_id' ] );
 	}
 
 	/**
@@ -296,7 +296,7 @@ class RuleRepositoryTest extends TestCase {
 			->andReturnUsing(
 				function ( $option, $value ) {
 					$this->assertCount( 1, $value );
-					$this->assertEquals( 'rule_1', $value[0]['id'] );
+					$this->assertEquals( 'rule_1', $value[ 0 ][ 'id' ] );
 					return true;
 				}
 			);
@@ -352,12 +352,12 @@ class RuleRepositoryTest extends TestCase {
 			->andReturnUsing(
 				function ( $option, $value ) {
 					// Check new order: C, A, B.
-					$this->assertEquals( 'rule_c', $value[0]['id'] );
-					$this->assertEquals( 1, $value[0]['priority'] );
-					$this->assertEquals( 'rule_a', $value[1]['id'] );
-					$this->assertEquals( 2, $value[1]['priority'] );
-					$this->assertEquals( 'rule_b', $value[2]['id'] );
-					$this->assertEquals( 3, $value[2]['priority'] );
+					$this->assertEquals( 'rule_c', $value[ 0 ][ 'id' ] );
+					$this->assertEquals( 1, $value[ 0 ][ 'priority' ] );
+					$this->assertEquals( 'rule_a', $value[ 1 ][ 'id' ] );
+					$this->assertEquals( 2, $value[ 1 ][ 'priority' ] );
+					$this->assertEquals( 'rule_b', $value[ 2 ][ 'id' ] );
+					$this->assertEquals( 3, $value[ 2 ][ 'priority' ] );
 					return true;
 				}
 			);

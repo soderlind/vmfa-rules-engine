@@ -33,7 +33,7 @@ class RuleEvaluatorTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->repository = Mockery::mock( RuleRepository::class );
+		$this->repository = Mockery::mock( RuleRepository::class);
 
 		// Stub apply_filters.
 		Filters\expectApplied( 'vmfa_rules_engine_matchers' )
@@ -126,8 +126,8 @@ class RuleEvaluatorTest extends TestCase {
 		$result = $evaluator->evaluate( 123, [] );
 
 		$this->assertNotNull( $result );
-		$this->assertEquals( 5, $result['folder_id'] );
-		$this->assertEquals( 'rule_1', $result['rule']['id'] );
+		$this->assertEquals( 5, $result[ 'folder_id' ] );
+		$this->assertEquals( 'rule_1', $result[ 'rule' ][ 'id' ] );
 	}
 
 	/**
@@ -176,8 +176,8 @@ class RuleEvaluatorTest extends TestCase {
 		$result = $evaluator->evaluate( 123, [] );
 
 		$this->assertNotNull( $result );
-		$this->assertEquals( 10, $result['folder_id'] );
-		$this->assertEquals( 'rule_2', $result['rule']['id'] );
+		$this->assertEquals( 10, $result[ 'folder_id' ] );
+		$this->assertEquals( 'rule_2', $result[ 'rule' ][ 'id' ] );
 	}
 
 	/**

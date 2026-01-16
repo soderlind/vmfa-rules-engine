@@ -21,19 +21,19 @@ class ExifDateMatcher implements MatcherInterface {
 	 * @return bool True if date matches.
 	 */
 	public function matches( $attachment_id, $metadata, $params ) {
-		if ( empty( $params['value'] ) ) {
+		if ( empty( $params[ 'value' ] ) ) {
 			return false;
 		}
 
-		$created_timestamp = $metadata['image_meta']['created_timestamp'] ?? 0;
+		$created_timestamp = $metadata[ 'image_meta' ][ 'created_timestamp' ] ?? 0;
 
 		if ( empty( $created_timestamp ) ) {
 			return false;
 		}
 
-		$operator  = $params['operator'] ?? 'after';
-		$value     = strtotime( $params['value'] );
-		$value_end = ! empty( $params['value_end'] ) ? strtotime( $params['value_end'] ) : 0;
+		$operator  = $params[ 'operator' ] ?? 'after';
+		$value     = strtotime( $params[ 'value' ] );
+		$value_end = ! empty( $params[ 'value_end' ] ) ? strtotime( $params[ 'value_end' ] ) : 0;
 
 		if ( false === $value ) {
 			return false;
