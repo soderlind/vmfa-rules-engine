@@ -2,6 +2,8 @@
 
 Rule-based automatic folder assignment for media uploads. Add-on plugin for [Virtual Media Folders](https://github.com/soderlind/virtual-media-folders).
 
+<img width="1280" height="651" alt="vmfa-rules-engine-some" src="https://github.com/user-attachments/assets/8084a15b-0b99-4f46-b624-264b7fb4f078" />
+
 ## Description
 
 Turn "Default folder for uploads" into a powerful rule system. Automatically assign media to folders based on:
