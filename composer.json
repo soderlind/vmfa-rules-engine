@@ -17,11 +17,15 @@
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"wp-coding-standards/wpcs": "^3.0",
 		"phpcompatibility/php-compatibility": "^9.0",
-		"yoast/phpunit-polyfills": "^2.0"
+		"phpunit/phpunit": "^11.0",
+		"brain/monkey": "^2.6",
+		"mockery/mockery": "^1.6"
 	},
 	"scripts": {
 		"lint:php": "phpcs -p",
-		"fix:php": "phpcbf -p"
+		"fix:php": "phpcbf -p",
+		"test": "phpunit",
+		"test:coverage": "phpunit --coverage-html coverage"
 	},
 	"config": {
 		"allow-plugins": {
@@ -31,6 +35,11 @@
 	"autoload": {
 		"psr-4": {
 			"VmfaRulesEngine\\": "src/php/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"VmfaRulesEngine\\Tests\\": "tests/"
 		}
 	}
 }
