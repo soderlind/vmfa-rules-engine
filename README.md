@@ -55,6 +55,7 @@ Turn "Default folder for uploads" into a powerful rule system. Automatically ass
 
 ```bash
 # Install dependencies
+composer install
 npm install
 
 # Start development build with watch
@@ -69,8 +70,22 @@ npm run lint:js
 # Lint CSS
 npm run lint:css
 
-# Run tests
-npm run test
+# Lint PHP (WordPress Coding Standards)
+composer lint:php
+composer fix:php
+```
+
+### Running Tests
+
+```bash
+# PHP tests (PHPUnit with Brain Monkey)
+composer test
+composer test:coverage  # With HTML coverage report
+
+# JavaScript tests (Vitest)
+npm test
+npm run test:watch      # Watch mode
+npm run test:coverage   # With coverage report
 ```
 
 ## Hooks & Filters
