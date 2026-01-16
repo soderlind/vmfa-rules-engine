@@ -1,6 +1,6 @@
 # Virtual Media Folders Rules Engine
 
-Rule-based automatic folder assignment for media uploads. Add-on plugin for [Virtual Media Folders](https://github.com/soderlind/virtual-media-folders).
+Rule-based automatic folder assignment for media uploads. Add-on plugin for [Virtual Media Folders](https://wordpress.org/plugins/virtual-media-folders/).
 
 <img width="1280" height="651" alt="vmfa-rules-engine-some" src="https://github.com/user-attachments/assets/8084a15b-0b99-4f46-b624-264b7fb4f078" />
 
@@ -31,7 +31,7 @@ Turn "Default folder for uploads" into a powerful rule system. Automatically ass
 
 - WordPress 6.8+
 - PHP 8.3+
-- [Virtual Media Folders](https://github.com/soderlind/virtual-media-folders) plugin (parent plugin)
+- [Virtual Media Folders](https://wordpress.org/plugins/virtual-media-folders/) plugin (parent plugin)
 
 ## Installation
 
