@@ -3,7 +3,7 @@
  * Plugin Name: Virtual Media Folders Rules Engine
  * Plugin URI: https://github.com/soderlind/vmfa-rules-engine
  * Description: Rule-based automatic folder assignment for media uploads. Add-on for Virtual Media Folders.
- * Version: 0.4.0
+ * Version: 0.4.1
  * Author: Per Soderlind
  * Author URI: https://soderlind.no
  * License: GPL-2.0-or-later
@@ -12,6 +12,7 @@
  * Domain Path: /languages
  * Requires at least: 6.8
  * Requires PHP: 8.3
+ * Requires Plugins: virtual-media-folders
  *
  * @package VmfaRulesEngine
  */
@@ -19,7 +20,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Plugin constants.
-define( 'VMFA_RULES_ENGINE_VERSION', '0.4.0' );
+define( 'VMFA_RULES_ENGINE_VERSION', '0.4.1' );
 define( 'VMFA_RULES_ENGINE_FILE', __FILE__ );
 define( 'VMFA_RULES_ENGINE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VMFA_RULES_ENGINE_URL', plugin_dir_url( __FILE__ ) );
@@ -31,47 +32,11 @@ if ( file_exists( VMFA_RULES_ENGINE_PATH . 'vendor/autoload.php' ) ) {
 }
 
 /**
- * Check if Virtual Media Folders plugin is active.
- *
- * @return bool True if the parent plugin is active.
- */
-function vmfa_rules_engine_is_parent_active() {
-	return taxonomy_exists( 'vmfo_folder' );
-}
-
-/**
- * Display admin notice if parent plugin is not active.
- *
- * @return void
- */
-function vmfa_rules_engine_missing_parent_notice() {
-	?>
-	<div class="notice notice-error">
-		<p>
-			<?php
-			printf(
-				/* translators: %s: Plugin name */
-				esc_html__( '%s requires the Virtual Media Folders plugin to be installed and activated.', 'vmfa-rules-engine' ),
-				'<strong>VMFA Rules Engine</strong>'
-			);
-			?>
-		</p>
-	</div>
-	<?php
-}
-
-/**
  * Initialize the plugin.
  *
  * @return void
  */
 function vmfa_rules_engine_init() {
-	// Check for parent plugin on a later hook when taxonomies are registered.
-	if ( ! vmfa_rules_engine_is_parent_active() ) {
-		add_action( 'admin_notices', 'vmfa_rules_engine_missing_parent_notice' );
-		return;
-	}
-
 	// Update checker via GitHub releases.
 	VmfaRulesEngine\Update\GitHubPluginUpdater::create_with_assets(
 		'https://github.com/soderlind/vmfa-rules-engine',
