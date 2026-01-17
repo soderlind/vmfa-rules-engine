@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.3
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,13 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 0.4.1 =
+* Removed redundant parent plugin dependency checks (now handled by WordPress Requires Plugins header)
+
+= 0.4.0 =
+* Settings now appear as a tab within Virtual Media Folders "Folder Settings" page
+* Backwards compatible with older versions of parent plugin
 
 = 0.3.3 =
 * Improved condition descriptions for better usability
