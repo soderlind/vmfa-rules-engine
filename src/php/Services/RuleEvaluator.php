@@ -72,7 +72,7 @@ class RuleEvaluator {
 		);
 
 		foreach ( $matcher_classes as $class ) {
-			$matcher                                = new $class();
+			$matcher                               = new $class();
 			$this->matchers[ $matcher->get_type()] = $matcher;
 		}
 
