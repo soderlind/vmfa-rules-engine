@@ -153,8 +153,8 @@ class BatchProcessor {
 		$cursor  = $offset;
 
 		while ( $cursor < $total_count && $scanned < $max_scan ) {
-			$batch_args                  = $args;
-			$batch_args[ 'offset' ]      = $cursor;
+			$batch_args                     = $args;
+			$batch_args[ 'offset' ]         = $cursor;
 			$batch_args[ 'posts_per_page' ] = $limit;
 
 			$attachment_ids = $this->get_attachments( $batch_args );
