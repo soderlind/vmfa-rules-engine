@@ -31,8 +31,9 @@
 		{
 			"step": "installPlugin",
 			"pluginData": {
-				"resource": "url",
-				"url": "https://github.com/soderlind/vmfa-rules-engine/releases/latest/download/vmfa-rules-engine.zip"
+				"resource": "git:directory",
+				"url": "https://github.com/soderlind/vmfa-rules-engine",
+				"ref": "main"
 			},
 			"options": {
 				"activate": true
