@@ -1,7 +1,7 @@
 /**
  * Main Rules Panel component.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { useState, useCallback } from '@wordpress/element';
@@ -19,7 +19,7 @@ import {
 	Spinner,
 	ToggleControl,
 } from '@wordpress/components';
-import { plus, cog, trash } from '@wordpress/icons';
+import { plus, cog, trash, search } from '@wordpress/icons';
 import {
 	DndContext,
 	closestCenter,
@@ -43,15 +43,23 @@ import { PreviewModal } from './PreviewModal';
 /**
  * Sortable rule item component.
  *
- * @param {Object}   props            Component props.
- * @param {Object}   props.rule       Rule data.
- * @param {Function} props.onEdit     Edit handler.
- * @param {Function} props.onDelete   Delete handler.
- * @param {Function} props.onToggle   Toggle handler.
- * @param {Array}    props.folders    Available folders.
+ * @param {Object}   props          Component props.
+ * @param {Object}   props.rule     Rule data.
+ * @param {Function} props.onEdit   Edit handler.
+ * @param {Function} props.onDelete Delete handler.
+ * @param {Function} props.onToggle Toggle handler.
+ * @param {Function} props.onScan   Scan handler for single rule.
+ * @param {Array}    props.folders  Available folders.
  * @return {JSX.Element} Sortable rule item.
  */
-function SortableRuleItem( { rule, onEdit, onDelete, onToggle, folders } ) {
+function SortableRuleItem( {
+	rule,
+	onEdit,
+	onDelete,
+	onToggle,
+	onScan,
+	folders,
+} ) {
 	const {
 		attributes,
 		listeners,
@@ -68,21 +76,33 @@ function SortableRuleItem( { rule, onEdit, onDelete, onToggle, folders } ) {
 	};
 
 	const folder = folders.find( ( f ) => f.id === rule.folder_id );
-	const folderName = folder ? folder.name : __( 'Unknown folder', 'vmfa-rules-engine' );
+	const folderName = folder
+		? folder.name
+		: __( 'Unknown folder', 'vmfa-rules-engine' );
 
 	return (
 		<div
 			ref={ setNodeRef }
 			style={ style }
-			className={ `vmfa-rule-item ${ ! rule.enabled ? 'vmfa-rule-item--disabled' : '' }` }
+			className={ `vmfa-rule-item ${
+				! rule.enabled ? 'vmfa-rule-item--disabled' : ''
+			}` }
 		>
-			<div className="vmfa-rule-item__drag" { ...attributes } { ...listeners }>
+			<div
+				className="vmfa-rule-item__drag"
+				{ ...attributes }
+				{ ...listeners }
+			>
 				<span className="dashicons dashicons-menu"></span>
 			</div>
 			<div className="vmfa-rule-item__content">
 				<div className="vmfa-rule-item__header">
-					<strong className="vmfa-rule-item__name">{ rule.name }</strong>
-					<span className="vmfa-rule-item__folder">→ { folderName }</span>
+					<strong className="vmfa-rule-item__name">
+						{ rule.name }
+					</strong>
+					<span className="vmfa-rule-item__folder">
+						→ { folderName }
+					</span>
 				</div>
 				<div className="vmfa-rule-item__conditions">
 					{ rule.conditions.length > 0 ? (
@@ -109,6 +129,11 @@ function SortableRuleItem( { rule, onEdit, onDelete, onToggle, folders } ) {
 					checked={ rule.enabled }
 					onChange={ ( enabled ) => onToggle( rule.id, enabled ) }
 					__nextHasNoMarginBottom
+				/>
+				<Button
+					icon={ search }
+					label={ __( 'Scan with this rule', 'vmfa-rules-engine' ) }
+					onClick={ () => onScan( rule ) }
 				/>
 				<Button
 					icon={ cog }
@@ -143,13 +168,17 @@ function StatsCard( { stats } ) {
 			<CardBody>
 				<div className="vmfa-stats-grid">
 					<div className="vmfa-stats-item">
-						<span className="vmfa-stats-value">{ stats.total }</span>
+						<span className="vmfa-stats-value">
+							{ stats.total }
+						</span>
 						<span className="vmfa-stats-label">
 							{ __( 'Total Media', 'vmfa-rules-engine' ) }
 						</span>
 					</div>
 					<div className="vmfa-stats-item">
-						<span className="vmfa-stats-value">{ stats.assigned }</span>
+						<span className="vmfa-stats-value">
+							{ stats.assigned }
+						</span>
 						<span className="vmfa-stats-label">
 							{ __( 'Assigned', 'vmfa-rules-engine' ) }
 						</span>
@@ -163,7 +192,9 @@ function StatsCard( { stats } ) {
 						</span>
 					</div>
 					<div className="vmfa-stats-item">
-						<span className="vmfa-stats-value">{ stats.rules_enabled }</span>
+						<span className="vmfa-stats-value">
+							{ stats.rules_enabled }
+						</span>
 						<span className="vmfa-stats-label">
 							{ __( 'Active Rules', 'vmfa-rules-engine' ) }
 						</span>
@@ -193,12 +224,21 @@ export function RulesPanel() {
 	} = useRules();
 
 	const { stats, refresh: refreshStats } = useStats();
-	const { preview, loadMore, apply, isProcessing, isLoadingMore, results, clearResults } = useBatchOperations();
+	const {
+		preview,
+		loadMore,
+		apply,
+		isProcessing,
+		isLoadingMore,
+		results,
+		clearResults,
+	} = useBatchOperations();
 
 	const [ editingRule, setEditingRule ] = useState( null );
 	const [ isEditorOpen, setIsEditorOpen ] = useState( false );
 	const [ isPreviewOpen, setIsPreviewOpen ] = useState( false );
 	const [ successMessage, setSuccessMessage ] = useState( '' );
+	const [ scanningRule, setScanningRule ] = useState( null );
 
 	const { folders = [], strings = {} } = window.vmfaRulesEngine || {};
 
@@ -258,7 +298,9 @@ export function RulesPanel() {
 	 */
 	const handleDeleteRule = useCallback(
 		async ( id ) => {
-			if ( ! window.confirm( strings.deleteConfirm || 'Are you sure?' ) ) {
+			if (
+				! window.confirm( strings.deleteConfirm || 'Are you sure?' )
+			) {
 				return;
 			}
 			await deleteRule( id );
@@ -281,7 +323,9 @@ export function RulesPanel() {
 				}
 				setIsEditorOpen( false );
 				setEditingRule( null );
-				setSuccessMessage( strings.saveSuccess || 'Rule saved successfully.' );
+				setSuccessMessage(
+					strings.saveSuccess || 'Rule saved successfully.'
+				);
 				setTimeout( () => setSuccessMessage( '' ), 3000 );
 			} catch ( err ) {
 				// Error handled in hook.
@@ -291,12 +335,24 @@ export function RulesPanel() {
 	);
 
 	const [ isPreviewOptionsOpen, setIsPreviewOptionsOpen ] = useState( false );
-	const [ previewUnassignedOnly, setPreviewUnassignedOnly ] = useState( true );
+	const [ previewUnassignedOnly, setPreviewUnassignedOnly ] =
+		useState( true );
 
 	/**
 	 * Handle preview button click - show options first.
 	 */
 	const handlePreviewClick = useCallback( () => {
+		setScanningRule( null );
+		setIsPreviewOptionsOpen( true );
+	}, [] );
+
+	/**
+	 * Handle scanning with a single rule.
+	 *
+	 * @param {Object} rule Rule to scan with.
+	 */
+	const handleScanRule = useCallback( ( rule ) => {
+		setScanningRule( rule );
 		setIsPreviewOptionsOpen( true );
 	}, [] );
 
@@ -305,9 +361,13 @@ export function RulesPanel() {
 	 */
 	const handleRunPreview = useCallback( async () => {
 		setIsPreviewOptionsOpen( false );
-		await preview( { unassignedOnly: previewUnassignedOnly } );
+		const options = { unassignedOnly: previewUnassignedOnly };
+		if ( scanningRule ) {
+			options.ruleId = scanningRule.id;
+		}
+		await preview( options );
 		setIsPreviewOpen( true );
-	}, [ preview, previewUnassignedOnly ] );
+	}, [ preview, previewUnassignedOnly, scanningRule ] );
 
 	/**
 	 * Handle loading more preview items.
@@ -334,6 +394,7 @@ export function RulesPanel() {
 	 */
 	const handleClosePreview = useCallback( () => {
 		setIsPreviewOpen( false );
+		setScanningRule( null );
 		clearResults();
 	}, [ clearResults ] );
 
@@ -341,7 +402,7 @@ export function RulesPanel() {
 		return (
 			<div className="vmfa-rules-loading">
 				<Spinner />
-				<p>{ __( 'Loading rules...', 'vmfa-rules-engine' ) }</p>
+				<p>{ __( 'Loading rules…', 'vmfa-rules-engine' ) }</p>
 			</div>
 		);
 	}
@@ -355,7 +416,11 @@ export function RulesPanel() {
 			) }
 
 			{ successMessage && (
-				<Notice status="success" isDismissible onDismiss={ () => setSuccessMessage( '' ) }>
+				<Notice
+					status="success"
+					isDismissible
+					onDismiss={ () => setSuccessMessage( '' ) }
+				>
 					{ successMessage }
 				</Notice>
 			) }
@@ -373,18 +438,29 @@ export function RulesPanel() {
 								<Button
 									variant="secondary"
 									onClick={ handlePreviewClick }
-									disabled={ rules.length === 0 || isProcessing }
+									disabled={
+										rules.length === 0 || isProcessing
+									}
 								>
 									{ isProcessing ? (
 										<Spinner />
 									) : (
-										strings.dryRun || __( 'Scan Existing Media', 'vmfa-rules-engine' )
+										strings.dryRun ||
+										__(
+											'Scan Existing Media',
+											'vmfa-rules-engine'
+										)
 									) }
 								</Button>
 							</FlexItem>
 							<FlexItem>
-								<Button variant="primary" icon={ plus } onClick={ handleAddRule }>
-									{ strings.addRule || __( 'Add Rule', 'vmfa-rules-engine' ) }
+								<Button
+									variant="primary"
+									icon={ plus }
+									onClick={ handleAddRule }
+								>
+									{ strings.addRule ||
+										__( 'Add Rule', 'vmfa-rules-engine' ) }
 								</Button>
 							</FlexItem>
 						</Flex>
@@ -393,9 +469,22 @@ export function RulesPanel() {
 				<CardBody>
 					{ rules.length === 0 ? (
 						<div className="vmfa-rules-empty">
-							<p>{ strings.noRules || __( 'No rules configured yet.', 'vmfa-rules-engine' ) }</p>
-							<Button variant="primary" icon={ plus } onClick={ handleAddRule }>
-								{ __( 'Create your first rule', 'vmfa-rules-engine' ) }
+							<p>
+								{ strings.noRules ||
+									__(
+										'No rules configured yet.',
+										'vmfa-rules-engine'
+									) }
+							</p>
+							<Button
+								variant="primary"
+								icon={ plus }
+								onClick={ handleAddRule }
+							>
+								{ __(
+									'Create your first rule',
+									'vmfa-rules-engine'
+								) }
 							</Button>
 						</div>
 					) : (
@@ -417,6 +506,7 @@ export function RulesPanel() {
 											onEdit={ handleEditRule }
 											onDelete={ handleDeleteRule }
 											onToggle={ toggleRule }
+											onScan={ handleScanRule }
 										/>
 									) ) }
 								</div>
@@ -441,14 +531,44 @@ export function RulesPanel() {
 
 			{ isPreviewOptionsOpen && (
 				<Modal
-					title={ __( 'Scan Options', 'vmfa-rules-engine' ) }
-					onRequestClose={ () => setIsPreviewOptionsOpen( false ) }
+					title={
+						scanningRule
+							? __( 'Scan with Rule', 'vmfa-rules-engine' ) +
+							  ': ' +
+							  scanningRule.name
+							: __( 'Scan Options', 'vmfa-rules-engine' )
+					}
+					onRequestClose={ () => {
+						setIsPreviewOptionsOpen( false );
+						setScanningRule( null );
+					} }
 					size="small"
 				>
-					<p>{ __( 'Choose which media files to scan.', 'vmfa-rules-engine' ) }</p>
+					{ scanningRule ? (
+						<p>
+							{ __(
+								'Scan media using only the rule:',
+								'vmfa-rules-engine'
+							) }{ ' ' }
+							<strong>{ scanningRule.name }</strong>
+						</p>
+					) : (
+						<p>
+							{ __(
+								'Choose which media files to scan.',
+								'vmfa-rules-engine'
+							) }
+						</p>
+					) }
 					<CheckboxControl
-						label={ __( 'Unassigned media only', 'vmfa-rules-engine' ) }
-						help={ __( 'When checked, only media not yet in any folder will be scanned. Uncheck to include all media (may reassign existing).', 'vmfa-rules-engine' ) }
+						label={ __(
+							'Unassigned media only',
+							'vmfa-rules-engine'
+						) }
+						help={ __(
+							'When checked, only media not yet in any folder will be scanned. Uncheck to include all media (may reassign existing).',
+							'vmfa-rules-engine'
+						) }
 						checked={ previewUnassignedOnly }
 						onChange={ setPreviewUnassignedOnly }
 						__nextHasNoMarginBottom
@@ -457,7 +577,10 @@ export function RulesPanel() {
 						<FlexItem>
 							<Button
 								variant="secondary"
-								onClick={ () => setIsPreviewOptionsOpen( false ) }
+								onClick={ () => {
+									setIsPreviewOptionsOpen( false );
+									setScanningRule( null );
+								} }
 							>
 								{ __( 'Cancel', 'vmfa-rules-engine' ) }
 							</Button>

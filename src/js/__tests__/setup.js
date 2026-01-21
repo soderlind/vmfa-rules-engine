@@ -1,7 +1,7 @@
 /**
  * Vitest setup file.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { vi } from 'vitest';
@@ -79,7 +79,8 @@ vi.mock( '@wordpress/element', () => ( {
 	useState: vi.fn( ( initial ) => {
 		let state = initial;
 		const setState = ( newState ) => {
-			state = typeof newState === 'function' ? newState( state ) : newState;
+			state =
+				typeof newState === 'function' ? newState( state ) : newState;
 		};
 		return [ state, setState ];
 	} ),
@@ -112,52 +113,106 @@ vi.mock( '@wordpress/components', () => ( {
 		return { type: 'button', props: { ...props, onClick }, children };
 	},
 	Panel: ( { children, ...props } ) => {
-		return { type: 'div', props: { className: 'panel', ...props }, children };
+		return {
+			type: 'div',
+			props: { className: 'panel', ...props },
+			children,
+		};
 	},
 	PanelBody: ( { children, title, ...props } ) => {
-		return { type: 'div', props: { className: 'panel-body', ...props }, children, title };
+		return {
+			type: 'div',
+			props: { className: 'panel-body', ...props },
+			children,
+			title,
+		};
 	},
 	PanelRow: ( { children, ...props } ) => {
-		return { type: 'div', props: { className: 'panel-row', ...props }, children };
+		return {
+			type: 'div',
+			props: { className: 'panel-row', ...props },
+			children,
+		};
 	},
 	TextControl: ( { value, onChange, ...props } ) => {
 		return { type: 'input', props: { ...props, value, onChange } };
 	},
 	SelectControl: ( { value, options, onChange, ...props } ) => {
-		return { type: 'select', props: { ...props, value, options, onChange } };
+		return {
+			type: 'select',
+			props: { ...props, value, options, onChange },
+		};
 	},
 	ToggleControl: ( { checked, onChange, ...props } ) => {
-		return { type: 'input', props: { ...props, type: 'checkbox', checked, onChange } };
+		return {
+			type: 'input',
+			props: { ...props, type: 'checkbox', checked, onChange },
+		};
 	},
 	Modal: ( { children, title, onRequestClose, ...props } ) => {
-		return { type: 'div', props: { className: 'modal', ...props, title, onRequestClose }, children };
+		return {
+			type: 'div',
+			props: { className: 'modal', ...props, title, onRequestClose },
+			children,
+		};
 	},
 	Spinner: () => {
 		return { type: 'span', props: { className: 'spinner' } };
 	},
 	Notice: ( { children, status, ...props } ) => {
-		return { type: 'div', props: { className: `notice notice-${ status }`, ...props }, children };
+		return {
+			type: 'div',
+			props: { className: `notice notice-${ status }`, ...props },
+			children,
+		};
 	},
 	Flex: ( { children, ...props } ) => {
-		return { type: 'div', props: { className: 'flex', ...props }, children };
+		return {
+			type: 'div',
+			props: { className: 'flex', ...props },
+			children,
+		};
 	},
 	FlexItem: ( { children, ...props } ) => {
-		return { type: 'div', props: { className: 'flex-item', ...props }, children };
+		return {
+			type: 'div',
+			props: { className: 'flex-item', ...props },
+			children,
+		};
 	},
 	FlexBlock: ( { children, ...props } ) => {
-		return { type: 'div', props: { className: 'flex-block', ...props }, children };
+		return {
+			type: 'div',
+			props: { className: 'flex-block', ...props },
+			children,
+		};
 	},
 	Card: ( { children, ...props } ) => {
-		return { type: 'div', props: { className: 'card', ...props }, children };
+		return {
+			type: 'div',
+			props: { className: 'card', ...props },
+			children,
+		};
 	},
 	CardBody: ( { children, ...props } ) => {
-		return { type: 'div', props: { className: 'card-body', ...props }, children };
+		return {
+			type: 'div',
+			props: { className: 'card-body', ...props },
+			children,
+		};
 	},
 	CardHeader: ( { children, ...props } ) => {
-		return { type: 'div', props: { className: 'card-header', ...props }, children };
+		return {
+			type: 'div',
+			props: { className: 'card-header', ...props },
+			children,
+		};
 	},
 	CheckboxControl: ( { checked, onChange, ...props } ) => {
-		return { type: 'input', props: { ...props, type: 'checkbox', checked, onChange } };
+		return {
+			type: 'input',
+			props: { ...props, type: 'checkbox', checked, onChange },
+		};
 	},
 } ) );
 

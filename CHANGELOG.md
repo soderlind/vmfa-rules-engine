@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-01-21
+
+### Added
+- **Single Rule Scan**: Scan media using a specific rule with the new search icon button on each rule item
+- WordPress Playground blueprint support for easy testing
+
+### Changed
+- Blueprint now uses `git:directory` resource for more reliable plugin loading
+- Vendor directory now included in repository for Playground compatibility
+
 ## [0.4.1] - 2026-01-17
 
 ### Changed

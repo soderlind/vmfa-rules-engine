@@ -1,10 +1,16 @@
 /**
  * Preview Modal component.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
-import { useState, useCallback, useMemo, useRef, useEffect } from '@wordpress/element';
+import {
+	useState,
+	useCallback,
+	useMemo,
+	useRef,
+	useEffect,
+} from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
 	Button,
@@ -18,16 +24,23 @@ import {
 /**
  * Preview Modal component.
  *
- * @param {Object}   props                Component props.
- * @param {Object}   props.results        Preview results.
- * @param {Function} props.onApply        Apply handler.
- * @param {Function} props.onClose        Close handler.
- * @param {Function} props.onLoadMore     Load more handler.
- * @param {boolean}  props.isProcessing   Whether processing is in progress.
- * @param {boolean}  props.isLoadingMore  Whether loading more items.
+ * @param {Object}   props               Component props.
+ * @param {Object}   props.results       Preview results.
+ * @param {Function} props.onApply       Apply handler.
+ * @param {Function} props.onClose       Close handler.
+ * @param {Function} props.onLoadMore    Load more handler.
+ * @param {boolean}  props.isProcessing  Whether processing is in progress.
+ * @param {boolean}  props.isLoadingMore Whether loading more items.
  * @return {JSX.Element} Preview modal.
  */
-export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcessing, isLoadingMore } ) {
+export function PreviewModal( {
+	results,
+	onApply,
+	onClose,
+	onLoadMore,
+	isProcessing,
+	isLoadingMore,
+} ) {
 	const [ selectedIds, setSelectedIds ] = useState( new Set() );
 	const [ selectAll, setSelectAll ] = useState( false );
 	const [ applied, setApplied ] = useState( false );
@@ -40,7 +53,9 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 		if ( ! results?.items ) {
 			return [];
 		}
-		return results.items.filter( ( item ) => item.status === 'will_assign' );
+		return results.items.filter(
+			( item ) => item.status === 'will_assign'
+		);
 	}, [ results ] );
 
 	// Items with no match.
@@ -96,7 +111,11 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 		( checked ) => {
 			setSelectAll( checked );
 			if ( checked ) {
-				setSelectedIds( new Set( assignableItems.map( ( item ) => item.attachment_id ) ) );
+				setSelectedIds(
+					new Set(
+						assignableItems.map( ( item ) => item.attachment_id )
+					)
+				);
 			} else {
 				setSelectedIds( new Set() );
 			}
@@ -119,13 +138,15 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 	if ( ! results ) {
 		return (
 			<Modal
-				title={ strings.preview || __( 'Preview', 'vmfa-rules-engine' ) }
+				title={
+					strings.preview || __( 'Preview', 'vmfa-rules-engine' )
+				}
 				onRequestClose={ onClose }
 				className="vmfa-preview-modal"
 			>
 				<div className="vmfa-preview-loading">
 					<Spinner />
-					<p>{ __( 'Loading preview...', 'vmfa-rules-engine' ) }</p>
+					<p>{ __( 'Loading preview…', 'vmfa-rules-engine' ) }</p>
 				</div>
 			</Modal>
 		);
@@ -141,20 +162,26 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 				<div className="vmfa-preview-applied">
 					<div className="vmfa-preview-stats">
 						<div className="vmfa-preview-stat vmfa-preview-stat--success">
-							<span className="vmfa-preview-stat-value">{ results.assigned }</span>
+							<span className="vmfa-preview-stat-value">
+								{ results.assigned }
+							</span>
 							<span className="vmfa-preview-stat-label">
 								{ __( 'Assigned', 'vmfa-rules-engine' ) }
 							</span>
 						</div>
 						<div className="vmfa-preview-stat">
-							<span className="vmfa-preview-stat-value">{ results.skipped }</span>
+							<span className="vmfa-preview-stat-value">
+								{ results.skipped }
+							</span>
 							<span className="vmfa-preview-stat-label">
 								{ __( 'Skipped', 'vmfa-rules-engine' ) }
 							</span>
 						</div>
 						{ results.errors > 0 && (
 							<div className="vmfa-preview-stat vmfa-preview-stat--error">
-								<span className="vmfa-preview-stat-value">{ results.errors }</span>
+								<span className="vmfa-preview-stat-value">
+									{ results.errors }
+								</span>
 								<span className="vmfa-preview-stat-label">
 									{ __( 'Errors', 'vmfa-rules-engine' ) }
 								</span>
@@ -182,14 +209,25 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 						{ __( 'Scanned', 'vmfa-rules-engine' ) }{ ' ' }
 						<strong>{ results.total }</strong>
 						{ results.total_count > results.total && (
-							<>{ ' ' }{ __( 'of', 'vmfa-rules-engine' ) } <strong>{ results.total_count }</strong></>
-						) }
-						{ ' ' }{ __( 'media items.', 'vmfa-rules-engine' ) }{ ' ' }
+							<>
+								{ ' ' }
+								{ __( 'of', 'vmfa-rules-engine' ) }{ ' ' }
+								<strong>{ results.total_count }</strong>
+							</>
+						) }{ ' ' }
+						{ __( 'media items.', 'vmfa-rules-engine' ) }{ ' ' }
 						<strong>{ results.matched }</strong>{ ' ' }
-						{ __( 'will be assigned to folders.', 'vmfa-rules-engine' ) }
+						{ __(
+							'will be assigned to folders.',
+							'vmfa-rules-engine'
+						) }
 						{ results.has_more && (
 							<span className="vmfa-preview-loading-hint">
-								{ ' ' }{ __( 'Scroll down to load more.', 'vmfa-rules-engine' ) }
+								{ ' ' }
+								{ __(
+									'Scroll down to load more.',
+									'vmfa-rules-engine'
+								) }
 							</span>
 						) }
 					</p>
@@ -198,23 +236,49 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 				{ assignableItems.length > 0 && (
 					<div className="vmfa-preview-section">
 						<div className="vmfa-preview-section-header">
-							<h3>{ __( 'Will be assigned', 'vmfa-rules-engine' ) }</h3>
+							<h3>
+								{ __(
+									'Will be assigned',
+									'vmfa-rules-engine'
+								) }
+							</h3>
 							<CheckboxControl
-								label={ __( 'Select all loaded', 'vmfa-rules-engine' ) }
+								label={ __(
+									'Select all loaded',
+									'vmfa-rules-engine'
+								) }
 								checked={ selectAll }
 								onChange={ handleSelectAll }
 								__nextHasNoMarginBottom
 							/>
 						</div>
-						<div className="vmfa-preview-table" ref={ tableContainerRef }>
+						<div
+							className="vmfa-preview-table"
+							ref={ tableContainerRef }
+						>
 							<table>
 								<thead>
 									<tr>
 										<th className="vmfa-preview-col-check"></th>
 										<th className="vmfa-preview-col-thumb"></th>
-										<th>{ __( 'File', 'vmfa-rules-engine' ) }</th>
-										<th>{ __( 'Rule', 'vmfa-rules-engine' ) }</th>
-										<th>{ __( 'Folder', 'vmfa-rules-engine' ) }</th>
+										<th>
+											{ __(
+												'File',
+												'vmfa-rules-engine'
+											) }
+										</th>
+										<th>
+											{ __(
+												'Rule',
+												'vmfa-rules-engine'
+											) }
+										</th>
+										<th>
+											{ __(
+												'Folder',
+												'vmfa-rules-engine'
+											) }
+										</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -222,8 +286,14 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 										<tr key={ item.attachment_id }>
 											<td className="vmfa-preview-col-check">
 												<CheckboxControl
-													checked={ selectedIds.has( item.attachment_id ) }
-													onChange={ () => toggleSelection( item.attachment_id ) }
+													checked={ selectedIds.has(
+														item.attachment_id
+													) }
+													onChange={ () =>
+														toggleSelection(
+															item.attachment_id
+														)
+													}
 													__nextHasNoMarginBottom
 												/>
 											</td>
@@ -260,13 +330,24 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 							{ isLoadingMore && (
 								<div className="vmfa-preview-loading-more">
 									<Spinner />
-									<span>{ __( 'Loading more...', 'vmfa-rules-engine' ) }</span>
+									<span>
+										{ __(
+											'Loading more…',
+											'vmfa-rules-engine'
+										) }
+									</span>
 								</div>
 							) }
 							{ results.has_more && ! isLoadingMore && (
 								<div className="vmfa-preview-load-more">
-									<Button variant="secondary" onClick={ onLoadMore }>
-										{ __( 'Load more', 'vmfa-rules-engine' ) }
+									<Button
+										variant="secondary"
+										onClick={ onLoadMore }
+									>
+										{ __(
+											'Load more',
+											'vmfa-rules-engine'
+										) }
 									</Button>
 								</div>
 							) }
@@ -277,20 +358,31 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 				{ unmatchedItems.length > 0 && (
 					<details className="vmfa-preview-section vmfa-preview-section--collapsed">
 						<summary>
-							{ __( 'No matching rules', 'vmfa-rules-engine' ) } ({ unmatchedItems.length })
+							{ __( 'No matching rules', 'vmfa-rules-engine' ) } (
+							{ unmatchedItems.length })
 						</summary>
 						<div className="vmfa-preview-unmatched">
 							{ unmatchedItems.slice( 0, 20 ).map( ( item ) => (
-								<div key={ item.attachment_id } className="vmfa-preview-unmatched-item">
+								<div
+									key={ item.attachment_id }
+									className="vmfa-preview-unmatched-item"
+								>
 									{ item.thumbnail && (
-										<img src={ item.thumbnail } alt="" width="30" height="30" />
+										<img
+											src={ item.thumbnail }
+											alt=""
+											width="30"
+											height="30"
+										/>
 									) }
 									<span>{ item.filename }</span>
 								</div>
 							) ) }
 							{ unmatchedItems.length > 20 && (
 								<p className="vmfa-preview-more">
-									{ __( 'And', 'vmfa-rules-engine' ) } { unmatchedItems.length - 20 } { __( 'more...', 'vmfa-rules-engine' ) }
+									{ __( 'And', 'vmfa-rules-engine' ) }{ ' ' }
+									{ unmatchedItems.length - 20 }{ ' ' }
+									{ __( 'more…', 'vmfa-rules-engine' ) }
 								</p>
 							) }
 						</div>
@@ -299,7 +391,11 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 
 				<Flex justify="flex-end" className="vmfa-preview-actions">
 					<FlexItem>
-						<Button variant="tertiary" onClick={ onClose } disabled={ isProcessing }>
+						<Button
+							variant="tertiary"
+							onClick={ onClose }
+							disabled={ isProcessing }
+						>
 							{ __( 'Cancel', 'vmfa-rules-engine' ) }
 						</Button>
 					</FlexItem>
@@ -312,12 +408,17 @@ export function PreviewModal( { results, onApply, onClose, onLoadMore, isProcess
 							{ isProcessing ? (
 								<>
 									<Spinner />
-									{ __( 'Applying...', 'vmfa-rules-engine' ) }
+									{ __( 'Applying…', 'vmfa-rules-engine' ) }
 								</>
 							) : (
 								<>
-									{ strings.apply || __( 'Apply Changes', 'vmfa-rules-engine' ) }
-									{ selectedIds.size > 0 && ` (${ selectedIds.size })` }
+									{ strings.apply ||
+										__(
+											'Apply Changes',
+											'vmfa-rules-engine'
+										) }
+									{ selectedIds.size > 0 &&
+										` (${ selectedIds.size })` }
 								</>
 							) }
 						</Button>

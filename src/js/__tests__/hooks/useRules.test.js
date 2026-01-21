@@ -1,7 +1,7 @@
 /**
  * Tests for useRules hook.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
@@ -218,8 +218,18 @@ describe( 'useBatchOperations hook logic', () => {
 			const mockPreview = {
 				total: 50,
 				matches: [
-					{ id: 1, title: 'IMG_001.jpg', rule: 'rule_1', folder: 'Photos' },
-					{ id: 2, title: 'DOC_001.pdf', rule: 'rule_2', folder: 'Documents' },
+					{
+						id: 1,
+						title: 'IMG_001.jpg',
+						rule: 'rule_1',
+						folder: 'Photos',
+					},
+					{
+						id: 2,
+						title: 'DOC_001.pdf',
+						rule: 'rule_2',
+						folder: 'Documents',
+					},
 				],
 			};
 			apiFetch.mockResolvedValueOnce( mockPreview );

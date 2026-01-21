@@ -122,6 +122,9 @@ class BatchProcessor {
 		$offset         = isset( $args[ 'offset' ] ) ? (int) $args[ 'offset' ] : 0;
 		$limit          = isset( $args[ 'posts_per_page' ] ) ? (int) $args[ 'posts_per_page' ] : 50;
 
+		// Get optional rule_id for single-rule scanning.
+		$rule_id = isset( $args[ 'rule_id' ] ) ? $args[ 'rule_id' ] : null;
+
 		$results = array(
 			'total'       => count( $attachment_ids ),
 			'total_count' => $total_count,
@@ -131,6 +134,7 @@ class BatchProcessor {
 			'matched'     => 0,
 			'unmatched'   => 0,
 			'items'       => array(),
+			'rule_id'     => $rule_id,
 		);
 
 		foreach ( $attachment_ids as $attachment_id ) {
@@ -139,7 +143,7 @@ class BatchProcessor {
 				$metadata = array();
 			}
 
-			$match = $this->evaluator->evaluate( $attachment_id, $metadata );
+			$match = $this->evaluator->evaluate( $attachment_id, $metadata, $rule_id );
 
 			if ( $match ) {
 				$folder = get_term( $match[ 'folder_id' ], self::TAXONOMY );

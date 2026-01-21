@@ -1,7 +1,7 @@
 /**
  * Tests for rule data structures and validation.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { describe, it, expect } from 'vitest';
@@ -70,7 +70,9 @@ function sortRulesByPriority( rules ) {
  * @return {Object|null} First matching rule or null.
  */
 function findMatchingRule( rules, attachment ) {
-	const sortedRules = sortRulesByPriority( rules ).filter( ( r ) => r.enabled );
+	const sortedRules = sortRulesByPriority( rules ).filter(
+		( r ) => r.enabled
+	);
 
 	for ( const rule of sortedRules ) {
 		const allConditionsMatch = rule.conditions.every( ( condition ) => {
@@ -91,16 +93,29 @@ function findMatchingRule( rules, attachment ) {
 					}
 
 				case 'dimensions':
-					const dim = condition.dimension === 'both'
-						? Math.min( attachment.width, attachment.height )
-						: attachment[ condition.dimension ];
-					return compareValue( dim, condition.operator, condition.value, condition.value_end );
+					const dim =
+						condition.dimension === 'both'
+							? Math.min( attachment.width, attachment.height )
+							: attachment[ condition.dimension ];
+					return compareValue(
+						dim,
+						condition.operator,
+						condition.value,
+						condition.value_end
+					);
 
 				case 'file_size':
-					return compareValue( attachment.file_size, condition.operator, condition.value, condition.value_end );
+					return compareValue(
+						attachment.file_size,
+						condition.operator,
+						condition.value,
+						condition.value_end
+					);
 
 				case 'author':
-					return attachment.author_id === parseInt( condition.value, 10 );
+					return (
+						attachment.author_id === parseInt( condition.value, 10 )
+					);
 
 				default:
 					return false;
@@ -118,9 +133,9 @@ function findMatchingRule( rules, attachment ) {
 /**
  * Compare value with operator.
  *
- * @param {number} value    Value to compare.
- * @param {string} operator Comparison operator.
- * @param {number} target   Target value.
+ * @param {number} value     Value to compare.
+ * @param {string} operator  Comparison operator.
+ * @param {number} target    Target value.
  * @param {number} targetEnd End value for between operator.
  * @return {boolean} Comparison result.
  */
@@ -148,9 +163,7 @@ describe( 'validateRule', () => {
 		const rule = {
 			name: 'Photo Rule',
 			folder_id: 1,
-			conditions: [
-				{ type: 'mime_type', value: 'image/*' },
-			],
+			conditions: [ { type: 'mime_type', value: 'image/*' } ],
 		};
 
 		const result = validateRule( rule );
@@ -163,9 +176,7 @@ describe( 'validateRule', () => {
 		const rule = {
 			name: '',
 			folder_id: 1,
-			conditions: [
-				{ type: 'mime_type', value: 'image/*' },
-			],
+			conditions: [ { type: 'mime_type', value: 'image/*' } ],
 		};
 
 		const result = validateRule( rule );
@@ -178,9 +189,7 @@ describe( 'validateRule', () => {
 		const rule = {
 			name: '   ',
 			folder_id: 1,
-			conditions: [
-				{ type: 'mime_type', value: 'image/*' },
-			],
+			conditions: [ { type: 'mime_type', value: 'image/*' } ],
 		};
 
 		const result = validateRule( rule );
@@ -193,9 +202,7 @@ describe( 'validateRule', () => {
 		const rule = {
 			name: 'Test Rule',
 			folder_id: null,
-			conditions: [
-				{ type: 'mime_type', value: 'image/*' },
-			],
+			conditions: [ { type: 'mime_type', value: 'image/*' } ],
 		};
 
 		const result = validateRule( rule );
@@ -214,7 +221,9 @@ describe( 'validateRule', () => {
 		const result = validateRule( rule );
 
 		expect( result.isValid ).toBe( false );
-		expect( result.errors ).toContain( 'At least one condition is required' );
+		expect( result.errors ).toContain(
+			'At least one condition is required'
+		);
 	} );
 
 	it( 'should collect multiple errors', () => {

@@ -1,7 +1,7 @@
 /**
  * Main entry point for the Rules Engine admin UI.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { createRoot } from '@wordpress/element';

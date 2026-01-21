@@ -1,6 +1,6 @@
 {
 	"name": "vmfa-rules-engine",
-	"version": "0.3.3",
+	"version": "1.0.0",
 	"description": "Rule-based automatic folder assignment for media uploads",
 	"author": "Per Soderlind",
 	"license": "GPL-2.0-or-later",

@@ -1,7 +1,7 @@
 /**
  * Tests for ConditionBuilder utility functions.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
@@ -86,7 +86,11 @@ function validateCondition( condition ) {
 			if ( typeof condition.value !== 'number' || condition.value < 0 ) {
 				errors.push( 'Value must be a positive number' );
 			}
-			if ( condition.operator === 'between' && ( ! condition.value_end || condition.value_end <= condition.value ) ) {
+			if (
+				condition.operator === 'between' &&
+				( ! condition.value_end ||
+					condition.value_end <= condition.value )
+			) {
 				errors.push( 'End value must be greater than start value' );
 			}
 			break;
@@ -352,7 +356,9 @@ describe( 'validateCondition', () => {
 			const result = validateCondition( condition );
 
 			expect( result.isValid ).toBe( false );
-			expect( result.errors ).toContain( 'End value must be greater than start value' );
+			expect( result.errors ).toContain(
+				'End value must be greater than start value'
+			);
 		} );
 
 		it( 'should reject negative dimension value', () => {
@@ -366,7 +372,9 @@ describe( 'validateCondition', () => {
 			const result = validateCondition( condition );
 
 			expect( result.isValid ).toBe( false );
-			expect( result.errors ).toContain( 'Value must be a positive number' );
+			expect( result.errors ).toContain(
+				'Value must be a positive number'
+			);
 		} );
 
 		it( 'should reject missing dimension field', () => {

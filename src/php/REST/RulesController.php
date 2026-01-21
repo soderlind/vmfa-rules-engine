@@ -157,6 +157,11 @@ class RulesController extends WP_REST_Controller {
 						'default' => 0,
 						'minimum' => 0,
 					),
+					'rule_id'         => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_text_field',
+						'default'           => null,
+					),
 				),
 			)
 		);
@@ -346,6 +351,10 @@ class RulesController extends WP_REST_Controller {
 
 		if ( $request->get_param( 'mime_type' ) ) {
 			$args[ 'mime_type' ] = $request->get_param( 'mime_type' );
+		}
+
+		if ( $request->get_param( 'rule_id' ) ) {
+			$args[ 'rule_id' ] = $request->get_param( 'rule_id' );
 		}
 
 		$results = $this->batch_processor->preview( $args );

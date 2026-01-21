@@ -1,7 +1,7 @@
 /**
  * Condition Builder component.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { useCallback } from '@wordpress/element';
@@ -57,17 +57,19 @@ function getDefaultCondition( conditionType ) {
 /**
  * Single condition row component.
  *
- * @param {Object}   props            Component props.
- * @param {Object}   props.condition  Condition data.
- * @param {number}   props.index      Condition index.
- * @param {Function} props.onChange   Change handler.
- * @param {Function} props.onRemove   Remove handler.
- * @param {Array}    props.users      Available users for author condition.
+ * @param {Object}   props           Component props.
+ * @param {Object}   props.condition Condition data.
+ * @param {number}   props.index     Condition index.
+ * @param {Function} props.onChange  Change handler.
+ * @param {Function} props.onRemove  Remove handler.
+ * @param {Array}    props.users     Available users for author condition.
  * @return {JSX.Element} Condition row.
  */
 function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 	const { conditionTypes = [] } = window.vmfaRulesEngine || {};
-	const conditionType = conditionTypes.find( ( ct ) => ct.value === condition.type );
+	const conditionType = conditionTypes.find(
+		( ct ) => ct.value === condition.type
+	);
 
 	/**
 	 * Handle type change.
@@ -75,7 +77,9 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 	 * @param {string} newType New condition type.
 	 */
 	const handleTypeChange = ( newType ) => {
-		const newConditionType = conditionTypes.find( ( ct ) => ct.value === newType );
+		const newConditionType = conditionTypes.find(
+			( ct ) => ct.value === newType
+		);
 		if ( newConditionType ) {
 			onChange( index, getDefaultCondition( newConditionType ) );
 		}
@@ -106,10 +110,12 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 				return (
 					<TextControl
 						value={ condition.value || '' }
-						onChange={ ( val ) => handleValueChange( 'value', val ) }
+						onChange={ ( val ) =>
+							handleValueChange( 'value', val )
+						}
 						placeholder={ conditionType.placeholder || '' }
 						__nextHasNoMarginBottom
-									__next40pxDefaultSize
+						__next40pxDefaultSize
 					/>
 				);
 
@@ -118,9 +124,11 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 					<SelectControl
 						value={ condition.value || '' }
 						options={ conditionType.options || [] }
-						onChange={ ( val ) => handleValueChange( 'value', val ) }
+						onChange={ ( val ) =>
+							handleValueChange( 'value', val )
+						}
 						__nextHasNoMarginBottom
-									__next40pxDefaultSize
+						__next40pxDefaultSize
 					/>
 				);
 
@@ -131,13 +139,33 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 							<SelectControl
 								value={ condition.dimension || 'width' }
 								options={ [
-									{ value: 'width', label: __( 'Width', 'vmfa-rules-engine' ) },
-									{ value: 'height', label: __( 'Height', 'vmfa-rules-engine' ) },
-									{ value: 'both', label: __( 'Both', 'vmfa-rules-engine' ) },
+									{
+										value: 'width',
+										label: __(
+											'Width',
+											'vmfa-rules-engine'
+										),
+									},
+									{
+										value: 'height',
+										label: __(
+											'Height',
+											'vmfa-rules-engine'
+										),
+									},
+									{
+										value: 'both',
+										label: __(
+											'Both',
+											'vmfa-rules-engine'
+										),
+									},
 								] }
-								onChange={ ( val ) => handleValueChange( 'dimension', val ) }
+								onChange={ ( val ) =>
+									handleValueChange( 'dimension', val )
+								}
 								__nextHasNoMarginBottom
-									__next40pxDefaultSize
+								__next40pxDefaultSize
 							/>
 						</FlexItem>
 						<FlexItem>
@@ -149,21 +177,34 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 									{ value: 'lt', label: '<' },
 									{ value: 'lte', label: '<=' },
 									{ value: 'eq', label: '=' },
-									{ value: 'between', label: __( 'Between', 'vmfa-rules-engine' ) },
+									{
+										value: 'between',
+										label: __(
+											'Between',
+											'vmfa-rules-engine'
+										),
+									},
 								] }
-								onChange={ ( val ) => handleValueChange( 'operator', val ) }
+								onChange={ ( val ) =>
+									handleValueChange( 'operator', val )
+								}
 								__nextHasNoMarginBottom
-									__next40pxDefaultSize
+								__next40pxDefaultSize
 							/>
 						</FlexItem>
 						<FlexItem>
 							<TextControl
 								type="number"
 								value={ condition.value || '' }
-								onChange={ ( val ) => handleValueChange( 'value', parseInt( val, 10 ) || 0 ) }
+								onChange={ ( val ) =>
+									handleValueChange(
+										'value',
+										parseInt( val, 10 ) || 0
+									)
+								}
 								placeholder="1920"
 								__nextHasNoMarginBottom
-									__next40pxDefaultSize
+								__next40pxDefaultSize
 							/>
 						</FlexItem>
 						{ condition.operator === 'between' && (
@@ -171,7 +212,12 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								<TextControl
 									type="number"
 									value={ condition.value_end || '' }
-									onChange={ ( val ) => handleValueChange( 'value_end', parseInt( val, 10 ) || 0 ) }
+									onChange={ ( val ) =>
+										handleValueChange(
+											'value_end',
+											parseInt( val, 10 ) || 0
+										)
+									}
 									placeholder="3840"
 									__nextHasNoMarginBottom
 									__next40pxDefaultSize
@@ -195,21 +241,34 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 									{ value: 'gte', label: '>=' },
 									{ value: 'lt', label: '<' },
 									{ value: 'lte', label: '<=' },
-									{ value: 'between', label: __( 'Between', 'vmfa-rules-engine' ) },
+									{
+										value: 'between',
+										label: __(
+											'Between',
+											'vmfa-rules-engine'
+										),
+									},
 								] }
-								onChange={ ( val ) => handleValueChange( 'operator', val ) }
+								onChange={ ( val ) =>
+									handleValueChange( 'operator', val )
+								}
 								__nextHasNoMarginBottom
-									__next40pxDefaultSize
+								__next40pxDefaultSize
 							/>
 						</FlexItem>
 						<FlexItem>
 							<TextControl
 								type="number"
 								value={ condition.value || '' }
-								onChange={ ( val ) => handleValueChange( 'value', parseInt( val, 10 ) || 0 ) }
+								onChange={ ( val ) =>
+									handleValueChange(
+										'value',
+										parseInt( val, 10 ) || 0
+									)
+								}
 								placeholder="1024"
 								__nextHasNoMarginBottom
-									__next40pxDefaultSize
+								__next40pxDefaultSize
 							/>
 						</FlexItem>
 						{ condition.operator === 'between' && (
@@ -217,7 +276,12 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								<TextControl
 									type="number"
 									value={ condition.value_end || '' }
-									onChange={ ( val ) => handleValueChange( 'value_end', parseInt( val, 10 ) || 0 ) }
+									onChange={ ( val ) =>
+										handleValueChange(
+											'value_end',
+											parseInt( val, 10 ) || 0
+										)
+									}
 									placeholder="5120"
 									__nextHasNoMarginBottom
 									__next40pxDefaultSize
@@ -237,25 +301,62 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 							<SelectControl
 								value={ condition.operator || 'after' }
 								options={ [
-									{ value: 'after', label: __( 'After', 'vmfa-rules-engine' ) },
-									{ value: 'before', label: __( 'Before', 'vmfa-rules-engine' ) },
-									{ value: 'on', label: __( 'On', 'vmfa-rules-engine' ) },
-									{ value: 'between', label: __( 'Between', 'vmfa-rules-engine' ) },
-									{ value: 'year', label: __( 'In year', 'vmfa-rules-engine' ) },
-									{ value: 'month', label: __( 'In month', 'vmfa-rules-engine' ) },
+									{
+										value: 'after',
+										label: __(
+											'After',
+											'vmfa-rules-engine'
+										),
+									},
+									{
+										value: 'before',
+										label: __(
+											'Before',
+											'vmfa-rules-engine'
+										),
+									},
+									{
+										value: 'on',
+										label: __( 'On', 'vmfa-rules-engine' ),
+									},
+									{
+										value: 'between',
+										label: __(
+											'Between',
+											'vmfa-rules-engine'
+										),
+									},
+									{
+										value: 'year',
+										label: __(
+											'In year',
+											'vmfa-rules-engine'
+										),
+									},
+									{
+										value: 'month',
+										label: __(
+											'In month',
+											'vmfa-rules-engine'
+										),
+									},
 								] }
-								onChange={ ( val ) => handleValueChange( 'operator', val ) }
+								onChange={ ( val ) =>
+									handleValueChange( 'operator', val )
+								}
 								__nextHasNoMarginBottom
-									__next40pxDefaultSize
+								__next40pxDefaultSize
 							/>
 						</FlexItem>
 						<FlexItem>
 							<TextControl
 								type="date"
 								value={ condition.value || '' }
-								onChange={ ( val ) => handleValueChange( 'value', val ) }
+								onChange={ ( val ) =>
+									handleValueChange( 'value', val )
+								}
 								__nextHasNoMarginBottom
-									__next40pxDefaultSize
+								__next40pxDefaultSize
 							/>
 						</FlexItem>
 						{ condition.operator === 'between' && (
@@ -263,7 +364,9 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 								<TextControl
 									type="date"
 									value={ condition.value_end || '' }
-									onChange={ ( val ) => handleValueChange( 'value_end', val ) }
+									onChange={ ( val ) =>
+										handleValueChange( 'value_end', val )
+									}
 									__nextHasNoMarginBottom
 									__next40pxDefaultSize
 								/>
@@ -277,15 +380,26 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 					<SelectControl
 						value={ String( condition.value || '' ) }
 						options={ [
-							{ value: '', label: __( 'Select a user...', 'vmfa-rules-engine' ) },
+							{
+								value: '',
+								label: __(
+									'Select a user…',
+									'vmfa-rules-engine'
+								),
+							},
 							...users.map( ( u ) => ( {
 								value: String( u.id ),
 								label: `${ u.display_name } (${ u.user_login })`,
 							} ) ),
 						] }
-						onChange={ ( val ) => handleValueChange( 'value', parseInt( val, 10 ) || 0 ) }
+						onChange={ ( val ) =>
+							handleValueChange(
+								'value',
+								parseInt( val, 10 ) || 0
+							)
+						}
 						__nextHasNoMarginBottom
-									__next40pxDefaultSize
+						__next40pxDefaultSize
 					/>
 				);
 
@@ -293,9 +407,11 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 				return (
 					<TextControl
 						value={ condition.value || '' }
-						onChange={ ( val ) => handleValueChange( 'value', val ) }
+						onChange={ ( val ) =>
+							handleValueChange( 'value', val )
+						}
 						__nextHasNoMarginBottom
-									__next40pxDefaultSize
+						__next40pxDefaultSize
 					/>
 				);
 		}
@@ -308,7 +424,13 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 					<SelectControl
 						value={ condition.type }
 						options={ [
-							{ value: '', label: __( 'Select condition...', 'vmfa-rules-engine' ) },
+							{
+								value: '',
+								label: __(
+									'Select condition…',
+									'vmfa-rules-engine'
+								),
+							},
 							...conditionTypes.map( ( ct ) => ( {
 								value: ct.value,
 								label: ct.label,
@@ -316,7 +438,7 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 						] }
 						onChange={ handleTypeChange }
 						__nextHasNoMarginBottom
-									__next40pxDefaultSize
+						__next40pxDefaultSize
 					/>
 				</FlexItem>
 				<FlexBlock>{ renderValueInput() }</FlexBlock>
@@ -330,7 +452,9 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 				</FlexItem>
 			</Flex>
 			{ conditionType?.description && (
-				<p className="vmfa-condition-description">{ conditionType.description }</p>
+				<p className="vmfa-condition-description">
+					{ conditionType.description }
+				</p>
 			) }
 		</div>
 	);
@@ -339,9 +463,9 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 /**
  * Condition Builder component.
  *
- * @param {Object}   props             Component props.
- * @param {Array}    props.conditions  Current conditions.
- * @param {Function} props.onChange    Change handler.
+ * @param {Object}   props            Component props.
+ * @param {Array}    props.conditions Current conditions.
+ * @param {Function} props.onChange   Change handler.
  * @return {JSX.Element} Condition builder.
  */
 export function ConditionBuilder( { conditions, onChange } ) {
@@ -403,7 +527,10 @@ export function ConditionBuilder( { conditions, onChange } ) {
 				</div>
 			) : (
 				<p className="vmfa-condition-empty">
-					{ __( 'No conditions added yet. Add at least one condition.', 'vmfa-rules-engine' ) }
+					{ __(
+						'No conditions added yet. Add at least one condition.',
+						'vmfa-rules-engine'
+					) }
 				</p>
 			) }
 

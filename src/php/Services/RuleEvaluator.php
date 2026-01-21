@@ -129,16 +129,29 @@ class RuleEvaluator {
 	/**
 	 * Evaluate all enabled rules against an attachment.
 	 *
-	 * @param int   $attachment_id Attachment ID.
-	 * @param array $metadata      Attachment metadata (optional, will be fetched if not provided).
+	 * @param int        $attachment_id Attachment ID.
+	 * @param array      $metadata      Attachment metadata (optional, will be fetched if not provided).
+	 * @param string|null $rule_id      Optional specific rule ID to evaluate (null for all rules).
 	 * @return array|null Result with 'folder_id' and 'rule', or null if no match.
 	 */
-	public function evaluate( $attachment_id, $metadata = null ) {
+	public function evaluate( $attachment_id, $metadata = null, $rule_id = null ) {
 		if ( null === $metadata ) {
 			$metadata = wp_get_attachment_metadata( $attachment_id );
 			if ( ! is_array( $metadata ) ) {
 				$metadata = array();
 			}
+		}
+
+		// If a specific rule is requested, only evaluate that rule.
+		if ( null !== $rule_id ) {
+			$rule = $this->repository->get( $rule_id );
+			if ( $rule && $this->rule_matches( $rule, $attachment_id, $metadata ) ) {
+				return array(
+					'folder_id' => $rule[ 'folder_id' ],
+					'rule'      => $rule,
+				);
+			}
+			return null;
 		}
 
 		$rules = $this->repository->get_enabled();
