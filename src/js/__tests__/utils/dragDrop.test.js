@@ -1,7 +1,7 @@
 /**
  * Tests for drag-and-drop reordering utilities.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { describe, it, expect } from 'vitest';
@@ -103,9 +103,7 @@ describe( 'recalculatePriorities', () => {
 	} );
 
 	it( 'should preserve other rule properties', () => {
-		const rules = [
-			{ id: 'a', name: 'A', folder_id: 1, enabled: true },
-		];
+		const rules = [ { id: 'a', name: 'A', folder_id: 1, enabled: true } ];
 
 		const result = recalculatePriorities( rules );
 
@@ -171,6 +169,8 @@ describe( 'full reorder workflow', () => {
 
 		const order = getRuleOrder( result );
 		expect( order[ 0 ] ).toBe( '5' );
-		expect( result.every( ( r, i ) => r.priority === ( i + 1 ) * 10 ) ).toBe( true );
+		expect(
+			result.every( ( r, i ) => r.priority === ( i + 1 ) * 10 )
+		).toBe( true );
 	} );
 } );

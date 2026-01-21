@@ -1,7 +1,7 @@
 /**
  * Rule Editor modal component.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { useState, useCallback, useEffect } from '@wordpress/element';
@@ -66,15 +66,24 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 		const newErrors = {};
 
 		if ( ! name.trim() ) {
-			newErrors.name = __( 'Rule name is required.', 'vmfa-rules-engine' );
+			newErrors.name = __(
+				'Rule name is required.',
+				'vmfa-rules-engine'
+			);
 		}
 
 		if ( ! folderId ) {
-			newErrors.folder = __( 'Target folder is required.', 'vmfa-rules-engine' );
+			newErrors.folder = __(
+				'Target folder is required.',
+				'vmfa-rules-engine'
+			);
 		}
 
 		if ( conditions.length === 0 ) {
-			newErrors.conditions = __( 'At least one condition is required.', 'vmfa-rules-engine' );
+			newErrors.conditions = __(
+				'At least one condition is required.',
+				'vmfa-rules-engine'
+			);
 		}
 
 		setErrors( newErrors );
@@ -96,7 +105,15 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 			stop_processing: stopProcessing,
 			enabled,
 		} );
-	}, [ name, folderId, conditions, stopProcessing, enabled, validate, onSave ] );
+	}, [
+		name,
+		folderId,
+		conditions,
+		stopProcessing,
+		enabled,
+		validate,
+		onSave,
+	] );
 
 	/**
 	 * Build folder options for select.
@@ -111,7 +128,10 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 			for ( const folder of children ) {
 				result.push( {
 					value: String( folder.id ),
-					label: '—'.repeat( depth ) + ( depth > 0 ? ' ' : '' ) + folder.name,
+					label:
+						'—'.repeat( depth ) +
+						( depth > 0 ? ' ' : '' ) +
+						folder.name,
 				} );
 				result.push( ...buildOptions( items, folder.id, depth + 1 ) );
 			}
@@ -120,24 +140,37 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 		};
 
 		return [
-			{ value: '', label: __( 'Select a folder...', 'vmfa-rules-engine' ) },
+			{
+				value: '',
+				label: __( 'Select a folder…', 'vmfa-rules-engine' ),
+			},
 			...buildOptions( folders ),
 		];
 	}, [ folders ] );
 
 	return (
 		<Modal
-			title={ rule ? strings.editRule || __( 'Edit Rule', 'vmfa-rules-engine' ) : strings.addRule || __( 'Add Rule', 'vmfa-rules-engine' ) }
+			title={
+				rule
+					? strings.editRule || __( 'Edit Rule', 'vmfa-rules-engine' )
+					: strings.addRule || __( 'Add Rule', 'vmfa-rules-engine' )
+			}
 			onRequestClose={ onCancel }
 			className="vmfa-rule-editor-modal"
 			shouldCloseOnClickOutside={ false }
 		>
 			<div className="vmfa-rule-editor">
 				<TextControl
-					label={ strings.ruleName || __( 'Rule Name', 'vmfa-rules-engine' ) }
+					label={
+						strings.ruleName ||
+						__( 'Rule Name', 'vmfa-rules-engine' )
+					}
 					value={ name }
 					onChange={ setName }
-					placeholder={ __( 'e.g., Mobile Photos', 'vmfa-rules-engine' ) }
+					placeholder={ __(
+						'e.g., Mobile Photos',
+						'vmfa-rules-engine'
+					) }
 					help={ errors.name }
 					className={ errors.name ? 'has-error' : '' }
 					__nextHasNoMarginBottom
@@ -145,7 +178,10 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 				/>
 
 				<SelectControl
-					label={ strings.targetFolder || __( 'Target Folder', 'vmfa-rules-engine' ) }
+					label={
+						strings.targetFolder ||
+						__( 'Target Folder', 'vmfa-rules-engine' )
+					}
 					value={ folderId }
 					options={ getFolderOptions() }
 					onChange={ setFolderId }
@@ -156,12 +192,20 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 				/>
 
 				<div className="vmfa-rule-editor__conditions">
-					<h3>{ strings.conditions || __( 'Conditions', 'vmfa-rules-engine' ) }</h3>
+					<h3>
+						{ strings.conditions ||
+							__( 'Conditions', 'vmfa-rules-engine' ) }
+					</h3>
 					<p className="description">
-						{ __( 'All conditions must match (AND logic).', 'vmfa-rules-engine' ) }
+						{ __(
+							'All conditions must match (AND logic).',
+							'vmfa-rules-engine'
+						) }
 					</p>
 					{ errors.conditions && (
-						<p className="vmfa-error-message">{ errors.conditions }</p>
+						<p className="vmfa-error-message">
+							{ errors.conditions }
+						</p>
 					) }
 					<ConditionBuilder
 						conditions={ conditions }
@@ -171,16 +215,31 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 
 				<div className="vmfa-rule-editor__options">
 					<ToggleControl
-						label={ strings.stopProcessing || __( 'Stop processing after match', 'vmfa-rules-engine' ) }
-						help={ __( 'When enabled, no further rules will be evaluated after this rule matches.', 'vmfa-rules-engine' ) }
+						label={
+							strings.stopProcessing ||
+							__(
+								'Stop processing after match',
+								'vmfa-rules-engine'
+							)
+						}
+						help={ __(
+							'When enabled, no further rules will be evaluated after this rule matches.',
+							'vmfa-rules-engine'
+						) }
 						checked={ stopProcessing }
 						onChange={ setStopProcessing }
 						__nextHasNoMarginBottom
 					/>
 
 					<ToggleControl
-						label={ strings.enabled || __( 'Enabled', 'vmfa-rules-engine' ) }
-						help={ __( 'Disabled rules will not be evaluated during uploads.', 'vmfa-rules-engine' ) }
+						label={
+							strings.enabled ||
+							__( 'Enabled', 'vmfa-rules-engine' )
+						}
+						help={ __(
+							'Disabled rules will not be evaluated during uploads.',
+							'vmfa-rules-engine'
+						) }
 						checked={ enabled }
 						onChange={ setEnabled }
 						__nextHasNoMarginBottom
@@ -189,7 +248,11 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 
 				<Flex justify="flex-end" className="vmfa-rule-editor__actions">
 					<FlexItem>
-						<Button variant="tertiary" onClick={ onCancel } disabled={ isSaving }>
+						<Button
+							variant="tertiary"
+							onClick={ onCancel }
+							disabled={ isSaving }
+						>
 							{ __( 'Cancel', 'vmfa-rules-engine' ) }
 						</Button>
 					</FlexItem>
@@ -202,7 +265,7 @@ export function RuleEditor( { rule, folders, onSave, onCancel, isSaving } ) {
 							{ isSaving ? (
 								<>
 									<Spinner />
-									{ __( 'Saving...', 'vmfa-rules-engine' ) }
+									{ __( 'Saving…', 'vmfa-rules-engine' ) }
 								</>
 							) : (
 								__( 'Save Rule', 'vmfa-rules-engine' )

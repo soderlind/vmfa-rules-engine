@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.3
-Stable tag: 0.4.1
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,11 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 1.0.0 =
+* Added: Single Rule Scan - Scan media using a specific rule with the new search icon button
+* Added: WordPress Playground blueprint support for easy testing
+* Changed: Blueprint now uses git:directory resource for more reliable plugin loading
 
 = 0.4.1 =
 * Removed redundant parent plugin dependency checks (now handled by WordPress Requires Plugins header)

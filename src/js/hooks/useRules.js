@@ -1,7 +1,7 @@
 /**
  * Custom hook for managing rules via REST API.
  *
- * @package VmfaRulesEngine
+ * @package
  */
 
 import { useState, useEffect, useCallback } from '@wordpress/element';
@@ -120,7 +120,9 @@ export function useRules() {
 					method: 'DELETE',
 					headers: { 'X-WP-Nonce': nonce },
 				} );
-				setRules( ( prev ) => prev.filter( ( rule ) => rule.id !== id ) );
+				setRules( ( prev ) =>
+					prev.filter( ( rule ) => rule.id !== id )
+				);
 			} catch ( err ) {
 				setError( err.message || 'Failed to delete rule' );
 				throw err;
@@ -256,15 +258,22 @@ export function useBatchOperations() {
 			setResults( null );
 
 			try {
+				const data = {
+					unassigned_only: options.unassignedOnly ?? true,
+					limit: options.limit ?? 50,
+					offset: 0,
+					mime_type: options.mimeType,
+				};
+
+				// Add rule_id for single-rule scanning.
+				if ( options.ruleId ) {
+					data.rule_id = options.ruleId;
+				}
+
 				const response = await apiFetch( {
 					path: 'vmfa-rules/v1/preview',
 					method: 'POST',
-					data: {
-						unassigned_only: options.unassignedOnly ?? true,
-						limit: options.limit ?? 50,
-						offset: 0,
-						mime_type: options.mimeType,
-					},
+					data,
 					headers: { 'X-WP-Nonce': nonce },
 				} );
 				setResults( response );
@@ -297,15 +306,22 @@ export function useBatchOperations() {
 			try {
 				// Calculate offset based on currently loaded items count.
 				const newOffset = results.items.length;
+				const data = {
+					unassigned_only: options.unassignedOnly ?? true,
+					limit: results.limit,
+					offset: newOffset,
+					mime_type: options.mimeType,
+				};
+
+				// Preserve rule_id from initial results for single-rule scanning.
+				if ( results.rule_id ) {
+					data.rule_id = results.rule_id;
+				}
+
 				const response = await apiFetch( {
 					path: 'vmfa-rules/v1/preview',
 					method: 'POST',
-					data: {
-						unassigned_only: options.unassignedOnly ?? true,
-						limit: results.limit,
-						offset: newOffset,
-						mime_type: options.mimeType,
-					},
+					data,
 					headers: { 'X-WP-Nonce': nonce },
 				} );
 
