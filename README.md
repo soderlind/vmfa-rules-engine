@@ -1,5 +1,7 @@
 # Virtual Media Folders Rules Engine
 
+[![Try in WordPress Playground](https://img.shields.io/badge/▶_Try_in_WordPress_Playground-blue?style=for-the-badge)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/soderlind/vmfa-rules-engine/refs/heads/main/.wordpress-org/blueprints/blueprint.json)
+
 Rule-based automatic folder assignment for media uploads. Add-on plugin for [Virtual Media Folders](https://wordpress.org/plugins/virtual-media-folders/).
 
 <img width="1280" height="651" alt="vmfa-rules-engine-some" src="https://github.com/user-attachments/assets/8084a15b-0b99-4f46-b624-264b7fb4f078" />
