@@ -152,6 +152,18 @@ class RulesController extends WP_REST_Controller {
 						'minimum' => 1,
 						'maximum' => 200,
 					),
+					'target_matches'  => array(
+						'type'    => 'integer',
+						'default' => null,
+						'minimum' => 1,
+						'maximum' => 200,
+					),
+					'max_scan'        => array(
+						'type'    => 'integer',
+						'default' => 500,
+						'minimum' => 50,
+						'maximum' => 5000,
+					),
 					'offset'          => array(
 						'type'    => 'integer',
 						'default' => 0,
@@ -347,6 +359,8 @@ class RulesController extends WP_REST_Controller {
 			'unassigned_only' => $request->get_param( 'unassigned_only' ),
 			'posts_per_page'  => $request->get_param( 'limit' ),
 			'offset'          => $request->get_param( 'offset' ),
+			'target_matches'  => $request->get_param( 'target_matches' ),
+			'max_scan'        => $request->get_param( 'max_scan' ),
 		);
 
 		if ( $request->get_param( 'mime_type' ) ) {

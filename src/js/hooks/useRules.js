@@ -263,6 +263,8 @@ export function useBatchOperations() {
 					limit: options.limit ?? 50,
 					offset: 0,
 					mime_type: options.mimeType,
+					target_matches: options.targetMatches ?? 50,
+					max_scan: options.maxScan ?? 500,
 				};
 
 				// Add rule_id for single-rule scanning.
@@ -311,6 +313,8 @@ export function useBatchOperations() {
 					limit: results.limit,
 					offset: newOffset,
 					mime_type: options.mimeType,
+					target_matches: options.targetMatches ?? 50,
+					max_scan: options.maxScan ?? 500,
 				};
 
 				// Preserve rule_id from initial results for single-rule scanning.

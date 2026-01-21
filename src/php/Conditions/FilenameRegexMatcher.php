@@ -30,13 +30,29 @@ class FilenameRegexMatcher implements MatcherInterface {
 			return false;
 		}
 
-		$filename = basename( $file_path );
-		$pattern  = '/' . str_replace( '/', '\/', $params[ 'value' ] ) . '/i';
+		$filename   = basename( $file_path );
+		$raw_value  = (string) $params[ 'value' ];
+		$raw_value  = trim( $raw_value );
+		$regex_body = str_replace( '/', '\/', $raw_value );
+		$pattern    = '/' . $regex_body . '/i';
 
-		// Suppress errors for invalid regex patterns.
+		// Try as user-supplied regex first.
 		$result = @preg_match( $pattern, $filename );
+		if ( false !== $result ) {
+			return 1 === $result;
+		}
 
-		return 1 === $result;
+		// If the regex is invalid, try treating it as a glob pattern.
+		// This supports patterns like: *abc*.* or IMG_????.jpg
+		if ( false !== strpos( $raw_value, '*' ) || false !== strpos( $raw_value, '?' ) ) {
+			$glob_quoted = preg_quote( $raw_value, '/' );
+			$glob_body   = str_replace( array( '\\*', '\\?' ), array( '.*', '.' ), $glob_quoted );
+			$glob_regex  = '/' . $glob_body . '/i';
+			$glob_result = @preg_match( $glob_regex, $filename );
+			return 1 === $glob_result;
+		}
+
+		return false;
 	}
 
 	/**
