@@ -19,7 +19,7 @@ import {
 	Spinner,
 	ToggleControl,
 } from '@wordpress/components';
-import { plus, cog, trash, search } from '@wordpress/icons';
+import { plus, settings, trash, funnel } from '@wordpress/icons';
 import {
 	DndContext,
 	closestCenter,
@@ -131,12 +131,12 @@ function SortableRuleItem( {
 					__nextHasNoMarginBottom
 				/>
 				<Button
-					icon={ search }
+					icon={ funnel }
 					label={ __( 'Scan with this rule', 'vmfa-rules-engine' ) }
 					onClick={ () => onScan( rule ) }
 				/>
 				<Button
-					icon={ cog }
+					icon={ settings }
 					label={ __( 'Edit rule', 'vmfa-rules-engine' ) }
 					onClick={ () => onEdit( rule ) }
 				/>
