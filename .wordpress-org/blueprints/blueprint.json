@@ -9,7 +9,7 @@
 			"Media"
 		]
 	},
-	"landingPage": "/wp-admin/upload.php?mode=folder",
+	"landingPage": "/wp-admin/upload.php?page=vmfo-settings&tab=rules-engine",
 	"steps": [
 		{
 			"step": "importWxr",
