@@ -4,7 +4,9 @@
 
 Rule-based automatic folder assignment for media uploads. Add-on plugin for [Virtual Media Folders](https://wordpress.org/plugins/virtual-media-folders/).
 
-<img width="1280" height="651" alt="vmfa-rules-engine-some" src="https://github.com/user-attachments/assets/8084a15b-0b99-4f46-b624-264b7fb4f078" />
+
+https://github.com/user-attachments/assets/8655014d-b963-493d-a93e-ca1fc63e8b1b
+
 
 ## Description
 
