@@ -1,5 +1,7 @@
 # Development
 
+>[Add-on Development](https://github.com/soderlind/virtual-media-folders/blob/main/docs/addon-development.md) – Guide to building add-on plugins for Virtual Media Folders.
+
 ## Setup
 
 ```bash
