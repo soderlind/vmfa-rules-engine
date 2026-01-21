@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-01-21
+
+### Added
+- **Smart Preview Scanning**: Preview now auto-continues scanning until it finds matches (up to safety caps), eliminating empty result screens
+- **Glob/Wildcard Filename Matching**: Filename patterns now support glob-style wildcards (`*` and `?`) in addition to regex (e.g., `*06160a12d5c1*.*`)
+- **Load More Button with Icon**: Added a visible "Load more" button with down-chevron icon when there are more items to scan
+
+### Improved
+- **Server-side Scan Optimization**: New `target_matches` and `max_scan` parameters allow scanning until enough matches are found, reducing round-trips
+- **Better UX for Large Libraries**: Auto-loads additional batches when no matches found, with spinner feedback
+
 ## [1.0.0] - 2026-01-21
 
 ### Added

@@ -3,7 +3,7 @@
         'name' => 'soderlind/vmfa-rules-engine',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '079d150453867a06a156f64845761a79d514a340',
+        'reference' => 'f4cd81576b31e71e2760f462271dae7b6397bd77',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'soderlind/vmfa-rules-engine' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '079d150453867a06a156f64845761a79d514a340',
+            'reference' => 'f4cd81576b31e71e2760f462271dae7b6397bd77',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

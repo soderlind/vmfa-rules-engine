@@ -20,6 +20,7 @@ import {
 	Flex,
 	FlexItem,
 } from '@wordpress/components';
+import { chevronDown } from '@wordpress/icons';
 
 /**
  * Preview Modal component.
@@ -41,9 +42,14 @@ export function PreviewModal( {
 	isProcessing,
 	isLoadingMore,
 } ) {
+	const AUTO_LOAD_MAX_REQUESTS = 20;
+	const AUTO_LOAD_DELAY_MS = 250;
+	const AUTO_LOAD_MAX_ITEMS = 5000;
+
 	const [ selectedIds, setSelectedIds ] = useState( new Set() );
 	const [ selectAll, setSelectAll ] = useState( false );
 	const [ applied, setApplied ] = useState( false );
+	const [ autoLoadCount, setAutoLoadCount ] = useState( 0 );
 	const tableContainerRef = useRef( null );
 
 	const { strings = {} } = window.vmfaRulesEngine || {};
@@ -84,6 +90,40 @@ export function PreviewModal( {
 		container.addEventListener( 'scroll', handleScroll );
 		return () => container.removeEventListener( 'scroll', handleScroll );
 	}, [ results?.has_more, isLoadingMore, onLoadMore ] );
+
+	// Auto-load more when there are no matches yet (no scrollable table).
+	useEffect( () => {
+		if ( ! results?.has_more || isLoadingMore ) {
+			return;
+		}
+
+		// Once we have at least one assignable item, stop auto-loading.
+		if ( assignableItems.length > 0 ) {
+			return;
+		}
+
+		// Safety caps to avoid hammering the server on huge/no-match libraries.
+		if ( autoLoadCount >= AUTO_LOAD_MAX_REQUESTS ) {
+			return;
+		}
+		if ( results.total >= AUTO_LOAD_MAX_ITEMS ) {
+			return;
+		}
+
+		setAutoLoadCount( ( prev ) => prev + 1 );
+		const timeoutId = window.setTimeout( () => {
+			onLoadMore?.();
+		}, AUTO_LOAD_DELAY_MS );
+
+		return () => window.clearTimeout( timeoutId );
+	}, [
+		results?.has_more,
+		results?.total,
+		assignableItems.length,
+		isLoadingMore,
+		autoLoadCount,
+		onLoadMore,
+	] );
 
 	/**
 	 * Toggle selection of an item.
@@ -221,7 +261,7 @@ export function PreviewModal( {
 							'will be assigned to folders.',
 							'vmfa-rules-engine'
 						) }
-						{ results.has_more && (
+						{ results.has_more && assignableItems.length > 0 && (
 							<span className="vmfa-preview-loading-hint">
 								{ ' ' }
 								{ __(
@@ -342,6 +382,7 @@ export function PreviewModal( {
 								<div className="vmfa-preview-load-more">
 									<Button
 										variant="secondary"
+										icon={ chevronDown }
 										onClick={ onLoadMore }
 									>
 										{ __(
@@ -387,6 +428,29 @@ export function PreviewModal( {
 							) }
 						</div>
 					</details>
+				) }
+
+				{ results.has_more && assignableItems.length === 0 && (
+					<div className="vmfa-preview-load-more">
+						<Button
+							variant="secondary"
+							icon={ chevronDown }
+							onClick={ () => onLoadMore?.() }
+							disabled={ isLoadingMore }
+						>
+							{ isLoadingMore ? (
+								<>
+									<Spinner />
+									{ __(
+										'Loading more…',
+										'vmfa-rules-engine'
+									) }
+								</>
+							) : (
+								__( 'Load more', 'vmfa-rules-engine' )
+							) }
+						</Button>
+					</div>
 				) }
 
 				<Flex justify="flex-end" className="vmfa-preview-actions">

@@ -117,66 +117,111 @@ class BatchProcessor {
 		// Get total count first (without pagination).
 		$total_count = $this->count_attachments( $args );
 
-		// Get paginated attachments.
-		$attachment_ids = $this->get_attachments( $args );
-		$offset         = isset( $args[ 'offset' ] ) ? (int) $args[ 'offset' ] : 0;
-		$limit          = isset( $args[ 'posts_per_page' ] ) ? (int) $args[ 'posts_per_page' ] : 50;
+		$offset = isset( $args[ 'offset' ] ) ? (int) $args[ 'offset' ] : 0;
+		$limit  = isset( $args[ 'posts_per_page' ] ) ? (int) $args[ 'posts_per_page' ] : 50;
+
+		$target_matches = isset( $args[ 'target_matches' ] ) ? (int) $args[ 'target_matches' ] : 0;
+		$max_scan       = isset( $args[ 'max_scan' ] ) ? (int) $args[ 'max_scan' ] : 500;
+
+		// Keep values sane.
+		if ( $limit < 1 ) {
+			$limit = 50;
+		}
+		if ( $target_matches < 0 ) {
+			$target_matches = 0;
+		}
+		if ( $max_scan < $limit ) {
+			$max_scan = $limit;
+		}
 
 		// Get optional rule_id for single-rule scanning.
 		$rule_id = isset( $args[ 'rule_id' ] ) ? $args[ 'rule_id' ] : null;
 
 		$results = array(
-			'total'       => count( $attachment_ids ),
+			'total'       => 0,
 			'total_count' => $total_count,
 			'offset'      => $offset,
 			'limit'       => $limit,
-			'has_more'    => ( $offset + count( $attachment_ids ) ) < $total_count,
+			'has_more'    => false,
 			'matched'     => 0,
 			'unmatched'   => 0,
 			'items'       => array(),
 			'rule_id'     => $rule_id,
 		);
 
-		foreach ( $attachment_ids as $attachment_id ) {
-			$metadata = wp_get_attachment_metadata( $attachment_id );
-			if ( ! is_array( $metadata ) ) {
-				$metadata = array();
+		$scanned = 0;
+		$cursor  = $offset;
+
+		while ( $cursor < $total_count && $scanned < $max_scan ) {
+			$batch_args                     = $args;
+			$batch_args[ 'offset' ]         = $cursor;
+			$batch_args[ 'posts_per_page' ] = $limit;
+
+			$attachment_ids = $this->get_attachments( $batch_args );
+			if ( empty( $attachment_ids ) ) {
+				break;
 			}
 
-			$match = $this->evaluator->evaluate( $attachment_id, $metadata, $rule_id );
+			$batch_scanned = 0;
 
-			if ( $match ) {
-				$folder = get_term( $match[ 'folder_id' ], self::TAXONOMY );
+			foreach ( $attachment_ids as $attachment_id ) {
+				$metadata = wp_get_attachment_metadata( $attachment_id );
+				if ( ! is_array( $metadata ) ) {
+					$metadata = array();
+				}
 
-				$results[ 'items' ][] = array(
-					'attachment_id' => $attachment_id,
-					'title'         => get_the_title( $attachment_id ),
-					'filename'      => basename( get_attached_file( $attachment_id ) ),
-					'thumbnail'     => wp_get_attachment_image_url( $attachment_id, 'thumbnail' ),
-					'matched_rule'  => array(
-						'id'   => $match[ 'rule' ][ 'id' ],
-						'name' => $match[ 'rule' ][ 'name' ],
-					),
-					'target_folder' => array(
-						'id'   => $match[ 'folder_id' ],
-						'name' => $folder ? $folder->name : __( 'Unknown', 'vmfa-rules-engine' ),
-					),
-					'status'        => 'will_assign',
-				);
-				++$results[ 'matched' ];
-			} else {
-				$results[ 'items' ][] = array(
-					'attachment_id' => $attachment_id,
-					'title'         => get_the_title( $attachment_id ),
-					'filename'      => basename( get_attached_file( $attachment_id ) ),
-					'thumbnail'     => wp_get_attachment_image_url( $attachment_id, 'thumbnail' ),
-					'matched_rule'  => null,
-					'target_folder' => null,
-					'status'        => 'no_match',
-				);
-				++$results[ 'unmatched' ];
+				$match = $this->evaluator->evaluate( $attachment_id, $metadata, $rule_id );
+
+				if ( $match ) {
+					$folder = get_term( $match[ 'folder_id' ], self::TAXONOMY );
+
+					$results[ 'items' ][] = array(
+						'attachment_id' => $attachment_id,
+						'title'         => get_the_title( $attachment_id ),
+						'filename'      => basename( get_attached_file( $attachment_id ) ),
+						'thumbnail'     => wp_get_attachment_image_url( $attachment_id, 'thumbnail' ),
+						'matched_rule'  => array(
+							'id'   => $match[ 'rule' ][ 'id' ],
+							'name' => $match[ 'rule' ][ 'name' ],
+						),
+						'target_folder' => array(
+							'id'   => $match[ 'folder_id' ],
+							'name' => $folder ? $folder->name : __( 'Unknown', 'vmfa-rules-engine' ),
+						),
+						'status'        => 'will_assign',
+					);
+					++$results[ 'matched' ];
+				} else {
+					$results[ 'items' ][] = array(
+						'attachment_id' => $attachment_id,
+						'title'         => get_the_title( $attachment_id ),
+						'filename'      => basename( get_attached_file( $attachment_id ) ),
+						'thumbnail'     => wp_get_attachment_image_url( $attachment_id, 'thumbnail' ),
+						'matched_rule'  => null,
+						'target_folder' => null,
+						'status'        => 'no_match',
+					);
+					++$results[ 'unmatched' ];
+				}
+
+				++$scanned;
+				++$batch_scanned;
+				if ( $scanned >= $max_scan ) {
+					break;
+				}
+				if ( $target_matches > 0 && $results[ 'matched' ] >= $target_matches ) {
+					break;
+				}
+			}
+
+			$cursor += $batch_scanned;
+			if ( $target_matches > 0 && $results[ 'matched' ] >= $target_matches ) {
+				break;
 			}
 		}
+
+		$results[ 'total' ]    = count( $results[ 'items' ] );
+		$results[ 'has_more' ] = $cursor < $total_count;
 
 		return $results;
 	}

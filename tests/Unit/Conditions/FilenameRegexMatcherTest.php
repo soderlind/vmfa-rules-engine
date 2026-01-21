@@ -132,6 +132,19 @@ class FilenameRegexMatcherTest extends TestCase {
 	}
 
 	/**
+	 * Test matches supports glob-style wildcards when regex is invalid.
+	 */
+	public function test_matches_supports_glob_wildcards(): void {
+		Functions\expect( 'get_attached_file' )
+			->once()
+			->with( 123 )
+			->andReturn( '/var/www/wp-content/uploads/0077-3212f303-fe29-4dc2-96e7-06160a12d5c1.jpg' );
+
+		$result = $this->matcher->matches( 123, [], [ 'value' => '*06160a12d5c1*.*' ] );
+		$this->assertTrue( $result );
+	}
+
+	/**
 	 * Test matches with file extension pattern.
 	 */
 	public function test_matches_file_extension_pattern(): void {
