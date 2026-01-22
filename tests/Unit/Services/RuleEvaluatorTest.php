@@ -251,6 +251,14 @@ class RuleEvaluatorTest extends TestCase {
 			->with( 123, [ 5 ], 'vmfo_folder' )
 			->andReturn( [ 5 ] );
 
+		Functions\expect( 'wp_update_term_count_now' )
+			->once()
+			->with( [ 5 ], 'vmfo_folder' );
+
+		Functions\expect( 'clean_object_term_cache' )
+			->once()
+			->with( 123, 'attachment' );
+
 		Actions\expectDone( 'vmfa_rules_engine_folder_assigned' )
 			->once()
 			->with( 123, 5, Mockery::type( 'array' ) );

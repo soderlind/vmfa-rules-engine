@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.3
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,10 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 1.1.2 =
+* Fixed: Folder counts not updating in sidebar after rule-based folder assignment on upload
+* Fixed: Now explicitly calls vmfRefreshFolders() after folder assignment to ensure accurate counts
 
 = 1.1.1 =
 * Changed: Replaced gear icon with settings icon for "Edit rule" button
