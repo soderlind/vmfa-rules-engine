@@ -214,8 +214,8 @@ class Plugin {
 		wp_enqueue_script(
 			'vmfa-rules-engine-media-upload',
 			VMFA_RULES_ENGINE_URL . 'build/media-upload.js',
-			$asset['dependencies'],
-			$asset['version'],
+			$asset[ 'dependencies' ],
+			$asset[ 'version' ],
 			true
 		);
 	}
