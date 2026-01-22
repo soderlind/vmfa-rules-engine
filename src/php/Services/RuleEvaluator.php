@@ -226,6 +226,12 @@ class RuleEvaluator {
 			return false;
 		}
 
+		// Update term count immediately so parent plugin's UI reflects the change.
+		wp_update_term_count_now( $result, self::TAXONOMY );
+
+		// Clean object term cache to ensure the attachment shows in correct folder.
+		clean_object_term_cache( $attachment_id, 'attachment' );
+
 		/**
 		 * Action fired after rule-based folder assignment.
 		 *

@@ -81,6 +81,9 @@ class Plugin {
 				add_action( 'admin_menu', array( $this, 'register_admin_menu' ) );
 				add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 			}
+
+			// Enqueue media upload handler on media library page.
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_media_upload_script' ) );
 		}
 
 		// REST API.
@@ -184,6 +187,37 @@ class Plugin {
 		}
 
 		$this->do_enqueue_assets();
+	}
+
+	/**
+	 * Enqueue media upload script on media library page.
+	 *
+	 * This script refreshes the media library after uploads
+	 * when the rules engine has assigned a folder.
+	 *
+	 * @param string $hook_suffix The current admin page hook suffix.
+	 * @return void
+	 */
+	public function enqueue_media_upload_script( $hook_suffix ): void {
+		if ( 'upload.php' !== $hook_suffix ) {
+			return;
+		}
+
+		$asset_file = VMFA_RULES_ENGINE_PATH . 'build/media-upload.asset.php';
+
+		if ( ! file_exists( $asset_file ) ) {
+			return;
+		}
+
+		$asset = require $asset_file;
+
+		wp_enqueue_script(
+			'vmfa-rules-engine-media-upload',
+			VMFA_RULES_ENGINE_URL . 'build/media-upload.js',
+			$asset['dependencies'],
+			$asset['version'],
+			true
+		);
 	}
 
 	/**
