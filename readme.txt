@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.3
-Stable tag: 1.1.2
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,13 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 1.2.0 =
+* Added: Create folder button (+) in rule editor modal - create folders without leaving the editor
+* Added: Automatic selection of newly created folders
+* Added: Hierarchical parent folder selection for nested folders
+* Improved: Error messages now displayed as proper error elements (red text)
+* Improved: Race condition protections for folder operations
 
 = 1.1.2 =
 * Fixed: Folder counts not updating in sidebar after rule-based folder assignment on upload

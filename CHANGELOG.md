@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-01-23
+
+### Added
+- **Create Folder in Rule Editor**: Added + button next to folder dropdown to create new folders without leaving the rule editor modal
+- New folder is automatically selected after creation
+- Hierarchical parent folder selection when creating nested folders
+
+### Improved
+- Error messages now displayed as proper error elements (red text) instead of help text
+- Race condition protections for folder creation and fetching
+
 ## [1.1.2] - 2026-01-22
 
 ### Fixed
