@@ -14,177 +14,177 @@ msgstr ""
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: vmfa-rules-engine\n"
 
-#: src/php/Plugin.php:359
+#: src/php/Plugin.php:430
 msgid "Match files by size (supports >, <, =, >=, <= operators)"
 msgstr "Matcher filer etter størrelse (støtter >, <, =, >=, <= operatorer)"
 
-#: src/php/Plugin.php:365
+#: src/php/Plugin.php:436
 msgid "Partial match by camera model from EXIF data"
 msgstr "Delvis treff på kameramodell fra EXIF-data"
 
-#: src/php/Plugin.php:372
+#: src/php/Plugin.php:443
 msgid "Match photos taken within a date range"
 msgstr "Matcher bilder tatt innenfor et datointervall"
 
-#: src/php/Plugin.php:384
+#: src/php/Plugin.php:455
 msgid "Partial match by embedded IPTC keywords (comma-separated)"
 msgstr "Delvis treff på innebygde IPTC-nøkkelord (kommaseparert)"
 
-#: src/php/Plugin.php:153
-#: src/php/Plugin.php:169
+#: src/php/Plugin.php:193
+#: src/php/Plugin.php:209
 msgid "Virtual Media Folders Rules Engine"
 msgstr "Virtuelle mediemapper regelmotor"
 
-#: src/php/Plugin.php:111
-#: src/php/Plugin.php:154
+#: src/php/Plugin.php:117
+#: src/php/Plugin.php:194
 msgid "Rules Engine"
 msgstr "Regelmotor"
 
-#: src/php/Plugin.php:236
+#: src/php/Plugin.php:307
 msgid "Rules saved successfully."
 msgstr "Regler lagret."
 
-#: src/php/Plugin.php:237
+#: src/php/Plugin.php:308
 msgid "Failed to save rules."
 msgstr "Kunne ikke lagre regler."
 
-#: src/php/Plugin.php:238
+#: src/php/Plugin.php:309
 msgid "Are you sure you want to delete this rule?"
 msgstr "Er du sikker på at du vil slette denne regelen?"
 
-#: src/php/Plugin.php:239
+#: src/php/Plugin.php:310
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:474
+#: src/js/components/RulesPanel.jsx:540
 msgid "No rules configured yet."
 msgstr "Ingen regler konfigurert ennå."
 
-#: src/php/Plugin.php:240
+#: src/php/Plugin.php:311
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:156
-#: src/js/components/RulesPanel.jsx:463
+#: src/js/components/RuleEditor.jsx:319
+#: src/js/components/RulesPanel.jsx:529
 msgid "Add Rule"
 msgstr "Legg til regel"
 
-#: src/php/Plugin.php:241
+#: src/php/Plugin.php:312
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:155
+#: src/js/components/RuleEditor.jsx:318
 msgid "Edit Rule"
 msgstr "Rediger regel"
 
-#: src/php/Plugin.php:242
+#: src/php/Plugin.php:313
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:166
+#: src/js/components/RuleEditor.jsx:329
 msgid "Rule Name"
 msgstr "Regelnavn"
 
-#: src/php/Plugin.php:243
+#: src/php/Plugin.php:314
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:197
+#: src/js/components/RuleEditor.jsx:388
 msgid "Conditions"
 msgstr "Betingelser"
 
-#: src/php/Plugin.php:244
+#: src/php/Plugin.php:315
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:183
+#: src/js/components/RuleEditor.jsx:348
 msgid "Target Folder"
 msgstr "Målmappe"
 
-#: src/php/Plugin.php:245
+#: src/php/Plugin.php:316
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:220
+#: src/js/components/RuleEditor.jsx:411
 msgid "Stop processing after match"
 msgstr "Stopp behandling etter treff"
 
-#: src/php/Plugin.php:246
+#: src/php/Plugin.php:317
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:237
+#: src/js/components/RuleEditor.jsx:428
 msgid "Enabled"
 msgstr "Aktivert"
 
-#: src/php/Plugin.php:247
+#: src/php/Plugin.php:318
 msgid "Apply to Library"
 msgstr "Bruk på bibliotek"
 
-#: src/php/Plugin.php:248
+#: src/php/Plugin.php:319
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:449
+#: src/js/components/RulesPanel.jsx:515
 msgid "Scan Existing Media"
 msgstr "Skann eksisterende media"
 
-#: src/php/Plugin.php:249
+#: src/php/Plugin.php:320
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:142
-#: src/js/components/PreviewModal.jsx:201
+#: src/js/components/PreviewModal.jsx:182
+#: src/js/components/PreviewModal.jsx:241
 msgid "Preview"
 msgstr "Forhåndsvisning"
 
-#: src/php/Plugin.php:250
+#: src/php/Plugin.php:321
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:416
+#: src/js/components/PreviewModal.jsx:480
 msgid "Apply Changes"
 msgstr "Bruk endringer"
 
-#: src/php/Plugin.php:297
+#: src/php/Plugin.php:368
 msgid "Filename matches regex"
 msgstr "Filnavn matcher regex"
 
-#: src/php/Plugin.php:298
+#: src/php/Plugin.php:369
 msgid "Match filename against a regular expression (e.g., ^IMG_)"
 msgstr "Match filnavn mot et regulært uttrykk (f.eks. ^IMG_)"
 
-#: src/php/Plugin.php:304
+#: src/php/Plugin.php:375
 msgid "MIME type"
 msgstr "MIME-type"
 
-#: src/php/Plugin.php:305
+#: src/php/Plugin.php:376
 msgid "Match by file MIME type"
 msgstr "Match etter fil-MIME-type"
 
-#: src/php/Plugin.php:310
+#: src/php/Plugin.php:381
 msgid "Any image"
 msgstr "Alle bilder"
 
-#: src/php/Plugin.php:334
+#: src/php/Plugin.php:405
 msgid "Any video"
 msgstr "Alle videoer"
 
-#: src/php/Plugin.php:338
+#: src/php/Plugin.php:409
 msgid "Any audio"
 msgstr "All lyd"
 
-#: src/php/Plugin.php:346
+#: src/php/Plugin.php:417
 msgid "Any document"
 msgstr "Alle dokumenter"
 
-#: src/php/Plugin.php:352
+#: src/php/Plugin.php:423
 msgid "Image dimensions"
 msgstr "Bildedimensjoner"
 
-#: src/php/Plugin.php:353
+#: src/php/Plugin.php:424
 msgid "Match by image width/height"
 msgstr "Match etter bildebredde/høyde"
 
-#: src/php/Plugin.php:358
+#: src/php/Plugin.php:429
 msgid "File size"
 msgstr "Filstørrelse"
 
-#: src/php/Plugin.php:364
+#: src/php/Plugin.php:435
 msgid "EXIF camera model"
 msgstr "EXIF-kameramodell"
 
-#: src/php/Plugin.php:371
+#: src/php/Plugin.php:442
 msgid "EXIF date taken"
 msgstr "EXIF-dato tatt"
 
-#: src/php/Plugin.php:377
+#: src/php/Plugin.php:448
 msgid "Upload author"
 msgstr "Opplastet av"
 
-#: src/php/Plugin.php:378
+#: src/php/Plugin.php:449
 msgid "Match by user who uploaded the file"
 msgstr "Match etter bruker som lastet opp filen"
 
-#: src/php/Plugin.php:383
+#: src/php/Plugin.php:454
 msgid "IPTC keywords"
 msgstr "IPTC-nøkkelord"
 
@@ -192,25 +192,25 @@ msgstr "IPTC-nøkkelord"
 msgid "Array of rule IDs in desired order."
 msgstr "Liste over regel-IDer i ønsket rekkefølge."
 
-#: src/php/REST/RulesController.php:226
+#: src/php/REST/RulesController.php:238
 msgid "You do not have permission to access this resource."
 msgstr "Du har ikke tilgang til denne ressursen."
 
-#: src/php/REST/RulesController.php:257
-#: src/php/REST/RulesController.php:292
-#: src/php/REST/RulesController.php:313
+#: src/php/REST/RulesController.php:269
+#: src/php/REST/RulesController.php:304
+#: src/php/REST/RulesController.php:325
 msgid "Rule not found."
 msgstr "Regel ikke funnet."
 
-#: src/php/Services/BatchProcessor.php:162
+#: src/php/Services/BatchProcessor.php:189
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: src/php/Services/BatchProcessor.php:212
+#: src/php/Services/BatchProcessor.php:257
 msgid "No matching rule"
 msgstr "Ingen matchende regel"
 
-#: src/php/Services/BatchProcessor.php:239
+#: src/php/Services/BatchProcessor.php:284
 msgid "Failed to assign folder"
 msgstr "Kunne ikke tildele mappe"
 
@@ -277,225 +277,227 @@ msgid "Add Condition"
 msgstr "Legg til betingelse"
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:69
+#: src/js/components/RuleEditor.jsx:116
 msgid "Rule name is required."
 msgstr "Regelnavn er påkrevd."
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:76
+#: src/js/components/RuleEditor.jsx:123
 msgid "Target folder is required."
 msgstr "Målmappe er påkrevd."
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:83
+#: src/js/components/RuleEditor.jsx:130
 msgid "At least one condition is required."
 msgstr "Minst én betingelse er påkrevd."
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:170
+#: src/js/components/RuleEditor.jsx:333
 msgid "e.g., Mobile Photos"
 msgstr "f.eks. Mobilbilder"
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:200
+#: src/js/components/RuleEditor.jsx:391
 msgid "All conditions must match (AND logic)."
 msgstr "Alle betingelser må matche (OG-logikk)."
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:225
+#: src/js/components/RuleEditor.jsx:416
 msgid "When enabled, no further rules will be evaluated after this rule matches."
 msgstr "Når aktivert, vil ingen flere regler bli evaluert etter at denne regelen matcher."
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:239
+#: src/js/components/RuleEditor.jsx:430
 msgid "Disabled rules will not be evaluated during uploads."
 msgstr "Deaktiverte regler vil ikke bli evaluert under opplasting."
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:399
-#: src/js/components/RuleEditor.jsx:256
-#: src/js/components/RulesPanel.jsx:585
+#: src/js/components/PreviewModal.jsx:463
+#: src/js/components/RuleEditor.jsx:447
+#: src/js/components/RuleEditor.jsx:513
+#: src/js/components/RulesPanel.jsx:652
 msgid "Cancel"
 msgstr "Avbryt"
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:271
+#: src/js/components/RuleEditor.jsx:462
 msgid "Save Rule"
 msgstr "Lagre regel"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:158
+#: src/js/components/PreviewModal.jsx:198
 msgid "Rules Applied"
 msgstr "Regler brukt"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:169
-#: src/js/components/RulesPanel.jsx:183
+#: src/js/components/PreviewModal.jsx:209
+#: src/js/components/RulesPanel.jsx:184
 msgid "Assigned"
 msgstr "Tildelt"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:177
+#: src/js/components/PreviewModal.jsx:217
 msgid "Skipped"
 msgstr "Hoppet over"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:186
+#: src/js/components/PreviewModal.jsx:226
 msgid "Errors"
 msgstr "Feil"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:192
+#: src/js/components/PreviewModal.jsx:232
 msgid "Close"
 msgstr "Lukk"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:209
+#: src/js/components/PreviewModal.jsx:249
 msgid "Scanned"
 msgstr "Skannet"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:214
+#: src/js/components/PreviewModal.jsx:254
 msgid "of"
 msgstr "av"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:218
+#: src/js/components/PreviewModal.jsx:258
 msgid "media items."
 msgstr "medieelementer."
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:220
+#: src/js/components/PreviewModal.jsx:260
 msgid "will be assigned to folders."
 msgstr "vil bli tildelt mapper."
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:227
+#: src/js/components/PreviewModal.jsx:267
 msgid "Scroll down to load more."
 msgstr "Rull ned for å laste mer."
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:240
+#: src/js/components/PreviewModal.jsx:280
 msgid "Will be assigned"
 msgstr "Vil bli tildelt"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:246
+#: src/js/components/PreviewModal.jsx:286
 msgid "Select all loaded"
 msgstr "Velg alle lastede"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:265
+#: src/js/components/PreviewModal.jsx:305
 msgid "File"
 msgstr "Fil"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:271
+#: src/js/components/PreviewModal.jsx:311
 msgid "Rule"
 msgstr "Regel"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:277
+#: src/js/components/PreviewModal.jsx:317
 msgid "Folder"
 msgstr "Mappe"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:347
+#: src/js/components/PreviewModal.jsx:388
+#: src/js/components/PreviewModal.jsx:450
 msgid "Load more"
 msgstr "Last mer"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:361
+#: src/js/components/PreviewModal.jsx:402
 msgid "No matching rules"
 msgstr "Ingen matchende regler"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:383
+#: src/js/components/PreviewModal.jsx:424
 msgid "And"
 msgstr "Og"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:81
+#: src/js/components/RulesPanel.jsx:82
 msgid "Unknown folder"
 msgstr "Ukjent mappe"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:112
+#: src/js/components/RulesPanel.jsx:113
 msgid "condition"
 msgstr "betingelse"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:113
+#: src/js/components/RulesPanel.jsx:114
 msgid "conditions"
 msgstr "betingelser"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:117
+#: src/js/components/RulesPanel.jsx:118
 msgid "No conditions"
 msgstr "Ingen betingelser"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:122
+#: src/js/components/RulesPanel.jsx:123
 msgid "Stop"
 msgstr "Stopp"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:140
+#: src/js/components/RulesPanel.jsx:141
 msgid "Edit rule"
 msgstr "Rediger regel"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:145
+#: src/js/components/RulesPanel.jsx:146
 msgid "Delete rule"
 msgstr "Slett regel"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:175
+#: src/js/components/RulesPanel.jsx:176
 msgid "Total Media"
 msgstr "Totalt media"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:191
+#: src/js/components/RulesPanel.jsx:192
 msgid "Unassigned"
 msgstr "Ikke tildelt"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:199
+#: src/js/components/RulesPanel.jsx:200
 msgid "Active Rules"
 msgstr "Aktive regler"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:434
+#: src/js/components/RulesPanel.jsx:500
 msgid "Rules"
 msgstr "Regler"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:484
+#: src/js/components/RulesPanel.jsx:550
 msgid "Create your first rule"
 msgstr "Opprett din første regel"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:539
+#: src/js/components/RulesPanel.jsx:606
 msgid "Scan Options"
 msgstr "Skannealternativer"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:557
+#: src/js/components/RulesPanel.jsx:624
 msgid "Choose which media files to scan."
 msgstr "Velg hvilke mediefiler som skal skannes."
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:564
+#: src/js/components/RulesPanel.jsx:631
 msgid "Unassigned media only"
 msgstr "Kun ikke-tildelt media"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:568
+#: src/js/components/RulesPanel.jsx:635
 msgid "When checked, only media not yet in any folder will be scanned. Uncheck to include all media (may reassign existing)."
 msgstr "Når valgt, vil kun media som ikke er i noen mappe bli skannet. Fjern valget for å inkludere all media (kan omtildele eksisterende)."
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:593
+#: src/js/components/RulesPanel.jsx:660
 msgid "Run Preview"
 msgstr "Kjør forhåndsvisning"
 
@@ -535,51 +537,104 @@ msgid "Select a user…"
 msgstr "Velg en bruker…"
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:145
+#: src/js/components/RuleEditor.jsx:192
 msgid "Select a folder…"
 msgstr "Velg en mappe…"
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:268
+#: src/js/components/RuleEditor.jsx:459
 msgid "Saving…"
 msgstr "Lagrer…"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:334
+#: src/js/components/PreviewModal.jsx:374
+#: src/js/components/PreviewModal.jsx:444
 msgid "Loading more…"
 msgstr "Laster mer…"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:385
+#: src/js/components/PreviewModal.jsx:426
 msgid "more…"
 msgstr "flere…"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:411
+#: src/js/components/PreviewModal.jsx:475
 msgid "Applying…"
 msgstr "Bruker endringer…"
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:149
+#: src/js/components/PreviewModal.jsx:189
 msgid "Loading preview…"
 msgstr "Laster forhåndsvisning…"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:135
+#: src/js/components/RulesPanel.jsx:136
 msgid "Scan with this rule"
 msgstr "Skann med denne regelen"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:405
+#: src/js/components/RulesPanel.jsx:471
 msgid "Loading rules…"
 msgstr "Laster regler…"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:536
+#: src/js/components/RulesPanel.jsx:603
 msgid "Scan with Rule"
 msgstr "Skann med regel"
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:549
+#: src/js/components/RulesPanel.jsx:616
 msgid "Scan media using only the rule:"
 msgstr "Skann media med kun regelen:"
+
+#. translators: %s: folder name
+#: src/php/Plugin.php:159
+#, php-format
+msgid "Cannot delete folder \"%s\": it has active rules. Remove the rules first."
+msgstr "Kan ikke slette mappen \"%s\": den har aktive regler. Fjern reglene først."
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:225
+msgid "None (top level)"
+msgstr "Ingen (toppnivå)"
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:305
+msgid "Failed to create folder."
+msgstr "Kunne ikke opprette mappe."
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:242
+msgid "Please enter a folder name."
+msgstr "Vennligst skriv inn et mappenavn."
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:365
+#: src/js/components/RuleEditor.jsx:472
+msgid "Create Folder"
+msgstr "Opprett mappe"
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:478
+msgid "Folder Name"
+msgstr "Mappenavn"
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:481
+msgid "Enter folder name"
+msgstr "Skriv inn mappenavn"
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:489
+msgid "Parent Folder"
+msgstr "Overordnet mappe"
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:523
+msgid "Creating…"
+msgstr "Oppretter…"
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:524
+msgid "Create"
+msgstr "Opprett"

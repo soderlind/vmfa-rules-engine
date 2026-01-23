@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Virtual Media Folders - Rules Engine 1.0.0\n"
+"Project-Id-Version: Virtual Media Folders - Rules Engine 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vmfa-rules-engine\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-21T16:41:35+00:00\n"
+"POT-Creation-Date: 2026-01-23T07:37:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: vmfa-rules-engine\n"
@@ -39,177 +39,183 @@ msgstr ""
 msgid "https://soderlind.no"
 msgstr ""
 
-#: src/php/Plugin.php:111
-#: src/php/Plugin.php:154
+#: src/php/Plugin.php:117
+#: src/php/Plugin.php:194
 msgid "Rules Engine"
 msgstr ""
 
-#: src/php/Plugin.php:153
-#: src/php/Plugin.php:169
+#. translators: %s: folder name
+#: src/php/Plugin.php:159
+#, php-format
+msgid "Cannot delete folder \"%s\": it has active rules. Remove the rules first."
+msgstr ""
+
+#: src/php/Plugin.php:193
+#: src/php/Plugin.php:209
 msgid "Virtual Media Folders Rules Engine"
 msgstr ""
 
-#: src/php/Plugin.php:236
+#: src/php/Plugin.php:307
 msgid "Rules saved successfully."
 msgstr ""
 
-#: src/php/Plugin.php:237
+#: src/php/Plugin.php:308
 msgid "Failed to save rules."
 msgstr ""
 
-#: src/php/Plugin.php:238
+#: src/php/Plugin.php:309
 msgid "Are you sure you want to delete this rule?"
 msgstr ""
 
-#: src/php/Plugin.php:239
+#: src/php/Plugin.php:310
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:474
+#: src/js/components/RulesPanel.jsx:540
 msgid "No rules configured yet."
 msgstr ""
 
-#: src/php/Plugin.php:240
+#: src/php/Plugin.php:311
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:156
-#: src/js/components/RulesPanel.jsx:463
+#: src/js/components/RuleEditor.jsx:319
+#: src/js/components/RulesPanel.jsx:529
 msgid "Add Rule"
 msgstr ""
 
-#: src/php/Plugin.php:241
+#: src/php/Plugin.php:312
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:155
+#: src/js/components/RuleEditor.jsx:318
 msgid "Edit Rule"
 msgstr ""
 
-#: src/php/Plugin.php:242
+#: src/php/Plugin.php:313
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:166
+#: src/js/components/RuleEditor.jsx:329
 msgid "Rule Name"
 msgstr ""
 
-#: src/php/Plugin.php:243
+#: src/php/Plugin.php:314
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:197
+#: src/js/components/RuleEditor.jsx:388
 msgid "Conditions"
 msgstr ""
 
-#: src/php/Plugin.php:244
+#: src/php/Plugin.php:315
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:183
+#: src/js/components/RuleEditor.jsx:348
 msgid "Target Folder"
 msgstr ""
 
-#: src/php/Plugin.php:245
+#: src/php/Plugin.php:316
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:220
+#: src/js/components/RuleEditor.jsx:411
 msgid "Stop processing after match"
 msgstr ""
 
-#: src/php/Plugin.php:246
+#: src/php/Plugin.php:317
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:237
+#: src/js/components/RuleEditor.jsx:428
 msgid "Enabled"
 msgstr ""
 
-#: src/php/Plugin.php:247
+#: src/php/Plugin.php:318
 msgid "Apply to Library"
 msgstr ""
 
-#: src/php/Plugin.php:248
+#: src/php/Plugin.php:319
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:449
+#: src/js/components/RulesPanel.jsx:515
 msgid "Scan Existing Media"
 msgstr ""
 
-#: src/php/Plugin.php:249
+#: src/php/Plugin.php:320
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:142
-#: src/js/components/PreviewModal.jsx:201
+#: src/js/components/PreviewModal.jsx:182
+#: src/js/components/PreviewModal.jsx:241
 msgid "Preview"
 msgstr ""
 
-#: src/php/Plugin.php:250
+#: src/php/Plugin.php:321
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:416
+#: src/js/components/PreviewModal.jsx:480
 msgid "Apply Changes"
 msgstr ""
 
-#: src/php/Plugin.php:297
+#: src/php/Plugin.php:368
 msgid "Filename matches regex"
 msgstr ""
 
-#: src/php/Plugin.php:298
+#: src/php/Plugin.php:369
 msgid "Match filename against a regular expression (e.g., ^IMG_)"
 msgstr ""
 
-#: src/php/Plugin.php:304
+#: src/php/Plugin.php:375
 msgid "MIME type"
 msgstr ""
 
-#: src/php/Plugin.php:305
+#: src/php/Plugin.php:376
 msgid "Match by file MIME type"
 msgstr ""
 
-#: src/php/Plugin.php:310
+#: src/php/Plugin.php:381
 msgid "Any image"
 msgstr ""
 
-#: src/php/Plugin.php:334
+#: src/php/Plugin.php:405
 msgid "Any video"
 msgstr ""
 
-#: src/php/Plugin.php:338
+#: src/php/Plugin.php:409
 msgid "Any audio"
 msgstr ""
 
-#: src/php/Plugin.php:346
+#: src/php/Plugin.php:417
 msgid "Any document"
 msgstr ""
 
-#: src/php/Plugin.php:352
+#: src/php/Plugin.php:423
 msgid "Image dimensions"
 msgstr ""
 
-#: src/php/Plugin.php:353
+#: src/php/Plugin.php:424
 msgid "Match by image width/height"
 msgstr ""
 
-#: src/php/Plugin.php:358
+#: src/php/Plugin.php:429
 msgid "File size"
 msgstr ""
 
-#: src/php/Plugin.php:359
+#: src/php/Plugin.php:430
 msgid "Match files by size (supports >, <, =, >=, <= operators)"
 msgstr ""
 
-#: src/php/Plugin.php:364
+#: src/php/Plugin.php:435
 msgid "EXIF camera model"
 msgstr ""
 
-#: src/php/Plugin.php:365
+#: src/php/Plugin.php:436
 msgid "Partial match by camera model from EXIF data"
 msgstr ""
 
-#: src/php/Plugin.php:371
+#: src/php/Plugin.php:442
 msgid "EXIF date taken"
 msgstr ""
 
-#: src/php/Plugin.php:372
+#: src/php/Plugin.php:443
 msgid "Match photos taken within a date range"
 msgstr ""
 
-#: src/php/Plugin.php:377
+#: src/php/Plugin.php:448
 msgid "Upload author"
 msgstr ""
 
-#: src/php/Plugin.php:378
+#: src/php/Plugin.php:449
 msgid "Match by user who uploaded the file"
 msgstr ""
 
-#: src/php/Plugin.php:383
+#: src/php/Plugin.php:454
 msgid "IPTC keywords"
 msgstr ""
 
-#: src/php/Plugin.php:384
+#: src/php/Plugin.php:455
 msgid "Partial match by embedded IPTC keywords (comma-separated)"
 msgstr ""
 
@@ -217,25 +223,25 @@ msgstr ""
 msgid "Array of rule IDs in desired order."
 msgstr ""
 
-#: src/php/REST/RulesController.php:226
+#: src/php/REST/RulesController.php:238
 msgid "You do not have permission to access this resource."
 msgstr ""
 
-#: src/php/REST/RulesController.php:257
-#: src/php/REST/RulesController.php:292
-#: src/php/REST/RulesController.php:313
+#: src/php/REST/RulesController.php:269
+#: src/php/REST/RulesController.php:304
+#: src/php/REST/RulesController.php:325
 msgid "Rule not found."
 msgstr ""
 
-#: src/php/Services/BatchProcessor.php:162
+#: src/php/Services/BatchProcessor.php:189
 msgid "Unknown"
 msgstr ""
 
-#: src/php/Services/BatchProcessor.php:212
+#: src/php/Services/BatchProcessor.php:257
 msgid "No matching rule"
 msgstr ""
 
-#: src/php/Services/BatchProcessor.php:239
+#: src/php/Services/BatchProcessor.php:284
 msgid "Failed to assign folder"
 msgstr ""
 
@@ -312,274 +318,323 @@ msgid "Add Condition"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:69
+#: src/js/components/RuleEditor.jsx:116
 msgid "Rule name is required."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:76
+#: src/js/components/RuleEditor.jsx:123
 msgid "Target folder is required."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:83
+#: src/js/components/RuleEditor.jsx:130
 msgid "At least one condition is required."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:145
+#: src/js/components/RuleEditor.jsx:192
 msgid "Select a folder…"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:170
+#: src/js/components/RuleEditor.jsx:225
+msgid "None (top level)"
+msgstr ""
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:305
+msgid "Failed to create folder."
+msgstr ""
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:242
+msgid "Please enter a folder name."
+msgstr ""
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:333
 msgid "e.g., Mobile Photos"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:200
+#: src/js/components/RuleEditor.jsx:365
+#: src/js/components/RuleEditor.jsx:472
+msgid "Create Folder"
+msgstr ""
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:391
 msgid "All conditions must match (AND logic)."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:225
+#: src/js/components/RuleEditor.jsx:416
 msgid "When enabled, no further rules will be evaluated after this rule matches."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:239
+#: src/js/components/RuleEditor.jsx:430
 msgid "Disabled rules will not be evaluated during uploads."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:399
-#: src/js/components/RuleEditor.jsx:256
-#: src/js/components/RulesPanel.jsx:585
+#: src/js/components/PreviewModal.jsx:463
+#: src/js/components/RuleEditor.jsx:447
+#: src/js/components/RuleEditor.jsx:513
+#: src/js/components/RulesPanel.jsx:652
 msgid "Cancel"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:268
+#: src/js/components/RuleEditor.jsx:459
 msgid "Saving…"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RuleEditor.jsx:271
+#: src/js/components/RuleEditor.jsx:462
 msgid "Save Rule"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:158
+#: src/js/components/RuleEditor.jsx:478
+msgid "Folder Name"
+msgstr ""
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:481
+msgid "Enter folder name"
+msgstr ""
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:489
+msgid "Parent Folder"
+msgstr ""
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:523
+msgid "Creating…"
+msgstr ""
+
+#: build/index.js:1
+#: src/js/components/RuleEditor.jsx:524
+msgid "Create"
+msgstr ""
+
+#: build/index.js:1
+#: src/js/components/PreviewModal.jsx:198
 msgid "Rules Applied"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:169
-#: src/js/components/RulesPanel.jsx:183
+#: src/js/components/PreviewModal.jsx:209
+#: src/js/components/RulesPanel.jsx:184
 msgid "Assigned"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:177
+#: src/js/components/PreviewModal.jsx:217
 msgid "Skipped"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:186
+#: src/js/components/PreviewModal.jsx:226
 msgid "Errors"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:192
+#: src/js/components/PreviewModal.jsx:232
 msgid "Close"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:209
+#: src/js/components/PreviewModal.jsx:249
 msgid "Scanned"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:214
+#: src/js/components/PreviewModal.jsx:254
 msgid "of"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:218
+#: src/js/components/PreviewModal.jsx:258
 msgid "media items."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:220
+#: src/js/components/PreviewModal.jsx:260
 msgid "will be assigned to folders."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:227
+#: src/js/components/PreviewModal.jsx:267
 msgid "Scroll down to load more."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:240
+#: src/js/components/PreviewModal.jsx:280
 msgid "Will be assigned"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:246
+#: src/js/components/PreviewModal.jsx:286
 msgid "Select all loaded"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:265
+#: src/js/components/PreviewModal.jsx:305
 msgid "File"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:271
+#: src/js/components/PreviewModal.jsx:311
 msgid "Rule"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:277
+#: src/js/components/PreviewModal.jsx:317
 msgid "Folder"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:334
+#: src/js/components/PreviewModal.jsx:374
+#: src/js/components/PreviewModal.jsx:444
 msgid "Loading more…"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:347
+#: src/js/components/PreviewModal.jsx:388
+#: src/js/components/PreviewModal.jsx:450
 msgid "Load more"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:361
+#: src/js/components/PreviewModal.jsx:402
 msgid "No matching rules"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:383
+#: src/js/components/PreviewModal.jsx:424
 msgid "And"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:385
+#: src/js/components/PreviewModal.jsx:426
 msgid "more…"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:411
+#: src/js/components/PreviewModal.jsx:475
 msgid "Applying…"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/PreviewModal.jsx:149
+#: src/js/components/PreviewModal.jsx:189
 msgid "Loading preview…"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:81
+#: src/js/components/RulesPanel.jsx:82
 msgid "Unknown folder"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:112
+#: src/js/components/RulesPanel.jsx:113
 msgid "condition"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:113
+#: src/js/components/RulesPanel.jsx:114
 msgid "conditions"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:117
+#: src/js/components/RulesPanel.jsx:118
 msgid "No conditions"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:122
+#: src/js/components/RulesPanel.jsx:123
 msgid "Stop"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:135
+#: src/js/components/RulesPanel.jsx:136
 msgid "Scan with this rule"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:140
+#: src/js/components/RulesPanel.jsx:141
 msgid "Edit rule"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:145
+#: src/js/components/RulesPanel.jsx:146
 msgid "Delete rule"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:175
+#: src/js/components/RulesPanel.jsx:176
 msgid "Total Media"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:191
+#: src/js/components/RulesPanel.jsx:192
 msgid "Unassigned"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:199
+#: src/js/components/RulesPanel.jsx:200
 msgid "Active Rules"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:405
+#: src/js/components/RulesPanel.jsx:471
 msgid "Loading rules…"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:434
+#: src/js/components/RulesPanel.jsx:500
 msgid "Rules"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:484
+#: src/js/components/RulesPanel.jsx:550
 msgid "Create your first rule"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:536
+#: src/js/components/RulesPanel.jsx:603
 msgid "Scan with Rule"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:539
+#: src/js/components/RulesPanel.jsx:606
 msgid "Scan Options"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:549
+#: src/js/components/RulesPanel.jsx:616
 msgid "Scan media using only the rule:"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:557
+#: src/js/components/RulesPanel.jsx:624
 msgid "Choose which media files to scan."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:564
+#: src/js/components/RulesPanel.jsx:631
 msgid "Unassigned media only"
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:568
+#: src/js/components/RulesPanel.jsx:635
 msgid "When checked, only media not yet in any folder will be scanned. Uncheck to include all media (may reassign existing)."
 msgstr ""
 
 #: build/index.js:1
-#: src/js/components/RulesPanel.jsx:593
+#: src/js/components/RulesPanel.jsx:660
 msgid "Run Preview"
 msgstr ""

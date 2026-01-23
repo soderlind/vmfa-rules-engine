@@ -91,6 +91,9 @@ class Plugin {
 
 		// Rule evaluation on upload.
 		add_filter( 'wp_generate_attachment_metadata', array( $this->rule_evaluator, 'evaluate_on_upload' ), 20, 3 );
+
+		// Protect folders with rules from deletion.
+		add_filter( 'vmfo_can_delete_folder', array( $this, 'protect_folder_with_rules' ), 10, 3 );
 	}
 
 	/**
@@ -128,6 +131,40 @@ class Plugin {
 		?>
 		<div id="vmfa-rules-engine-app"></div>
 		<?php
+	}
+
+	/**
+	 * Protect folders that have rules from being deleted.
+	 *
+	 * @param bool|\WP_Error $can_delete Whether the folder can be deleted.
+	 * @param int            $folder_id  The folder ID.
+	 * @param \WP_Term       $term       The folder term object.
+	 * @return bool|\WP_Error True if can delete, WP_Error if protected.
+	 */
+	public function protect_folder_with_rules( $can_delete, $folder_id, $term ) {
+		// If already blocked, don't override.
+		if ( is_wp_error( $can_delete ) ) {
+			return $can_delete;
+		}
+
+		$folder_id = (int) $folder_id;
+		$rules     = get_option( 'vmfa_rules_engine_rules', array() );
+
+		foreach ( $rules as $rule ) {
+			if ( isset( $rule[ 'folder_id' ] ) && (int) $rule[ 'folder_id' ] === $folder_id ) {
+				return new \WP_Error(
+					'folder_has_rules',
+					sprintf(
+						/* translators: %s: folder name */
+						__( 'Cannot delete folder "%s": it has active rules. Remove the rules first.', 'vmfa-rules-engine' ),
+						$term->name
+					),
+					array( 'status' => 400 )
+				);
+			}
+		}
+
+		return $can_delete;
 	}
 
 	/**
