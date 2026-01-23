@@ -151,7 +151,7 @@ class Plugin {
 		$rules     = get_option( 'vmfa_rules_engine_rules', array() );
 
 		foreach ( $rules as $rule ) {
-			if ( isset( $rule['folder_id'] ) && (int) $rule['folder_id'] === $folder_id ) {
+			if ( isset( $rule[ 'folder_id' ] ) && (int) $rule[ 'folder_id' ] === $folder_id ) {
 				return new \WP_Error(
 					'folder_has_rules',
 					sprintf(
