@@ -237,6 +237,17 @@ $transition-duration: 0.2s;
 		}
 	}
 
+	// Style error messages in help text as red
+	.has-error+.components-base-control__help,
+	.components-base-control.has-error .components-base-control__help {
+		color: $color-error;
+	}
+
+	// Also handle the case where has-error is on the wrapper
+	.components-base-control:has(.has-error) .components-base-control__help {
+		color: $color-error;
+	}
+
 	h3 {
 		margin: $spacing-lg 0 $spacing-xs;
 		font-size: 14px;
@@ -254,6 +265,84 @@ $transition-duration: 0.2s;
 	padding: $spacing-md;
 	background: $color-gray-100;
 	border-radius: $border-radius;
+}
+
+/* Folder Select with Add Button */
+.vmfa-rule-editor__folder-select {
+	margin-top: $spacing-md;
+	margin-bottom: $spacing-md;
+
+	.components-flex {
+		align-items: flex-end;
+		gap: $spacing-sm;
+	}
+
+	.components-flex-item {
+		&:first-child {
+			flex: 1;
+		}
+	}
+
+	.components-base-control {
+		margin-bottom: 0;
+	}
+
+	.components-select-control {
+		width: 100%;
+	}
+}
+
+.vmfa-rule-editor__folder-label {
+	display: block;
+	margin-bottom: $spacing-xs;
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.4;
+	text-transform: uppercase;
+	color: $color-gray-900;
+}
+
+.vmfa-add-folder-button {
+	height: 40px;
+	min-width: 40px;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 0 !important;
+
+	svg {
+		width: 24px;
+		height: 24px;
+	}
+}
+
+/* Create Folder Modal */
+.vmfa-create-folder-modal {
+	.components-modal__content {
+		min-width: 400px;
+	}
+
+	.components-base-control {
+		margin-bottom: $spacing-md;
+	}
+}
+
+.vmfa-create-folder-modal-overlay {
+	z-index: 100001; // Higher than rule editor modal
+}
+
+.vmfa-create-folder-error {
+	color: $color-error;
+	font-size: 12px;
+	margin: $spacing-sm 0;
+}
+
+.vmfa-create-folder-actions {
+	margin-top: $spacing-lg;
+	padding-top: $spacing-md;
+	border-top: 1px solid $color-gray-200;
+	gap: $spacing-sm;
 }
 
 .vmfa-rule-editor__options {

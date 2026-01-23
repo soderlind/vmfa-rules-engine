@@ -4,8 +4,9 @@
  * @package
  */
 
-import { useState, useCallback } from '@wordpress/element';
+import { useState, useCallback, useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import apiFetch from '@wordpress/api-fetch';
 import {
 	Button,
 	Card,
@@ -240,7 +241,72 @@ export function RulesPanel() {
 	const [ successMessage, setSuccessMessage ] = useState( '' );
 	const [ scanningRule, setScanningRule ] = useState( null );
 
-	const { folders = [], strings = {} } = window.vmfaRulesEngine || {};
+	const { folders: initialFolders = [], strings = {} } =
+		window.vmfaRulesEngine || {};
+	const [ folders, setFolders ] = useState( initialFolders );
+
+	// Track if a fetch is in progress to prevent concurrent fetches
+	const isFetchingRef = useRef( false );
+
+	// Track if component is mounted
+	const isMountedRef = useRef( true );
+
+	// Cleanup on unmount
+	useEffect( () => {
+		isMountedRef.current = true;
+		return () => {
+			isMountedRef.current = false;
+		};
+	}, [] );
+
+	/**
+	 * Fetch folders from the API.
+	 *
+	 * @return {Promise<Array>} The folders array.
+	 */
+	const fetchFolders = useCallback( async () => {
+		// Prevent concurrent fetches
+		if ( isFetchingRef.current ) {
+			return folders;
+		}
+
+		isFetchingRef.current = true;
+
+		try {
+			const response = await apiFetch( {
+				path: '/vmfo/v1/folders',
+			} );
+			if ( Array.isArray( response ) && isMountedRef.current ) {
+				setFolders( response );
+				return response;
+			}
+			return isMountedRef.current ? folders : [];
+		} catch ( err ) {
+			// Silently fail - folders will stay as initial
+			// eslint-disable-next-line no-console
+			console.error( 'Failed to fetch folders:', err );
+			return isMountedRef.current ? folders : [];
+		} finally {
+			isFetchingRef.current = false;
+		}
+	}, [ folders ] );
+
+	// Sync folders state when window.vmfaRulesEngine.folders changes externally
+	useEffect( () => {
+		const handleFoldersUpdate = () => {
+			fetchFolders();
+		};
+
+		// Listen for folder updates from parent plugin
+		window.addEventListener( 'vmf:folders-updated', handleFoldersUpdate );
+
+		return () => {
+			window.removeEventListener(
+				'vmf:folders-updated',
+				handleFoldersUpdate
+			);
+		};
+	}, [ fetchFolders ] );
 
 	// DnD sensors.
 	const sensors = useSensors(
@@ -526,6 +592,7 @@ export function RulesPanel() {
 						setEditingRule( null );
 					} }
 					isSaving={ isSaving }
+					onFoldersChange={ fetchFolders }
 				/>
 			) }
 
