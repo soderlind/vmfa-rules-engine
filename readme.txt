@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.3
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -125,6 +125,29 @@ Each imported file will be evaluated against your rules and assigned to the matc
 = 1.1.1 =
 * Changed: Replaced gear icon with settings icon for "Edit rule" button
 * Changed: Replaced search icon with funnel icon for "Scan with this rule" button
+
+= 1.1.0 =
+* Added: Smart preview scanning - auto-continues until matches are found
+* Added: Glob/wildcard filename matching (patterns like `*abc*.*` now work)
+* Added: Visible "Load more" button with icon when no scrollable content
+* Improved: Server-side scan optimization with target_matches parameter
+* Improved: Better UX for large libraries with auto-loading and spinner feedback
+
+= 1.2.2 =
+* Changed: Updated dependencies to latest minor/patch versions
+
+= 1.2.1 =
+* Added: Folder deletion protection - folders with active rules cannot be deleted
+
+= 1.2.0 =
+* Added: Create folder button in rule editor modal
+* Improved: Better error message display
+
+= 1.1.2 =
+* Fixed: Folder counts not updating after rule-based folder assignment
+
+= 1.1.1 =
+* Changed: Updated icons for Edit rule and Scan buttons
 
 = 1.1.0 =
 * Added: Smart preview scanning - auto-continues until matches are found
