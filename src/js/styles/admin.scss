@@ -238,7 +238,7 @@ $transition-duration: 0.2s;
 	}
 
 	// Style error messages in help text as red
-	.has-error + .components-base-control__help,
+	.has-error+.components-base-control__help,
 	.components-base-control.has-error .components-base-control__help {
 		color: $color-error;
 	}
