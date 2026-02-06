@@ -11,13 +11,7 @@ import apiFetch from '@wordpress/api-fetch';
 
 import { AddonShell, StatsCard } from '@vmfo/shared';
 import { useStats } from './hooks/useRules';
-import {
-	OverviewPage,
-	DashboardPage,
-	ConfigurePage,
-	ActionsPage,
-	LogsPage,
-} from './pages';
+import { OverviewPage, DashboardPage, ConfigurePage } from './pages';
 
 import './styles/admin.scss';
 
@@ -61,8 +55,6 @@ function RulesEngineApp() {
 			overviewContent={ <OverviewPage /> }
 			dashboardContent={ <DashboardPage /> }
 			configureContent={ <ConfigurePage /> }
-			actionsContent={ <ActionsPage /> }
-			logsContent={ <LogsPage /> }
 		/>
 	);
 }
