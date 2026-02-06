@@ -274,7 +274,7 @@ class Plugin {
 		wp_enqueue_script(
 			'vmfa-rules-engine-admin',
 			VMFA_RULES_ENGINE_URL . 'build/index.js',
-			$asset[ 'dependencies' ],
+			array_merge( $asset[ 'dependencies' ], array( 'vmfo-shared' ) ),
 			$asset[ 'version' ],
 			true
 		);
@@ -288,7 +288,7 @@ class Plugin {
 		wp_enqueue_style(
 			'vmfa-rules-engine-admin',
 			VMFA_RULES_ENGINE_URL . 'build/index.css',
-			array( 'wp-components' ),
+			array( 'wp-components', 'vmfo-shared' ),
 			$asset[ 'version' ]
 		);
 
