@@ -106,11 +106,14 @@ class RuleEvaluator {
 		/**
 		 * Filter whether to skip rule evaluation if folder already assigned.
 		 *
-		 * @param bool $skip          Whether to skip evaluation.
+		 * Default is true to respect folder assignments made by Editorial Workflow
+		 * or other plugins that run at higher priority.
+		 *
+		 * @param bool $skip          Whether to skip evaluation (default: true).
 		 * @param int  $attachment_id Attachment ID.
 		 * @param array $existing_terms Currently assigned folder IDs.
 		 */
-		$skip_if_assigned = apply_filters( 'vmfa_rules_engine_skip_if_assigned', false, $attachment_id, $existing_terms );
+		$skip_if_assigned = apply_filters( 'vmfa_rules_engine_skip_if_assigned', true, $attachment_id, $existing_terms );
 
 		if ( $skip_if_assigned && ! empty( $existing_terms ) && ! is_wp_error( $existing_terms ) ) {
 			return $metadata;

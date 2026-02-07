@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-07
+
+### Fixed
+
+- Changed `vmfa_rules_engine_skip_if_assigned` filter default from `false` to `true`
+- Rules Engine now respects folder assignments made by Editorial Workflow by default
+- Prevents race condition where Rules Engine would override Editorial Workflow inbox assignments
+
+### Changed
+
+- Improved hook priority documentation in RuleEvaluator
+
 ## [1.2.2] - 2026-01-23
 
 ### Changed
