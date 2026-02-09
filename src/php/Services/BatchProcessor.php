@@ -7,6 +7,8 @@
 
 namespace VmfaRulesEngine\Services;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Handles batch rule application to existing media library.
  */

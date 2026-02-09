@@ -7,6 +7,8 @@
 
 namespace VmfaRulesEngine\Repository;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Handles CRUD operations for rules stored in WordPress options.
  */

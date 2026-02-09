@@ -7,6 +7,8 @@
 
 namespace VmfaRulesEngine;
 
+defined( 'ABSPATH' ) || exit;
+
 use VmfaRulesEngine\Admin\SettingsPage;
 use VmfaRulesEngine\REST\RulesController;
 use VmfaRulesEngine\Services\RuleEvaluator;

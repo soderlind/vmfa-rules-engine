@@ -7,6 +7,8 @@
 
 namespace VmfaRulesEngine\Conditions;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Matches filename against a regular expression.
  */
