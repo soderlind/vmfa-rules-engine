@@ -3,7 +3,7 @@ Contributors: flavflavor
 Donate link: https://developer.developer.developer.developer.developer.developer.developer/
 Tags: media library, virtual folders, automation, rules engine, media organization
 Requires at least: 6.8
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 8.3
 Stable tag: 1.3.1
 License: GPLv2 or later
