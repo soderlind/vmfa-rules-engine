@@ -13,7 +13,7 @@ use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
  * A reusable class for handling WordPress plugin updates from GitHub repositories
  * using the plugin-update-checker library.
  * 
- * @package ContentPoll\Update
+ * @package VmfaRulesEngine\Update
  * @version 1.0.0
  * @author Per Soderlind
  * @license GPL-2.0+
