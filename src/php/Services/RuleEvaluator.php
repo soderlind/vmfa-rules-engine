@@ -7,6 +7,8 @@
 
 namespace VmfaRulesEngine\Services;
 
+defined( 'ABSPATH' ) || exit;
+
 use VmfaRulesEngine\Repository\RuleRepository;
 use VmfaRulesEngine\Conditions\MatcherInterface;
 use VmfaRulesEngine\Conditions\FilenameRegexMatcher;

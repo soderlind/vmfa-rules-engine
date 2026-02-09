@@ -7,6 +7,8 @@
 
 namespace VmfaRulesEngine\Conditions;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Matches EXIF camera model.
  */

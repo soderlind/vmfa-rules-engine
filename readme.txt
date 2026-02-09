@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.3
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,10 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 1.3.1 =
+* Fixed: Added ABSPATH guards to all PHP source files
+* Added: uninstall.php for clean plugin removal
 
 = 1.3.0 =
 * Fixed: Changed `vmfa_rules_engine_skip_if_assigned` filter default from `false` to `true`

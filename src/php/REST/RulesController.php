@@ -7,6 +7,8 @@
 
 namespace VmfaRulesEngine\REST;
 
+defined( 'ABSPATH' ) || exit;
+
 use VmfaRulesEngine\Repository\RuleRepository;
 use VmfaRulesEngine\Services\BatchProcessor;
 use WP_REST_Controller;
