@@ -24,7 +24,8 @@
 		"@vitest/coverage-v8": "^4.0.18",
 		"@wordpress/scripts": "^31.3.0",
 		"jsdom": "^26.1.0",
-		"vitest": "^4.0.18"
+		"vitest": "^4.0.18",
+		"yaml": "^2.8.2"
 	},
 	"dependencies": {
 		"@dnd-kit/core": "^6.3.1",
