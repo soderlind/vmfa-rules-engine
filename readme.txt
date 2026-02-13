@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 8.3
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,10 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 1.4.1 =
+* Fixed: Added Node.js build step to GitHub Actions release workflows
+* Fixed: Added `build/` to `.gitignore`
 
 = 1.4.0 =
 * Changed: Replaced inline plugin updater with shared `class-github-updater.php`
