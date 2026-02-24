@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.2] - 2026-02-24
+
+### Changed
+
+- Use `vmfo_upload_folder` filter instead of hooking `wp_generate_attachment_metadata` directly
+- New `RuleEvaluator::filter_upload_folder()` receives folder_id, attachment_id, and metadata
+- Deprecated `RuleEvaluator::evaluate_on_upload()` (kept for backward compatibility)
+
 ## [1.4.1] - 2026-02-13
 
 ### Fixed

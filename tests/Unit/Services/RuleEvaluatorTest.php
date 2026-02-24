@@ -315,4 +315,83 @@ class RuleEvaluatorTest extends TestCase {
 		$this->assertArrayHasKey( 'author', $matchers );
 		$this->assertArrayHasKey( 'iptc_keywords', $matchers );
 	}
+
+	/**
+	 * Test filter_upload_folder returns matched rule folder.
+	 */
+	public function test_filter_upload_folder_returns_matched_folder(): void {
+		$rule = [
+			'id'         => 'rule_1',
+			'name'       => 'JPEG Rule',
+			'folder_id'  => 10,
+			'conditions' => [
+				[
+					'type'  => 'mime_type',
+					'value' => 'image/jpeg',
+				],
+			],
+			'enabled'    => true,
+		];
+
+		$this->repository
+			->shouldReceive( 'get_enabled' )
+			->once()
+			->andReturn( [ $rule ] );
+
+		Functions\expect( 'get_post_mime_type' )
+			->once()
+			->with( 123 )
+			->andReturn( 'image/jpeg' );
+
+		Functions\expect( 'get_term' )
+			->once()
+			->with( 10, 'vmfo_folder' )
+			->andReturn( (object) [ 'term_id' => 10 ] );
+
+		Functions\expect( 'is_wp_error' )
+			->once()
+			->andReturn( false );
+
+		Actions\expectDone( 'vmfa_rules_engine_folder_assigned' )
+			->once()
+			->with( 123, 10, $rule );
+
+		$evaluator = new RuleEvaluator( $this->repository );
+
+		$result = $evaluator->filter_upload_folder( 5, 123, [ 'width' => 1920 ] );
+
+		$this->assertSame( 10, $result );
+	}
+
+	/**
+	 * Test filter_upload_folder passes through default when no rules match.
+	 */
+	public function test_filter_upload_folder_passes_through_default(): void {
+		$this->repository
+			->shouldReceive( 'get_enabled' )
+			->once()
+			->andReturn( [] );
+
+		$evaluator = new RuleEvaluator( $this->repository );
+
+		$result = $evaluator->filter_upload_folder( 5, 123, [ 'width' => 1920 ] );
+
+		$this->assertSame( 5, $result );
+	}
+
+	/**
+	 * Test filter_upload_folder passes through zero default when no rules match.
+	 */
+	public function test_filter_upload_folder_passes_through_zero(): void {
+		$this->repository
+			->shouldReceive( 'get_enabled' )
+			->once()
+			->andReturn( [] );
+
+		$evaluator = new RuleEvaluator( $this->repository );
+
+		$result = $evaluator->filter_upload_folder( 0, 123, [] );
+
+		$this->assertSame( 0, $result );
+	}
 }

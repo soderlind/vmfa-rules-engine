@@ -91,8 +91,8 @@ class Plugin {
 		// REST API.
 		add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
 
-		// Rule evaluation on upload.
-		add_filter( 'wp_generate_attachment_metadata', array( $this->rule_evaluator, 'evaluate_on_upload' ), 20, 3 );
+		// Rule evaluation on upload — hooks the parent plugin's folder assignment filter.
+		add_filter( 'vmfo_upload_folder', array( $this->rule_evaluator, 'filter_upload_folder' ), 10, 3 );
 
 		// Protect folders with rules from deletion.
 		add_filter( 'vmfo_can_delete_folder', array( $this, 'protect_folder_with_rules' ), 10, 3 );

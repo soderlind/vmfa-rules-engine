@@ -26,21 +26,6 @@ class ComposerStaticInit274f80d43dcc30adcb0e0a5ccab84481
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'VmfaRulesEngine\\Conditions\\AuthorMatcher' => __DIR__ . '/../..' . '/src/php/Conditions/AuthorMatcher.php',
-        'VmfaRulesEngine\\Conditions\\DimensionsMatcher' => __DIR__ . '/../..' . '/src/php/Conditions/DimensionsMatcher.php',
-        'VmfaRulesEngine\\Conditions\\ExifCameraMatcher' => __DIR__ . '/../..' . '/src/php/Conditions/ExifCameraMatcher.php',
-        'VmfaRulesEngine\\Conditions\\ExifDateMatcher' => __DIR__ . '/../..' . '/src/php/Conditions/ExifDateMatcher.php',
-        'VmfaRulesEngine\\Conditions\\FileSizeMatcher' => __DIR__ . '/../..' . '/src/php/Conditions/FileSizeMatcher.php',
-        'VmfaRulesEngine\\Conditions\\FilenameRegexMatcher' => __DIR__ . '/../..' . '/src/php/Conditions/FilenameRegexMatcher.php',
-        'VmfaRulesEngine\\Conditions\\IptcKeywordsMatcher' => __DIR__ . '/../..' . '/src/php/Conditions/IptcKeywordsMatcher.php',
-        'VmfaRulesEngine\\Conditions\\MatcherInterface' => __DIR__ . '/../..' . '/src/php/Conditions/MatcherInterface.php',
-        'VmfaRulesEngine\\Conditions\\MimeTypeMatcher' => __DIR__ . '/../..' . '/src/php/Conditions/MimeTypeMatcher.php',
-        'VmfaRulesEngine\\Plugin' => __DIR__ . '/../..' . '/src/php/Plugin.php',
-        'VmfaRulesEngine\\REST\\RulesController' => __DIR__ . '/../..' . '/src/php/REST/RulesController.php',
-        'VmfaRulesEngine\\Repository\\RuleRepository' => __DIR__ . '/../..' . '/src/php/Repository/RuleRepository.php',
-        'VmfaRulesEngine\\Services\\BatchProcessor' => __DIR__ . '/../..' . '/src/php/Services/BatchProcessor.php',
-        'VmfaRulesEngine\\Services\\RuleEvaluator' => __DIR__ . '/../..' . '/src/php/Services/RuleEvaluator.php',
-        'VmfaRulesEngine\\Update\\GitHubPluginUpdater' => __DIR__ . '/../..' . '/src/php/Update/GitHubPluginUpdater.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

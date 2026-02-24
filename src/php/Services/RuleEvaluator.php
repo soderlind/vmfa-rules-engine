@@ -87,9 +87,48 @@ class RuleEvaluator {
 	}
 
 	/**
+	 * Filter the upload folder via the parent plugin's vmfo_upload_folder hook.
+	 *
+	 * Evaluates rules against the attachment and returns the matched folder ID,
+	 * or the original folder ID if no rule matches.
+	 *
+	 * @since 1.4.2
+	 *
+	 * @param int   $folder_id     The default folder ID (from parent plugin settings).
+	 * @param int   $attachment_id Attachment ID.
+	 * @param array $metadata      Attachment metadata (dimensions, EXIF, etc.).
+	 * @return int The folder ID to assign (matched rule or pass-through default).
+	 */
+	public function filter_upload_folder( $folder_id, $attachment_id, $metadata ) {
+		$result = $this->evaluate( (int) $attachment_id, is_array( $metadata ) ? $metadata : array() );
+
+		if ( $result && ! empty( $result['folder_id'] ) ) {
+			// Verify the matched folder exists.
+			$term = get_term( $result['folder_id'], self::TAXONOMY );
+			if ( $term && ! is_wp_error( $term ) ) {
+				/**
+				 * Action fired after rule-based folder assignment via filter.
+				 *
+				 * @param int   $attachment_id Attachment ID.
+				 * @param int   $folder_id     Assigned folder ID.
+				 * @param array $rule          The matching rule.
+				 */
+				do_action( 'vmfa_rules_engine_folder_assigned', $attachment_id, $result['folder_id'], $result['rule'] );
+
+				return (int) $result['folder_id'];
+			}
+		}
+
+		return (int) $folder_id;
+	}
+
+	/**
 	 * Evaluate rules on upload.
 	 *
 	 * Hooked to 'wp_generate_attachment_metadata' filter.
+	 * Kept for backward compatibility and batch processing.
+	 *
+	 * @deprecated 1.4.2 Use filter_upload_folder() via the vmfo_upload_folder filter instead.
 	 *
 	 * @param array  $metadata      Attachment metadata.
 	 * @param int    $attachment_id Attachment ID.
