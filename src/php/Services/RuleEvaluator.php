@@ -92,7 +92,7 @@ class RuleEvaluator {
 	 * Evaluates rules against the attachment and returns the matched folder ID,
 	 * or the original folder ID if no rule matches.
 	 *
-	 * @since 2.1.0
+	 * @since 1.4.2
 	 *
 	 * @param int   $folder_id     The default folder ID (from parent plugin settings).
 	 * @param int   $attachment_id Attachment ID.
@@ -128,7 +128,7 @@ class RuleEvaluator {
 	 * Hooked to 'wp_generate_attachment_metadata' filter.
 	 * Kept for backward compatibility and batch processing.
 	 *
-	 * @deprecated 2.1.0 Use filter_upload_folder() via the vmfo_upload_folder filter instead.
+	 * @deprecated 1.4.2 Use filter_upload_folder() via the vmfo_upload_folder filter instead.
 	 *
 	 * @param array  $metadata      Attachment metadata.
 	 * @param int    $attachment_id Attachment ID.
