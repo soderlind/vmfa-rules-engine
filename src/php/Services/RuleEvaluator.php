@@ -102,9 +102,9 @@ class RuleEvaluator {
 	public function filter_upload_folder( $folder_id, $attachment_id, $metadata ) {
 		$result = $this->evaluate( (int) $attachment_id, is_array( $metadata ) ? $metadata : array() );
 
-		if ( $result && ! empty( $result['folder_id'] ) ) {
+		if ( $result && ! empty( $result[ 'folder_id' ] ) ) {
 			// Verify the matched folder exists.
-			$term = get_term( $result['folder_id'], self::TAXONOMY );
+			$term = get_term( $result[ 'folder_id' ], self::TAXONOMY );
 			if ( $term && ! is_wp_error( $term ) ) {
 				/**
 				 * Action fired after rule-based folder assignment via filter.
@@ -113,9 +113,9 @@ class RuleEvaluator {
 				 * @param int   $folder_id     Assigned folder ID.
 				 * @param array $rule          The matching rule.
 				 */
-				do_action( 'vmfa_rules_engine_folder_assigned', $attachment_id, $result['folder_id'], $result['rule'] );
+				do_action( 'vmfa_rules_engine_folder_assigned', $attachment_id, $result[ 'folder_id' ], $result[ 'rule' ] );
 
-				return (int) $result['folder_id'];
+				return (int) $result[ 'folder_id' ];
 			}
 		}
 

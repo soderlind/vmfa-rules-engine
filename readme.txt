@@ -3,9 +3,9 @@ Contributors: flavflavor
 Donate link: https://developer.developer.developer.developer.developer.developer.developer/
 Tags: media library, virtual folders, automation, rules engine, media organization
 Requires at least: 6.8
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,9 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 1.4.3 =
+* Changed: Tested up to WordPress 7.0
 
 = 1.4.2 =
 * Changed: Use `vmfo_upload_folder` filter instead of hooking `wp_generate_attachment_metadata` directly
