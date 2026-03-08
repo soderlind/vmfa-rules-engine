@@ -1,0 +1,111 @@
+/**
+ * WP 7.0+ admin compatibility overrides for Rules Engine.
+ *
+ * Loaded only on WordPress 7.0+ to align with the "Modern" default color
+ * scheme and the new design tokens.
+ *
+ * @since 1.3.0
+ * @package VmfaRulesEngine
+ */
+
+/* ==========================================================================
+   Theme color: use CSS custom properties from wp-base-styles
+   ========================================================================== */
+
+/* Stats highlight value */
+.vmfa-stats-value--highlight {
+	color: var(--wp-admin-theme-color);
+}
+
+/* Preview folder badge */
+.vmfa-preview-folder {
+	background: rgba(var(--wp-admin-theme-color--rgb), 0.1);
+	color: var(--wp-admin-theme-color);
+}
+
+/* Add folder button focus */
+.vmfa-add-folder-button:focus {
+	box-shadow: 0 0 0 2px var(--wp-admin-theme-color);
+}
+
+/* ==========================================================================
+   Design-token alignment: backgrounds & borders
+   ========================================================================== */
+
+/* Rule item hover background */
+.vmfa-rule-item:hover {
+	background: #e8e8e8;
+}
+
+/* Condition row borders */
+.vmfa-condition-row {
+	border-color: #ddd;
+}
+
+/* Rule editor sections */
+.vmfa-rule-editor__actions {
+	border-top-color: #ddd;
+}
+
+.vmfa-rule-editor__conditions {
+	background: #f0f0f0;
+}
+
+/* Create folder modal actions */
+.vmfa-create-folder-actions {
+	border-top-color: #ddd;
+}
+
+/* Rule editor options */
+.vmfa-rule-editor__options .components-toggle-control {
+	border-color: #ddd;
+}
+
+/* Preview summary background */
+.vmfa-preview-summary {
+	background: #f0f0f0;
+}
+
+/* Preview table header background */
+.vmfa-preview-table table th {
+	background: #f0f0f0;
+}
+
+/* Preview table borders */
+.vmfa-preview-table {
+	border-color: #ddd;
+}
+
+.vmfa-preview-table table th,
+.vmfa-preview-table table td {
+	border-bottom-color: #ddd;
+}
+
+/* Preview actions border */
+.vmfa-preview-actions {
+	border-top-color: #ddd;
+}
+
+/* Unmatched item background */
+.vmfa-preview-unmatched-item {
+	background: #f0f0f0;
+}
+
+/* Preview section collapsed summary */
+.vmfa-preview-section--collapsed summary {
+	background: #f0f0f0;
+}
+
+.vmfa-preview-section--collapsed summary:hover {
+	background: #ddd;
+}
+
+/* Rule item background */
+.vmfa-rule-item {
+	background: #f0f0f0;
+}
+
+/* Stop badge */
+.vmfa-rule-item__stop-badge {
+	background: #ddd;
+}

@@ -297,6 +297,21 @@ class Plugin {
 		// Get folders from parent plugin.
 		$folders = $this->get_folders();
 
+		// WP 7+ design-token overrides.
+		if ( function_exists( 'vmfo_is_wp7' ) && vmfo_is_wp7() ) {
+			$wp7_asset_file = VMFA_RULES_ENGINE_PATH . 'build/wp7-compat.asset.php';
+			$wp7_version    = file_exists( $wp7_asset_file )
+				? ( include $wp7_asset_file )['version'] ?? VMFA_RULES_ENGINE_VERSION
+				: VMFA_RULES_ENGINE_VERSION;
+
+			wp_enqueue_style(
+				'vmfa-rules-engine-wp7',
+				VMFA_RULES_ENGINE_URL . 'build/wp7-compat.css',
+				[ 'vmfa-rules-engine-admin', 'wp-base-styles' ],
+				$wp7_version
+			);
+		}
+
 		wp_localize_script(
 			'vmfa-rules-engine-admin',
 			'vmfaRulesEngine',

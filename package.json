@@ -6,8 +6,8 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build src/js/index.js src/js/media-upload.js --output-path=build",
-		"start": "wp-scripts start src/js/index.js src/js/media-upload.js --output-path=build",
+		"build": "wp-scripts build src/js/index.js src/js/media-upload.js src/js/wp7-compat.js --output-path=build",
+		"start": "wp-scripts start src/js/index.js src/js/media-upload.js src/js/wp7-compat.js --output-path=build",
 		"lint:js": "wp-scripts lint-js src/js",
 		"lint:css": "wp-scripts lint-style src/js/styles",
 		"test": "vitest run",
