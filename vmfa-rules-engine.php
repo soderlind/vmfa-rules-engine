@@ -49,11 +49,7 @@ if ( ! class_exists( \Soderlind\WordPress\GitHubUpdater::class) ) {
  * @return void
  */
 function vmfa_rules_engine_init() {
-	// Load text domain.
-	load_plugin_textdomain( 'vmfa-rules-engine', false, dirname( VMFA_RULES_ENGINE_BASENAME ) . '/languages' );
-
-	// Initialize plugin components.
-	VmfaRulesEngine\Plugin::get_instance();
+	VmfaRulesEngine\Plugin::get_instance()->init();
 }
 add_action( 'plugins_loaded', 'vmfa_rules_engine_init', 20 );
 
