@@ -19,7 +19,7 @@
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"wp-coding-standards/wpcs": "^3.0",
 		"phpcompatibility/php-compatibility": "^9.0",
-		"phpunit/phpunit": "^11.0",
+		"phpunit/phpunit": "^12.5",
 		"brain/monkey": "^2.6",
 		"mockery/mockery": "^1.6"
 	},
