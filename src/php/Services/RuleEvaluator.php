@@ -17,8 +17,17 @@ use VmfaRulesEngine\Conditions\DimensionsMatcher;
 use VmfaRulesEngine\Conditions\FileSizeMatcher;
 use VmfaRulesEngine\Conditions\ExifCameraMatcher;
 use VmfaRulesEngine\Conditions\ExifDateMatcher;
+use VmfaRulesEngine\Conditions\ExifApertureMatcher;
+use VmfaRulesEngine\Conditions\ExifFocalLengthMatcher;
+use VmfaRulesEngine\Conditions\ExifIsoMatcher;
+use VmfaRulesEngine\Conditions\ExifShutterSpeedMatcher;
+use VmfaRulesEngine\Conditions\ExifOrientationMatcher;
 use VmfaRulesEngine\Conditions\AuthorMatcher;
 use VmfaRulesEngine\Conditions\IptcKeywordsMatcher;
+use VmfaRulesEngine\Conditions\IptcCreditMatcher;
+use VmfaRulesEngine\Conditions\IptcCaptionMatcher;
+use VmfaRulesEngine\Conditions\IptcCopyrightMatcher;
+use VmfaRulesEngine\Conditions\IptcTitleMatcher;
 
 /**
  * Evaluates rules against attachments and assigns folders.
@@ -69,8 +78,17 @@ class RuleEvaluator {
 			FileSizeMatcher::class,
 			ExifCameraMatcher::class,
 			ExifDateMatcher::class,
+			ExifApertureMatcher::class,
+			ExifFocalLengthMatcher::class,
+			ExifIsoMatcher::class,
+			ExifShutterSpeedMatcher::class,
+			ExifOrientationMatcher::class,
 			AuthorMatcher::class,
 			IptcKeywordsMatcher::class,
+			IptcCreditMatcher::class,
+			IptcCaptionMatcher::class,
+			IptcCopyrightMatcher::class,
+			IptcTitleMatcher::class,
 		);
 
 		foreach ( $matcher_classes as $class ) {

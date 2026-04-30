@@ -18,8 +18,9 @@ Turn "Default folder for uploads" into a powerful rule system. Automatically ass
 - **File size** — Separate large files from small ones
 - **EXIF camera model** — Group photos by device (iPhone, Canon, etc.)
 - **EXIF date taken** — Organize by capture date
+- **EXIF aperture, focal length, ISO, shutter speed, orientation** — Fine-grained camera settings
+- **IPTC keywords, credit, caption, copyright, title** — Match any embedded metadata field
 - **Upload author** — Assign based on who uploaded the file
-- **IPTC keywords** — Match embedded metadata keywords
 
 ### Features
 
@@ -59,6 +60,56 @@ Plugin [updates are handled automatically](https://github.com/soderlind/wordpres
 1. Click **Scan Existing Media** to preview what changes would be made
 2. Review the preview and select items to process
 3. Click **Apply Changes** to assign folders
+
+## Organizing a Photo Library
+
+The condition type selector groups conditions into **General**, **EXIF**, and **IPTC / XMP**, making it straightforward to build rules around embedded photo metadata.
+
+### EXIF conditions
+
+| Condition | Field | Example use |
+|---|---|---|
+| Camera model | `exif_camera` | Separate iPhone shots from DSLR shots |
+| Date taken | `exif_date` | Archive by year or shoot date |
+| Aperture (f-number) | `exif_aperture` | Isolate wide-open portraits (f/1.4 – f/2.8) |
+| Focal length | `exif_focal_length` | Group wide-angle vs telephoto shots |
+| ISO sensitivity | `exif_iso` | Flag high-ISO / low-light images for review |
+| Shutter speed | `exif_shutter_speed` | Find motion-frozen or long-exposure shots |
+| Orientation | `exif_orientation` | Separate portrait vs landscape images |
+
+Aperture, focal length, ISO, and shutter speed all support comparison operators (`>`, `>=`, `<`, `<=`, `=`, `Between`), so you can create ranges like "ISO between 1600 and 12800". Shutter speed accepts standard photographic fraction notation (`1/1000`, `1/60`) as well as decimal seconds (`0.5`).
+
+### IPTC / XMP conditions
+
+| Condition | Field | Example use |
+|---|---|---|
+| Keywords | `iptc_keywords` | Route images tagged `product` to a product folder |
+| Credit | `iptc_credit` | Separate agency photos (Reuters, AFP, Getty) |
+| Caption | `iptc_caption` | Match photos with specific caption text |
+| Copyright | `iptc_copyright` | Group images by rights holder or year |
+| Title | `iptc_title` | Route by object name or headline |
+
+All IPTC conditions use case-insensitive partial matching, so `"Reuters"` matches `"Reuters Photography"`.
+
+### Example: organize a news photo workflow
+
+```
+Rule: Agency Photos
+  Conditions:
+    IPTC Credit  contains  "Reuters"
+  → Folder: Agency / Reuters
+
+Rule: High-ISO Night Shots
+  Conditions:
+    EXIF ISO  >=  3200
+  → Folder: Review / High-ISO
+
+Rule: Product Images
+  Conditions:
+    IPTC Keywords  contains  "product"
+    MIME type      is        image/jpeg
+  → Folder: Products
+```
 
 ## Development
 

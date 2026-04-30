@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-04-30
+
+### Added
+
+- **9 new EXIF condition matchers**: aperture (f-number), focal length, ISO sensitivity, shutter speed (supports `1/1000` fraction notation), orientation
+- **4 new IPTC/XMP condition matchers**: credit, caption, copyright, title — all case-insensitive partial match
+- `NumericCompareTrait` — shared `compare_numeric()` for all numeric matchers (gt/gte/lt/lte/eq/between)
+- `TextSearchTrait` — shared `text_matches()` for all text partial-match matchers
+- Grouped condition type selector in the Rule Editor: `<optgroup>` sections for **General**, **EXIF**, and **IPTC / XMP**
+- `group`, `unit`, `step`, `unitPosition` metadata on condition type definitions, used by the React UI
+
+### Changed
+
+- Refactored `DimensionsMatcher`, `FileSizeMatcher`, `ExifCameraMatcher` to use shared traits (no behaviour change)
+
 ## [1.6.0] - 2026-03-14
 
 ### Changed

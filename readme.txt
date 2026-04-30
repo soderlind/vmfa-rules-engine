@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,15 +19,30 @@ VMFA Rules Engine automatically assigns uploaded media files to virtual folders 
 
 = Features =
 
-* **8 Condition Types**
+* **17 Condition Types** across three groups
+
+  *General*
   * Filename Regex – Match filenames using regular expressions
   * MIME Type – Match by file type with wildcard support (e.g., `image/*`)
   * Dimensions – Match image width/height with comparison operators
   * File Size – Match by file size with range support
-  * EXIF Camera – Match by camera make/model from EXIF metadata
-  * EXIF Date – Match by photo capture date ranges
   * Author – Match by WordPress user who uploaded the file
-  * IPTC Keywords – Match by embedded IPTC keyword metadata
+
+  *EXIF*
+  * Camera Model – Match by camera make/model
+  * Date Taken – Match by photo capture date ranges
+  * Aperture (f-number) – Match by lens aperture (supports >, <, =, Between)
+  * Focal Length – Match by focal length in millimetres
+  * ISO Sensitivity – Match by ISO value
+  * Shutter Speed – Match by exposure time; accepts fraction (`1/1000`) or decimal notation
+  * Orientation – Match by EXIF orientation tag (portrait, landscape, rotated)
+
+  *IPTC / XMP*
+  * Keywords – Match by embedded IPTC keyword metadata
+  * Credit – Match by photo credit line
+  * Caption – Match by image description or caption
+  * Copyright – Match by copyright notice
+  * Title – Match by object name or headline
 
 * **Powerful Rule Management**
   * Combine multiple conditions with AND logic
@@ -57,6 +72,43 @@ VMFA Rules Engine automatically assigns uploaded media files to virtual folders 
 * Organize high-resolution images (4K+) to a "High Resolution" folder
 * Route uploads from specific authors to designated folders
 * Sort images by capture date into year-based folders
+
+= Organizing a Photo Library =
+
+The condition picker groups options under **General**, **EXIF**, and **IPTC / XMP**, making it easy to build rules around embedded photo metadata.
+
+*EXIF conditions* let you match on camera settings written into the image file by the camera itself:
+
+* **Aperture** – Isolate wide-open portraits shot at f/1.4–f/2.8
+* **Focal Length** – Separate wide-angle from telephoto shots
+* **ISO** – Flag high-ISO / low-light images for review (e.g., ISO >= 3200)
+* **Shutter Speed** – Find motion-frozen action shots (e.g., <= 1/1000 s) or long exposures
+* **Orientation** – Route portrait-orientation images to a separate folder automatically
+
+*IPTC / XMP conditions* match on editorial metadata embedded by photo-editing software or DAM systems:
+
+* **Keywords** – Route images tagged "product" or "editorial" to the right folder
+* **Credit** – Automatically separate agency images from Reuters, AFP, or Getty
+* **Caption** – Match images whose description contains specific text
+* **Copyright** – Group images by rights holder or copyright year
+* **Title** – Route by object name or headline
+
+All IPTC conditions use case-insensitive partial matching, so `"Reuters"` matches `"Reuters Photography"`.
+
+Example rules for a news-photo workflow:
+
+  Rule: Agency Photos
+    IPTC Credit  contains  "Reuters"
+  → Folder: Agency / Reuters
+
+  Rule: High-ISO Night Shots
+    EXIF ISO  >=  3200
+  → Folder: Review / High-ISO
+
+  Rule: Product Images
+    IPTC Keywords  contains  "product"
+    MIME Type      is        image/jpeg
+  → Folder: Products
 
 == Installation ==
 
@@ -107,6 +159,13 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 1.7.0 =
+* Added: EXIF aperture, focal length, ISO, shutter speed, and orientation condition matchers
+* Added: IPTC/XMP credit, caption, copyright, and title condition matchers
+* Added: Grouped condition type selector (General / EXIF / IPTC sections) in the Rule Editor
+* Added: NumericCompareTrait and TextSearchTrait for shared matcher logic
+* Changed: Refactored DimensionsMatcher, FileSizeMatcher, ExifCameraMatcher to use shared traits
 
 = 1.6.0 =
 * Changed: Refactored Plugin class to extend VMF core `AbstractPlugin` base class

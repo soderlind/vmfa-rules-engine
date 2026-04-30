@@ -33,6 +33,14 @@ function getDefaultCondition( conditionType ) {
 			condition.operator = 'after';
 			condition.value = '';
 			break;
+		case 'numeric':
+			condition.operator = 'eq';
+			condition.value = '';
+			break;
+		case 'shutter':
+			condition.operator = 'lte';
+			condition.value = '';
+			break;
 		case 'user':
 			condition.value = '';
 			break;
@@ -530,5 +538,98 @@ describe( 'validateCondition', () => {
 			expect( result.isValid ).toBe( false );
 			expect( result.errors ).toContain( 'Condition type is required' );
 		} );
+	} );
+} );
+
+describe( 'getDefaultCondition — new inputTypes', () => {
+	it( 'should return default for numeric input type', () => {
+		const conditionType = {
+			value: 'exif_aperture',
+			inputType: 'numeric',
+		};
+
+		const result = getDefaultCondition( conditionType );
+
+		expect( result ).toEqual( {
+			type: 'exif_aperture',
+			operator: 'eq',
+			value: '',
+		} );
+	} );
+
+	it( 'should return default for shutter input type', () => {
+		const conditionType = {
+			value: 'exif_shutter_speed',
+			inputType: 'shutter',
+		};
+
+		const result = getDefaultCondition( conditionType );
+
+		expect( result ).toEqual( {
+			type: 'exif_shutter_speed',
+			operator: 'lte',
+			value: '',
+		} );
+	} );
+} );
+
+describe( 'GROUP_LABELS grouping', () => {
+	const GROUP_LABELS = {
+		general: 'General',
+		exif: 'EXIF',
+		iptc: 'IPTC / XMP',
+	};
+
+	it( 'should define the three expected groups', () => {
+		expect( Object.keys( GROUP_LABELS ) ).toEqual( [
+			'general',
+			'exif',
+			'iptc',
+		] );
+	} );
+
+	it( 'should label groups correctly', () => {
+		expect( GROUP_LABELS.general ).toBe( 'General' );
+		expect( GROUP_LABELS.exif ).toBe( 'EXIF' );
+		expect( GROUP_LABELS.iptc ).toBe( 'IPTC / XMP' );
+	} );
+} );
+
+describe( 'parseShutterSpeed (inline helper)', () => {
+	/**
+	 * Mirrors PHP ExifShutterSpeedMatcher::parse_shutter_speed logic in JS.
+	 *
+	 * @param {string} value Shutter speed string.
+	 * @return {number|null} Parsed seconds value or null.
+	 */
+	function parseShutterSpeed( value ) {
+		if ( ! value || ! value.trim() ) return null;
+		if ( value.includes( '/' ) ) {
+			const [ num, den ] = value.split( '/' ).map( Number );
+			if ( ! den ) return null;
+			return num / den;
+		}
+		const f = parseFloat( value );
+		return f >= 0 ? f : null;
+	}
+
+	it( 'parses fraction 1/1000 to 0.001', () => {
+		expect( parseShutterSpeed( '1/1000' ) ).toBeCloseTo( 0.001 );
+	} );
+
+	it( 'parses fraction 1/60 to approx 0.0167', () => {
+		expect( parseShutterSpeed( '1/60' ) ).toBeCloseTo( 0.01667 );
+	} );
+
+	it( 'parses decimal 0.5 to 0.5', () => {
+		expect( parseShutterSpeed( '0.5' ) ).toBe( 0.5 );
+	} );
+
+	it( 'returns null for empty string', () => {
+		expect( parseShutterSpeed( '' ) ).toBeNull();
+	} );
+
+	it( 'returns null for division by zero', () => {
+		expect( parseShutterSpeed( '1/0' ) ).toBeNull();
 	} );
 } );
