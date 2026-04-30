@@ -14,6 +14,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class FileSizeMatcher implements MatcherInterface {
 
+	use NumericCompareTrait;
+
 	/**
 	 * Check if the file size matches the condition.
 	 *
@@ -46,35 +48,7 @@ class FileSizeMatcher implements MatcherInterface {
 			return false;
 		}
 
-		return $this->compare( $actual, $operator, $value, $value_end );
-	}
-
-	/**
-	 * Compare values based on operator.
-	 *
-	 * @param int    $actual    Actual value in bytes.
-	 * @param string $operator  Comparison operator.
-	 * @param int    $value     First comparison value in bytes.
-	 * @param int    $value_end Second comparison value in bytes (for between).
-	 * @return bool Comparison result.
-	 */
-	private function compare( $actual, $operator, $value, $value_end ) {
-		switch ( $operator ) {
-			case 'gt':
-				return $actual > $value;
-			case 'gte':
-				return $actual >= $value;
-			case 'lt':
-				return $actual < $value;
-			case 'lte':
-				return $actual <= $value;
-			case 'eq':
-				return $actual === $value;
-			case 'between':
-				return $actual >= $value && $actual <= $value_end;
-			default:
-				return false;
-		}
+		return $this->compare_numeric( (float) $actual, $operator, (float) $value, (float) $value_end );
 	}
 
 	/**

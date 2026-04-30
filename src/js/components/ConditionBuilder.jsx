@@ -44,6 +44,14 @@ function getDefaultCondition( conditionType ) {
 			condition.operator = 'after';
 			condition.value = '';
 			break;
+		case 'numeric':
+			condition.operator = 'eq';
+			condition.value = '';
+			break;
+		case 'shutter':
+			condition.operator = 'lte';
+			condition.value = '';
+			break;
 		case 'user':
 			condition.value = '';
 			break;
@@ -53,6 +61,27 @@ function getDefaultCondition( conditionType ) {
 
 	return condition;
 }
+
+/**
+ * Group labels for condition type optgroups.
+ */
+const GROUP_LABELS = {
+	general: 'General',
+	exif: 'EXIF',
+	iptc: 'IPTC / XMP',
+};
+
+/**
+ * Shared operator options for numeric comparisons.
+ */
+const NUMERIC_OPERATORS = [
+	{ value: 'gt', label: '>' },
+	{ value: 'gte', label: '>=' },
+	{ value: 'lt', label: '<' },
+	{ value: 'lte', label: '<=' },
+	{ value: 'eq', label: '=' },
+	{ value: 'between', label: 'Between' },
+];
 
 /**
  * Single condition row component.
@@ -375,6 +404,124 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 					</Flex>
 				);
 
+			case 'numeric': {
+				const numUnit = conditionType.unit || '';
+				const numStep = conditionType.step || 1;
+				const numUnitBefore = conditionType.unitPosition === 'before';
+				return (
+					<Flex gap={ 2 } wrap>
+						<FlexItem>
+							<SelectControl
+								value={ condition.operator || 'eq' }
+								options={ NUMERIC_OPERATORS }
+								onChange={ ( val ) =>
+									handleValueChange( 'operator', val )
+								}
+								__nextHasNoMarginBottom
+								__next40pxDefaultSize
+							/>
+						</FlexItem>
+						{ numUnitBefore && numUnit && (
+							<FlexItem>
+								<span className="vmfa-condition-unit">
+									{ numUnit }
+								</span>
+							</FlexItem>
+						) }
+						<FlexItem>
+							<TextControl
+								type="number"
+								value={ condition.value ?? '' }
+								step={ numStep }
+								min={ 0 }
+								placeholder={
+									conditionType.placeholder || ''
+								}
+								onChange={ ( val ) =>
+									handleValueChange( 'value', val )
+								}
+								__nextHasNoMarginBottom
+								__next40pxDefaultSize
+							/>
+						</FlexItem>
+						{ condition.operator === 'between' && (
+							<FlexItem>
+								<TextControl
+									type="number"
+									value={ condition.value_end ?? '' }
+									step={ numStep }
+									min={ 0 }
+									placeholder={
+										conditionType.placeholder || ''
+									}
+									onChange={ ( val ) =>
+										handleValueChange( 'value_end', val )
+									}
+									__nextHasNoMarginBottom
+									__next40pxDefaultSize
+								/>
+							</FlexItem>
+						) }
+						{ ! numUnitBefore && numUnit && (
+							<FlexItem>
+								<span className="vmfa-condition-unit">
+									{ numUnit }
+								</span>
+							</FlexItem>
+						) }
+					</Flex>
+				);
+			}
+
+			case 'shutter': {
+				return (
+					<Flex gap={ 2 } wrap>
+						<FlexItem>
+							<SelectControl
+								value={ condition.operator || 'lte' }
+								options={ NUMERIC_OPERATORS }
+								onChange={ ( val ) =>
+									handleValueChange( 'operator', val )
+								}
+								__nextHasNoMarginBottom
+								__next40pxDefaultSize
+							/>
+						</FlexItem>
+						<FlexItem>
+							<TextControl
+								value={ condition.value || '' }
+								placeholder={
+									conditionType.placeholder || '1/1000'
+								}
+								onChange={ ( val ) =>
+									handleValueChange( 'value', val )
+								}
+								__nextHasNoMarginBottom
+								__next40pxDefaultSize
+							/>
+						</FlexItem>
+						{ condition.operator === 'between' && (
+							<FlexItem>
+								<TextControl
+									value={ condition.value_end || '' }
+									placeholder={
+										conditionType.placeholder || '1/60'
+									}
+									onChange={ ( val ) =>
+										handleValueChange( 'value_end', val )
+									}
+									__nextHasNoMarginBottom
+									__next40pxDefaultSize
+								/>
+							</FlexItem>
+						) }
+						<FlexItem>
+							<span className="vmfa-condition-unit">s</span>
+						</FlexItem>
+					</Flex>
+				);
+			}
+
 			case 'user':
 				return (
 					<SelectControl
@@ -417,30 +564,45 @@ function ConditionRow( { condition, index, onChange, onRemove, users } ) {
 		}
 	};
 
+	// Build grouped options for native <select> with <optgroup> support.
+	const groupedSelect = () => {
+		const groups = {};
+		for ( const ct of conditionTypes ) {
+			const g = ct.group || 'general';
+			if ( ! groups[ g ] ) groups[ g ] = [];
+			groups[ g ].push( ct );
+		}
+
+		return (
+			<select
+				value={ condition.type }
+				onChange={ ( e ) => handleTypeChange( e.target.value ) }
+				className="components-select-control__input vmfa-condition-type-select"
+				style={ { height: '40px', padding: '0 8px', minWidth: '200px' } }
+			>
+				<option value="">
+					{ __( 'Select condition…', 'vmfa-rules-engine' ) }
+				</option>
+				{ Object.entries( groups ).map( ( [ groupKey, items ] ) => (
+					<optgroup
+						key={ groupKey }
+						label={ GROUP_LABELS[ groupKey ] || groupKey }
+					>
+						{ items.map( ( ct ) => (
+							<option key={ ct.value } value={ ct.value }>
+								{ ct.label }
+							</option>
+						) ) }
+					</optgroup>
+				) ) }
+			</select>
+		);
+	};
+
 	return (
 		<div className="vmfa-condition-row">
 			<Flex gap={ 3 } align="flex-start">
-				<FlexItem>
-					<SelectControl
-						value={ condition.type }
-						options={ [
-							{
-								value: '',
-								label: __(
-									'Select condition…',
-									'vmfa-rules-engine'
-								),
-							},
-							...conditionTypes.map( ( ct ) => ( {
-								value: ct.value,
-								label: ct.label,
-							} ) ),
-						] }
-						onChange={ handleTypeChange }
-						__nextHasNoMarginBottom
-						__next40pxDefaultSize
-					/>
-				</FlexItem>
+				<FlexItem>{ groupedSelect() }</FlexItem>
 				<FlexBlock>{ renderValueInput() }</FlexBlock>
 				<FlexItem>
 					<Button

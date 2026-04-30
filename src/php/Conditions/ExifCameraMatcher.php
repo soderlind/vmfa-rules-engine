@@ -14,6 +14,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class ExifCameraMatcher implements MatcherInterface {
 
+	use TextSearchTrait;
+
 	/**
 	 * Check if the EXIF camera model matches.
 	 *
@@ -33,8 +35,7 @@ class ExifCameraMatcher implements MatcherInterface {
 			return false;
 		}
 
-		// Case-insensitive partial match.
-		return stripos( $camera, $params[ 'value' ] ) !== false;
+		return $this->text_matches( $camera, $params[ 'value' ] );
 	}
 
 	/**
