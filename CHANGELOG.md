@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.1] - 2026-04-30
+
+### Fixed
+
+- "Between" operator inputs no longer wrap onto a second line in the condition builder — scoped `flex-wrap` to the outer condition row only
+- Playground blueprint now installs the plugin from the release ZIP instead of the git directory (fixes missing `vendor/` on activation)
+
 ## [1.7.0] - 2026-04-30
 
 ### Added
