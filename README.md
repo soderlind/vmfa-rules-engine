@@ -8,7 +8,7 @@ Rule-based automatic folder assignment for media uploads. Add-on plugin for [Vir
 https://github.com/user-attachments/assets/8655014d-b963-493d-a93e-ca1fc63e8b1b
 
 
-[Requirements](#requirements) | [Installation](#installation) | [Usage](#usage) | [Organizing a Photo Library](#organizing-a-photo-library) | [Development](#development) | [License](#license)
+[Requirements](#requirements) | [Installation](#installation) | [Usage](#usage) | [Organizing a Photo Library](#organizing-a-photo-library) 
 
 ## Description
 
