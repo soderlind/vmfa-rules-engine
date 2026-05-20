@@ -42,6 +42,9 @@ Turn "Default folder for uploads" into a powerful rule system. Automatically ass
 
 ## Installation
 
+Recommended: Use the [Add-On Manager](https://github.com/soderlind/vmfa) to install the add-on.
+
+Manual installation:
 
 1. Download [`vmfa-rules-engine.zip`](https://github.com/soderlind/vmfa-rules-engine/releases/latest/download/vmfa-rules-engine.zip)
 2. Upload via  `Plugins → Add New → Upload Plugin`
