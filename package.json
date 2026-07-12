@@ -23,7 +23,7 @@
 	"devDependencies": {
 		"@vitest/coverage-v8": "^4.0.18",
 		"@wordpress/scripts": "^32.6.0",
-		"jsdom": "^26.1.0",
+		"jsdom": "^29.1.1",
 		"vitest": "^4.0.18",
 		"yaml": "^2.8.2"
 	},
