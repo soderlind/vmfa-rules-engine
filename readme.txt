@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -159,6 +159,10 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 1.7.3 =
+* Security: Resolved the majority of Dependabot alerts by updating build/test dependencies (`@wordpress/scripts` 31 → 32, `@wordpress/components` → 36). Remaining alerts are dev-only transitive dependencies.
+* Changed: Added grouped `.github/dependabot.yml` config to consolidate future dependency update PRs.
 
 = 1.7.2 =
 * Fixed: Allow both v1 and v2 of composer/installers for broader compatibility
