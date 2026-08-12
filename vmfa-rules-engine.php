@@ -3,7 +3,7 @@
  * Plugin Name: Virtual Media Folders - Rules Engine
  * Plugin URI: https://github.com/soderlind/vmfa-rules-engine
  * Description: Rule-based automatic folder assignment for media uploads. Add-on for Virtual Media Folders.
- * Version: 1.7.3
+ * Version: 1.7.4
  * Author: Per Soderlind
  * Author URI: https://soderlind.no
  * License: GPL-2.0-or-later
@@ -20,7 +20,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Plugin constants.
-define( 'VMFA_RULES_ENGINE_VERSION', '1.7.3' );
+define( 'VMFA_RULES_ENGINE_VERSION', '1.7.4' );
 define( 'VMFA_RULES_ENGINE_FILE', __FILE__ );
 define( 'VMFA_RULES_ENGINE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VMFA_RULES_ENGINE_URL', plugin_dir_url( __FILE__ ) );
@@ -49,9 +49,34 @@ if ( ! class_exists( \Soderlind\WordPress\GitHubUpdater::class) ) {
  * @return void
  */
 function vmfa_rules_engine_init() {
+	// The parent plugin (Virtual Media Folders 2.0.0+) provides the add-on base class.
+	// Bail with an admin notice if it is missing so we never fatal.
+	if ( ! class_exists( \VirtualMediaFolders\Addon\AbstractPlugin::class ) ) {
+		add_action( 'admin_notices', 'vmfa_rules_engine_parent_notice' );
+		return;
+	}
+
 	VmfaRulesEngine\Plugin::get_instance()->init();
 }
 add_action( 'plugins_loaded', 'vmfa_rules_engine_init', 20 );
+
+/**
+ * Admin notice shown when the required parent plugin is missing or outdated.
+ *
+ * @return void
+ */
+function vmfa_rules_engine_parent_notice() {
+	if ( ! current_user_can( 'activate_plugins' ) ) {
+		return;
+	}
+	printf(
+		'<div class="notice notice-error"><p>%s</p></div>',
+		esc_html__(
+			'Virtual Media Folders - Rules Engine requires the "Virtual Media Folders" plugin (version 2.0.0 or later) to be installed and active.',
+			'vmfa-rules-engine'
+		)
+	);
+}
 
 /**
  * Activation hook.
