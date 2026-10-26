@@ -5,7 +5,7 @@ Tags: media library, virtual folders, automation, rules engine, media organizati
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 1.7.4
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -159,6 +159,12 @@ Each imported file will be evaluated against your rules and assigned to the matc
 4. Batch processing results
 
 == Changelog ==
+
+= 1.8.0 =
+* Changed: Styles use WordPress Design System tokens, so the UI follows WordPress 7 styling. On WordPress 6.8–6.9 with Virtual Media Folders 2.2.0+, the classic admin palette is used.
+* Changed: Built-in token fallbacks keep the add-on looking right with older Virtual Media Folders versions.
+* Changed: Accent colors follow the admin color scheme.
+* Removed: Separate WordPress 7 override stylesheet.
 
 = 1.7.4 =
 * Fixed: Prevent a fatal error when the "Virtual Media Folders" parent plugin is missing or older than 2.0.0; show an admin notice instead.
