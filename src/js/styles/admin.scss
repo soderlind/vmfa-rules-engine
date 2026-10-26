@@ -5,16 +5,23 @@
  */
 
 /* Variables */
-$color-primary: #007cba;
-$color-primary-hover: #006ba1;
-$color-success: #00a32a;
-$color-error: #d63638;
-$color-warning: #dba617;
-$color-gray-100: #f0f0f1;
-$color-gray-200: #e0e0e0;
-$color-gray-300: #c3c4c7;
-$color-gray-600: #50575e;
-$color-gray-900: #1d2327;
+// Colors use WordPress Design System tokens. VMF (2.2.0+) provides classic
+// WP 6.x values on older WordPress; the build adds WP 7 fallbacks for when
+// neither core nor VMF defines a token (postcss.config.js).
+$color-primary: var(--wp-admin-theme-color, #2271b1);
+$color-primary-hover: var(--wp-admin-theme-color-darker-20, #135e96);
+$color-primary-tint: rgba(var(--wp-admin-theme-color--rgb, 34, 113, 177), 0.1);
+$color-success: var(--wpds-color-foreground-content-success-weak);
+$color-error: var(--wpds-color-foreground-content-error-weak);
+$color-error-stroke: var(--wpds-color-stroke-surface-error-strong);
+$color-warning: var(--wpds-color-foreground-content-warning-weak);
+$color-surface: var(--wpds-color-background-surface-neutral-strong);
+$color-surface-weak: var(--wpds-color-background-surface-neutral-weak);
+$color-interactive-active: var(--wpds-color-background-interactive-neutral-weak-active);
+$color-border: var(--wpds-color-stroke-surface-neutral);
+$color-icon-muted: var(--wpds-color-foreground-interactive-neutral-weak);
+$color-text-muted: var(--wpds-color-foreground-content-neutral-weak);
+$color-text: var(--wpds-color-foreground-content-neutral);
 
 $spacing-xs: 4px;
 $spacing-sm: 8px;
@@ -22,7 +29,8 @@ $spacing-md: 16px;
 $spacing-lg: 24px;
 $spacing-xl: 32px;
 
-$border-radius: 4px;
+$border-radius: var(--wpds-border-radius-md);
+$border-radius-sm: var(--wpds-border-radius-sm);
 $transition-duration: 0.2s;
 
 /* Loading State */
@@ -35,7 +43,7 @@ $transition-duration: 0.2s;
 
 	p {
 		margin-top: $spacing-md;
-		color: $color-gray-600;
+		color: $color-text-muted;
 	}
 }
 
@@ -72,7 +80,7 @@ $transition-duration: 0.2s;
 	font-size: 32px;
 	font-weight: 600;
 	line-height: 1.2;
-	color: $color-gray-900;
+	color: $color-text;
 
 	&--highlight {
 		color: $color-primary;
@@ -83,7 +91,7 @@ $transition-duration: 0.2s;
 	display: block;
 	margin-top: $spacing-xs;
 	font-size: 13px;
-	color: $color-gray-600;
+	color: $color-text-muted;
 }
 
 /* Rules Card */
@@ -111,7 +119,7 @@ $transition-duration: 0.2s;
 
 	p {
 		margin-bottom: $spacing-md;
-		color: $color-gray-600;
+		color: $color-text-muted;
 	}
 }
 
@@ -128,12 +136,12 @@ $transition-duration: 0.2s;
 	align-items: center;
 	gap: $spacing-md;
 	padding: $spacing-md;
-	background: $color-gray-100;
+	background: $color-surface-weak;
 	border-radius: $border-radius;
 	transition: background-color $transition-duration;
 
 	&:hover {
-		background: darken($color-gray-100, 3%);
+		background: $color-interactive-active;
 	}
 
 	&--disabled {
@@ -147,7 +155,7 @@ $transition-duration: 0.2s;
 
 .vmfa-rule-item__drag {
 	cursor: grab;
-	color: $color-gray-300;
+	color: $color-icon-muted;
 
 	&:active {
 		cursor: grabbing;
@@ -172,11 +180,11 @@ $transition-duration: 0.2s;
 
 .vmfa-rule-item__name {
 	font-weight: 600;
-	color: $color-gray-900;
+	color: $color-text;
 }
 
 .vmfa-rule-item__folder {
-	color: $color-gray-600;
+	color: $color-text-muted;
 	font-size: 13px;
 }
 
@@ -185,7 +193,7 @@ $transition-duration: 0.2s;
 	align-items: center;
 	gap: $spacing-sm;
 	font-size: 12px;
-	color: $color-gray-600;
+	color: $color-text-muted;
 }
 
 .vmfa-rule-item__no-conditions {
@@ -195,11 +203,11 @@ $transition-duration: 0.2s;
 .vmfa-rule-item__stop-badge {
 	display: inline-block;
 	padding: 2px 6px;
-	background: $color-gray-200;
-	border-radius: 3px;
+	background: $color-interactive-active;
+	border-radius: $border-radius-sm;
 	font-size: 11px;
 	text-transform: uppercase;
-	color: $color-gray-600;
+	color: $color-text-muted;
 }
 
 .vmfa-rule-item__actions {
@@ -233,7 +241,7 @@ $transition-duration: 0.2s;
 	.components-text-control__input,
 	.components-select-control__input {
 		&.has-error {
-			border-color: $color-error;
+			border-color: $color-error-stroke;
 		}
 	}
 
@@ -255,7 +263,7 @@ $transition-duration: 0.2s;
 
 	.description {
 		margin: 0 0 $spacing-md;
-		color: $color-gray-600;
+		color: $color-text-muted;
 		font-size: 12px;
 	}
 }
@@ -263,7 +271,7 @@ $transition-duration: 0.2s;
 .vmfa-rule-editor__conditions {
 	margin: $spacing-lg 0;
 	padding: $spacing-md;
-	background: $color-gray-100;
+	background: $color-surface-weak;
 	border-radius: $border-radius;
 }
 
@@ -299,7 +307,7 @@ $transition-duration: 0.2s;
 	font-weight: 500;
 	line-height: 1.4;
 	text-transform: uppercase;
-	color: $color-gray-900;
+	color: $color-text;
 }
 
 .vmfa-add-folder-button {
@@ -341,7 +349,7 @@ $transition-duration: 0.2s;
 .vmfa-create-folder-actions {
 	margin-top: $spacing-lg;
 	padding-top: $spacing-md;
-	border-top: 1px solid $color-gray-200;
+	border-top: 1px solid $color-border;
 	gap: $spacing-sm;
 }
 
@@ -360,7 +368,7 @@ $transition-duration: 0.2s;
 .vmfa-rule-editor__actions {
 	margin-top: $spacing-lg;
 	padding-top: $spacing-lg;
-	border-top: 1px solid $color-gray-200;
+	border-top: 1px solid $color-border;
 }
 
 .vmfa-error-message {
@@ -382,8 +390,8 @@ $transition-duration: 0.2s;
 
 .vmfa-condition-row {
 	padding: $spacing-md;
-	background: white;
-	border: 1px solid $color-gray-200;
+	background: $color-surface;
+	border: 1px solid $color-border;
 	border-radius: $border-radius;
 
 	// Allow the outer row (type + value area + trash) to wrap on narrow screens,
@@ -400,7 +408,7 @@ $transition-duration: 0.2s;
 .vmfa-condition-description {
 	margin: $spacing-sm 0 0;
 	font-size: 12px;
-	color: $color-gray-600;
+	color: $color-text-muted;
 	font-style: italic;
 }
 
@@ -408,12 +416,12 @@ $transition-duration: 0.2s;
 	display: inline-flex;
 	align-items: center;
 	height: 36px;
-	color: $color-gray-600;
+	color: $color-text-muted;
 	font-size: 13px;
 }
 
 .vmfa-condition-empty {
-	color: $color-gray-600;
+	color: $color-text-muted;
 	font-style: italic;
 }
 
@@ -438,7 +446,7 @@ $transition-duration: 0.2s;
 
 	p {
 		margin-top: $spacing-md;
-		color: $color-gray-600;
+		color: $color-text-muted;
 	}
 }
 
@@ -450,7 +458,7 @@ $transition-duration: 0.2s;
 .vmfa-preview-summary {
 	margin-bottom: $spacing-lg;
 	padding: $spacing-md;
-	background: $color-gray-100;
+	background: $color-surface-weak;
 	border-radius: $border-radius;
 
 	p {
@@ -465,12 +473,12 @@ $transition-duration: 0.2s;
 		summary {
 			cursor: pointer;
 			padding: $spacing-sm;
-			background: $color-gray-100;
+			background: $color-surface-weak;
 			border-radius: $border-radius;
 			font-weight: 500;
 
 			&:hover {
-				background: $color-gray-200;
+				background: $color-interactive-active;
 			}
 		}
 	}
@@ -495,7 +503,7 @@ $transition-duration: 0.2s;
 .vmfa-preview-table {
 	max-height: 400px;
 	overflow-y: auto;
-	border: 1px solid $color-gray-200;
+	border: 1px solid $color-border;
 	border-radius: $border-radius;
 
 	table {
@@ -506,17 +514,17 @@ $transition-duration: 0.2s;
 		td {
 			padding: $spacing-sm $spacing-md;
 			text-align: left;
-			border-bottom: 1px solid $color-gray-200;
+			border-bottom: 1px solid $color-border;
 		}
 
 		th {
 			position: sticky;
 			top: 0;
-			background: $color-gray-100;
+			background: $color-surface-weak;
 			font-weight: 600;
 			font-size: 12px;
 			text-transform: uppercase;
-			color: $color-gray-600;
+			color: $color-text-muted;
 		}
 
 		tr:last-child td {
@@ -542,7 +550,7 @@ $transition-duration: 0.2s;
 
 	img {
 		display: block;
-		border-radius: 2px;
+		border-radius: $border-radius-sm;
 		object-fit: cover;
 	}
 }
@@ -559,15 +567,15 @@ $transition-duration: 0.2s;
 
 .vmfa-preview-title {
 	font-size: 12px;
-	color: $color-gray-600;
+	color: $color-text-muted;
 }
 
 .vmfa-preview-folder {
 	display: inline-block;
 	padding: 2px 8px;
-	background: lighten($color-primary, 45%);
+	background: $color-primary-tint;
 	color: $color-primary;
-	border-radius: 3px;
+	border-radius: $border-radius-sm;
 	font-size: 12px;
 }
 
@@ -583,12 +591,12 @@ $transition-duration: 0.2s;
 	align-items: center;
 	gap: $spacing-xs;
 	padding: $spacing-xs $spacing-sm;
-	background: $color-gray-100;
+	background: $color-surface-weak;
 	border-radius: $border-radius;
 	font-size: 12px;
 
 	img {
-		border-radius: 2px;
+		border-radius: $border-radius-sm;
 		object-fit: cover;
 	}
 }
@@ -596,14 +604,14 @@ $transition-duration: 0.2s;
 .vmfa-preview-more {
 	width: 100%;
 	margin: $spacing-sm 0 0;
-	color: $color-gray-600;
+	color: $color-text-muted;
 	font-style: italic;
 }
 
 .vmfa-preview-actions {
 	margin-top: $spacing-lg;
 	padding-top: $spacing-lg;
-	border-top: 1px solid $color-gray-200;
+	border-top: 1px solid $color-border;
 }
 
 /* Applied Results */
@@ -634,7 +642,7 @@ $transition-duration: 0.2s;
 	display: block;
 	margin-top: $spacing-xs;
 	font-size: 13px;
-	color: $color-gray-600;
+	color: $color-text-muted;
 }
 
 .vmfa-preview-stat--success {
@@ -652,7 +660,7 @@ $transition-duration: 0.2s;
 /* Infinite scroll loading */
 .vmfa-preview-loading-hint {
 	font-style: italic;
-	color: $color-gray-600;
+	color: $color-text-muted;
 	font-size: 13px;
 }
 
@@ -662,7 +670,7 @@ $transition-duration: 0.2s;
 	justify-content: center;
 	gap: $spacing-sm;
 	padding: $spacing-md;
-	color: $color-gray-600;
+	color: $color-text-muted;
 	font-size: 13px;
 }
 
