@@ -142,6 +142,12 @@ $transition-duration: 0.2s;
 
 	&:hover {
 		background: $color-interactive-active;
+
+		// Muted text lacks AA contrast on the hover surface.
+		.vmfa-rule-item__folder,
+		.vmfa-rule-item__conditions {
+			color: $color-text;
+		}
 	}
 
 	&--disabled {
@@ -207,7 +213,7 @@ $transition-duration: 0.2s;
 	border-radius: $border-radius-sm;
 	font-size: 11px;
 	text-transform: uppercase;
-	color: $color-text-muted;
+	color: $color-text;
 }
 
 .vmfa-rule-item__actions {
