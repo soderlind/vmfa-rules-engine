@@ -1,15 +1,16 @@
 {
 	"name": "vmfa-rules-engine",
-	"version": "1.7.4",
+	"version": "1.8.0",
 	"description": "Rule-based automatic folder assignment for media uploads",
 	"author": "Per Soderlind",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build src/js/index.js src/js/media-upload.js src/js/wp7-compat.js --output-path=build",
-		"start": "wp-scripts start src/js/index.js src/js/media-upload.js src/js/wp7-compat.js --output-path=build",
+		"build": "wp-scripts build src/js/index.js src/js/media-upload.js --output-path=build",
+		"start": "wp-scripts start src/js/index.js src/js/media-upload.js --output-path=build",
 		"lint:js": "wp-scripts lint-js src/js",
 		"lint:css": "wp-scripts lint-style src/js/styles",
+		"lint:tokens": "stylelint --config .stylelintrc.tokens.mjs \"src/js/**/*.{css,scss}\"",
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"test:coverage": "vitest run --coverage",
@@ -23,6 +24,7 @@
 	"devDependencies": {
 		"@vitest/coverage-v8": "^4.0.18",
 		"@wordpress/scripts": "^32.6.0",
+		"@wordpress/theme": "0.17.0",
 		"jsdom": "^26.1.0",
 		"vitest": "^4.0.18",
 		"yaml": "^2.8.2"
